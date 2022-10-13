@@ -41,7 +41,7 @@ class _NftCardState extends State<NftCard> {
               fit: BoxFit.fill,
             ),
             Positioned(
-                bottom: -6,
+                bottom: 0,
                 child: Visibility(
                   visible: widget.show,
                   child: Container(
@@ -54,7 +54,7 @@ class _NftCardState extends State<NftCard> {
                   ),
                 )),
             Positioned(
-              bottom: 0,
+              bottom: 5,
               child: InkWell(
                 onTap: () => {isSelected = !isSelected, doNothing()},
                 child: Container(
