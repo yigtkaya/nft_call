@@ -1,0 +1,19 @@
+///[ScreenName] naming must be created with lowercase letters and english characters.
+enum ScreenName {
+  no_view(""),
+  splash_ekrani("splash "),
+  login("login"),
+  test("test"),
+  stats("istatistik ekrani"),
+  favorite("favori ekrani"),
+  menu("menu ekrani"),
+  graph("grafik ekrani"),
+  root("root ekrani"),
+  landing("Ana Ekran"),
+  notification("bildirim ekrani"),
+  smsotp("Sms Otp"),
+  drawer("Bize ulasin sayfasi");
+
+  final String name;
+  const ScreenName(this.name);
+}
