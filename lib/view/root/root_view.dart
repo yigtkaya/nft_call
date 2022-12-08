@@ -25,18 +25,10 @@ class RootView extends BaseView<RootView, RootViewModel> {
         top: false,
         child: Scaffold(
           backgroundColor: ThemeManager.instance?.getCurrentTheme.colorTheme.primaryScaffoldBackground,
-          appBar: AppBar(
+          appBar: AppBar(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             backgroundColor: ThemeManager.instance?.getCurrentTheme.colorTheme
                 .bottomNavigationBackground,
             title: Row(children: [
-              InkWell(
-                onTap: () => {viewModel.navigateToDrawer()},
-                child: ITIcon(
-                  iconName: AssetConstants.icons.drawer_menu,
-                  color:
-                      ThemeManager.instance?.getCurrentTheme.colorTheme.textColor,
-                ),
-              ),
               Expanded(
                   child: Center(
                 child: DTText(

@@ -39,14 +39,14 @@ class _NftCardState extends State<NftCard> {
             ),
             Positioned(
                 bottom: 0,
-                child: Container(
+                child: SizedBox(
                   width: 334,
                   height: 344,
                   child: Center(
                     child: AnimatedSize(
                       alignment: Alignment.topCenter,
                         duration: const Duration(milliseconds: 200),
-                        child: Container(
+                        child: SizedBox(
                           height: widget.show? null : 0.0,
                           child: InfoCard(
                             title: "NFT Collection Name",
