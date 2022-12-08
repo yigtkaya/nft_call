@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft_call/core/components/kt_icon.dart';
 import 'package:nft_call/core/constants/asset.dart';
-import 'package:nft_call/core/constants/dimen.dart';
-import 'package:nft_call/core/constants/dt_text.dart';
+import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:nft_call/core/constants/theme/theme_manager.dart';
 
 import 'kt_info_card.dart';
@@ -57,24 +56,23 @@ class _NftCardState extends State<NftCard> {
               bottom: 5,
               child: InkWell(
                 onTap: () => {isSelected = !isSelected, doNothing()},
-                child: Container(
+                child: Container(width: 45, height: 45,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(70),
                       color: const Color(0xFF000000).withOpacity(0.2),
                     ),
-                    child: isSelected
-                        ? ITIcon(
-                            color: Colors.white,
-                            iconName: AssetConstants.icons.down_arrow,
-                            width: 40,
-                            height: 40,
-                          )
-                        : ITIcon(
-                            color: Colors.white,
-                            iconName: AssetConstants.icons.up_arrow,
-                            width: 40,
-                            height: 40,
-                          )),
+                    child: AnimatedIconButton(
+                      onPressed: () => {isSelected = !isSelected, doNothing()},
+                      icons: const [
+                        AnimatedIconItem(
+                          icon: Icon(Icons.arrow_upward, size: 30,),
+                        ),
+                        AnimatedIconItem(
+                            icon: Icon(Icons.arrow_downward, size: 30),
+                        ),
+                      ],
+                    ),
+                ),
               ),
             ),
           ],
