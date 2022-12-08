@@ -33,7 +33,10 @@ dependencies:
     sdk: flutter
   #state management
   get:
+
+  #animation packages
   animated_icon_button: ^1.0.2
+
   #local storage
   hive_flutter: ^1.1.0
   hive_generator: ^1.1.2
