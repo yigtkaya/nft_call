@@ -59,18 +59,20 @@ class _NftCardState extends State<NftCard> {
                 child: Container(width: 45, height: 45,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(70),
-                      color: const Color(0xFF000000).withOpacity(0.2),
+                      color: const Color(0xFF000000).withOpacity(0.1),
                     ),
-                    child: AnimatedIconButton(
-                      onPressed: () => {isSelected = !isSelected, doNothing()},
-                      icons: const [
-                        AnimatedIconItem(
-                          icon: Icon(Icons.arrow_upward, size: 30,),
-                        ),
-                        AnimatedIconItem(
-                            icon: Icon(Icons.arrow_downward, size: 30),
-                        ),
-                      ],
+                    child: Opacity(opacity: 0.8,
+                      child: AnimatedIconButton(
+                        onPressed: () => {isSelected = !isSelected, doNothing()},
+                        icons: const [
+                          AnimatedIconItem(
+                            icon: Icon(Icons.arrow_upward, size: 30,),
+                          ),
+                          AnimatedIconItem(
+                              icon: Icon(Icons.arrow_downward, size: 30, color: Colors.white,),
+                          ),
+                        ],
+                      ),
                     ),
                 ),
               ),

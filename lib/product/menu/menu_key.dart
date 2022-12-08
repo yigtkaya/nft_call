@@ -10,6 +10,7 @@ enum MenuKey {
   stats("/stats"),
   root("/root"),
   drawer("/drawer"),
+  detail("/detail"),
   menu("/menu"),
   graph("/graph"),
   mobildeniz("/mobildeniz"),
