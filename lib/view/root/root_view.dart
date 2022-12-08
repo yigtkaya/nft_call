@@ -6,6 +6,7 @@ import 'package:nft_call/core/constants/asset.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/theme/theme_manager.dart';
+import 'package:nft_call/view/notification/notification_view.dart';
 import 'package:nft_call/view/root/root_view_model.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/bottom_navigation.dart';
@@ -56,7 +57,7 @@ class RootView extends BaseView<RootView, RootViewModel> {
                   FavoriteView(),
 
                   /// Stats View
-                  //StatsView()
+                  NotificationView()
                 ],
               )),
 

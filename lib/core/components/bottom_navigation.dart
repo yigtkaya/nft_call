@@ -20,7 +20,6 @@ class _KTLandingBottomNavigationBarState extends State<KTLandingBottomNavigation
     return SizedBox(
         height: 70,
         child: Container(
-          height: 70,
           decoration: BoxDecoration(
             color: context.bottomNavigationBackground,
             borderRadius: const BorderRadius.only(
