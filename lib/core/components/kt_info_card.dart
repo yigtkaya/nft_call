@@ -51,19 +51,24 @@ class _InfoCardState extends State<InfoCard> {
                       context: context,
                       label: widget.title,
                       color: Colors.white,
+                      maxLines: 2,
                     ),
+                    SizedBox(height: 50,),
                     DTText(
-                        label: widget.mintDate,
+                        label: "mint price: ${widget.mintPrice}",
                         style: const TextStyle(color: Colors.white)),
-                    DTText(
-                        label: widget.mintPrice,
-                        style: const TextStyle(color: Colors.white)),
+                    SizedBox(height: 50,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         DTText(
-                            label: widget.totalSupply,
+                            label: "mint date: ${widget.mintDate}",
                             style: const TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                         ITIcon(
                           iconName: AssetConstants.icons.twitter,
                           height: 26,
@@ -74,8 +79,9 @@ class _InfoCardState extends State<InfoCard> {
                           height: 26,
                           width: 26,
                         ),
+                        // web page iconu gelecek
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
