@@ -23,9 +23,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
         child: DefaultTabController(
       length: 4,
       child: Scaffold(
-        backgroundColor: ThemeManager
-            .instance?.getCurrentTheme.colorTheme.primaryScaffoldBackground,
-        body: Center(
+          body: Center(
             child: Padding(
           padding: const EdgeInsets.all(DimenConstant.MEDIUM),
           child: Column(

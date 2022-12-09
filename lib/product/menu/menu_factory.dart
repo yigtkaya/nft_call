@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:nft_call/view/drawer/drawer_view.dart';
 
 import '../../view/event_detail/event_detail.dart';
-import '../../view/favorite/favorite_view.dart';
 import '../../view/landing/landing_view.dart';
 import '../../view/notification/notification_view.dart';
 import '../../view/root/root_view.dart';
@@ -28,7 +27,6 @@ class MenuFactory extends IMenuFactory {
     return [
       GetPage(name: MenuKey.splash.key, page: () =>  SplashView()),
       GetPage(name: MenuKey.landing.key, page: () =>  LandingView()),
-      GetPage(name: MenuKey.favorite.key, page: () =>  FavoriteView()),
       GetPage(name: MenuKey.root.key, page: () =>  RootView(), transition: Transition.fadeIn),
       GetPage(name: MenuKey.notification.key, page: () =>  NotificationView()),
       GetPage(name: MenuKey.drawer.key, page: () =>  DrawerView(), transition: Transition.leftToRight),

@@ -12,7 +12,6 @@ import '../../core/base/view/view_info.dart';
 import '../../core/components/bottom_navigation.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
-import '../favorite/favorite_view.dart';
 import '../landing/landing_view.dart';
 
 class RootView extends BaseView<RootView, RootViewModel> {
@@ -53,8 +52,6 @@ class RootView extends BaseView<RootView, RootViewModel> {
                   /// Home View
                   LandingView(),
 
-                  /// Favorite View
-                  FavoriteView(),
 
                   /// Stats View
                   NotificationView()

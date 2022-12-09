@@ -6,7 +6,6 @@ enum MenuKey {
   login("/login"),
   loading("/loading"),
   landing("/landing"),
-  favorite("/favorite"),
   stats("/stats"),
   root("/root"),
   drawer("/drawer"),

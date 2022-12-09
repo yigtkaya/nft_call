@@ -30,16 +30,12 @@ class _KTLandingBottomNavigationBarState extends State<KTLandingBottomNavigation
 
           /// Listen Bottom navigation changes
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                   flex: 1,
                   child: GestureDetector(
                       onTap: () => {changeCurrentPage(0)}, child: ITIcon(height: 32, width: 32, iconName: getHomePageIcon, color: Colors.white))),
-              Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                      onTap: () => {changeCurrentPage(1)}, child: ITIcon(height: 32, width: 32, iconName: getFavoritePageIcon, color: Colors.white,))),
               Expanded(
                   flex: 1,
                   child: GestureDetector(
@@ -55,12 +51,9 @@ class _KTLandingBottomNavigationBarState extends State<KTLandingBottomNavigation
 
   String get getHomePageIcon =>
       widget.currentPage == 0 ? AssetConstants.icons.home_selected : AssetConstants.icons.home_un_selected;
-  String get getFavoritePageIcon =>
-      widget.currentPage == 1 ? AssetConstants.icons.favorite_selected : AssetConstants.icons.favorite_un_selected;
   String get getStaticsPageIcon =>
-      widget.currentPage == 2 ? AssetConstants.icons.notification_selected : AssetConstants.icons.notification_un_selected;
+      widget.currentPage == 1 ? AssetConstants.icons.notification_selected : AssetConstants.icons.notification_un_selected;
 
   bool get isHomeSelected => widget.currentPage == 0;
-  bool get isFavouriteSelected => widget.currentPage == 1;
-  bool get isStaticsSelected => widget.currentPage == 2;
+  bool get isStaticsSelected => widget.currentPage == 1;
 }
