@@ -12,7 +12,7 @@ enum ScreenName {
   landing("Ana Ekran"),
   notification("bildirim ekrani"),
   smsotp("Sms Otp"),
-  drawer("Bize ulasin sayfasi");
+  detay("Detaylara ulaşın sayfasi");
 
   final String name;
   const ScreenName(this.name);

@@ -121,6 +121,6 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
   @override
   void setViewInfo() {
     viewInfo =
-        ViewInfoModel(menuKey: MenuKey.drawer, screenName: ScreenName.drawer);
+        ViewInfoModel(menuKey: MenuKey.drawer, screenName: ScreenName.detay);
   }
 }
