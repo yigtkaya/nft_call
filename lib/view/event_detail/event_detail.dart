@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nft_call/core/components/kt_icon.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/constants/asset.dart';
@@ -52,7 +53,12 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ITIcon(iconName: AssetConstants.website)
+                    ITIcon(iconName: AssetConstants.icons.website, onPress: () {
+
+                        final Uri url = Uri.parse("https://nftcalendar.io/event/41-years-terry-lex/");
+                        launchMyUrl(url);
+
+                    },)
                   ],
                 )
               ],
@@ -67,5 +73,14 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   void setViewInfo() {
     viewInfo =
         ViewInfoModel(menuKey: MenuKey.detail, screenName: ScreenName.detay);
+  }
+
+  launchMyUrl (Uri url) async {
+      if (await canLaunchUrl(url)){
+        await launchUrl(url);
+      }
+      else {
+        throw 'could not launch ${url}';
+      }
   }
 }
