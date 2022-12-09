@@ -12,22 +12,32 @@ class NotificationView extends StatefulWidget {
 }
 
 class _NotificationViewState extends State<NotificationView> {
+  get isSubscribe => false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Padding(padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DTText(
+          child: !isSubscribe ?
+              Opacity(
+                opacity: 0.3,
+                child: DTText(
                   label:
-                      "Alert me when selected NFT collection is going to be online",
-                  style: context.semiBold14, color: Colors.white,)
-            ],
+                  "There is subscription yet.",
+                  style: context.semiBold14, color: Colors.white,),
+              ) :
+          Opacity(
+            opacity: 0.3,
+            child: DTText(
+              label:
+              "There is subscription.",
+              style: context.semiBold14, color: Colors.white,),
           ),
         ),
       ),
     );
   }
+
+  // subscribe listesi çekilecek çekilebilirse visibilty false olarak atancak
 }
