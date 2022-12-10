@@ -8,6 +8,7 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
   @override
   void onInit() {
     super.onInit();
+
   }
 
   /// Navigate to Notification page
