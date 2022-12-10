@@ -37,62 +37,56 @@ class InfoCard extends StatefulWidget {
 class _InfoCardState extends State<InfoCard> {
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Positioned(
-          bottom: -5,
-          child: InkWell(
-            onTap: () => {
-            Get.to(EventDetailView())
-            },
-            child: Container(
-              color: Colors.black.withOpacity(0.65),
-              width: 340,
-              height: 342,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    DTText.title(
-                      context: context,
-                      label: widget.title,
-                      color: Colors.white,
-                      maxLines: 2,
-                    ),
-                    const SizedBox(height: 50,),
-                    DTText(
-                        label: "mint price: ${widget.mintPrice}",
-                        style: const TextStyle(color: Colors.white)),
-                    const SizedBox(height: 50,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        DTText(
-                            label: "mint date: ${widget.mintDate}",
-                            style: const TextStyle(color: Colors.white)),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ITIcon(
-                          iconName: AssetConstants.icons.twitter,
-                          height: 26,
-                          width: 26,
-                        ),
-                        ITIcon(
-                          iconName: AssetConstants.icons.discord,
-                          height: 26,
-                          width: 26,
-                        ),
-                        // web page iconu gelecek
-                      ],
-                    ),
-                  ],
-                ),
+    return InkWell(
+      onTap: () => {
+      Get.to(EventDetailView())
+      },
+      child: Container(
+        color: Colors.black.withOpacity(0.65),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              DTText.title(
+                context: context,
+                label: widget.title,
+                color: Colors.white,
+                maxLines: 2,
               ),
-            ),
-          )),
-    ]);
+              const SizedBox(height: 50,),
+              DTText(
+                  label: "mint price: ${widget.mintPrice}",
+                  style: const TextStyle(color: Colors.white)),
+              const SizedBox(height: 50,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  DTText(
+                      label: "mint date: ${widget.mintDate}",
+                      style: const TextStyle(color: Colors.white)),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ITIcon(
+                    iconName: AssetConstants.icons.twitter,
+                    height: 26,
+                    width: 26,
+                  ),
+                  ITIcon(
+                    iconName: AssetConstants.icons.discord,
+                    height: 26,
+                    width: 26,
+                  ),
+                  // web page iconu gelecek
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

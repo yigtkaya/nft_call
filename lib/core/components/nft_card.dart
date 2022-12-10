@@ -19,79 +19,52 @@ class _NftCardState extends State<NftCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Card(
-        shadowColor: Colors.purpleAccent,
-        elevation: 20,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-            side: BorderSide(
-                color: ThemeManager.instance?.getCurrentTheme.colorTheme
-                        .secondaryScaffoldBackground ??
-                    Colors.deepPurple)),
-        clipBehavior: Clip.antiAlias,
+      padding: const EdgeInsets.all(20),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(25),
         child: Stack(
-          alignment: AlignmentDirectional.bottomCenter,
           children: [
-            const Image(
-              image: AssetImage("assets/images/nft_2.png"),
-              fit: BoxFit.fill,
+            Image.network(
+              "https://nftcalendar.io/storage/uploads/events/2022/11/sDcQjGT8XenfEYu1wlbPbm8tvcWlAcpG555GTDGb.webp",
+              fit: BoxFit.cover,
+            ),
+            Visibility(
+              visible: widget.show,
+              child: Positioned.fill(
+                child: InfoCard(
+                  title: "NFT Collection Name",
+                  mintDate: '22.07.2022 - 30.07.2022',
+                  mintPrice: '0.0003 ETH',
+                  twitter: 'twitter.com',
+                  discord: 'ss',
+                  website: '',
+                  totalSupply: '1000',
+                ),
+              ),
             ),
             Positioned(
-                bottom: 0,
-                child: SizedBox(
-                  width: 334,
-                  height: 344,
-                  child: Center(
-                    child: AnimatedSize(
-                      alignment: Alignment.topCenter,
-                        duration: const Duration(milliseconds: 200),
-                        child: SizedBox(
-                          height: widget.show? null : 0.0,
-                          child: InfoCard(
-                            title: "NFT Collection Name",
-                            mintDate: '22.07.2022 - 30.07.2022',
-                            mintPrice: '0.0003 ETH',
-                            twitter: 'twitter.com',
-                            discord: 'ss',
-                            website: '',
-                            totalSupply: '1000',
-                          ),
-                        )),
-                  ),
-                )),
-            Positioned(
-              bottom: 5,
-              child: InkWell(
-                onTap: () => {isSelected = !isSelected, doNothing()},
-                child: Container(
-                  width: 45,
-                  height: 45,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(70),
-                    color: const Color(0xFF000000).withOpacity(0.1),
-                  ),
-                  child: Opacity(
-                    opacity: 0.8,
-                    child: AnimatedIconButton(
-                      onPressed: () => {isSelected = !isSelected, doNothing()},
-                      icons: const [
-                        AnimatedIconItem(
-                          icon: Icon(
-                            Icons.arrow_upward,
-                            size: 30,
-                          ),
-                        ),
-                        AnimatedIconItem(
-                          icon: Icon(
-                            Icons.arrow_downward,
-                            size: 30,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Opacity(
+                opacity: 0.5,
+                child: AnimatedIconButton(
+                  onPressed: () => {isSelected = !isSelected, doNothing()},
+                  icons: const [
+                    AnimatedIconItem(
+                      icon: Icon(
+                        Icons.arrow_upward,
+                        size: 30,
+                      ),
                     ),
-                  ),
+                    AnimatedIconItem(
+                      icon: Icon(
+                        Icons.arrow_downward,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
