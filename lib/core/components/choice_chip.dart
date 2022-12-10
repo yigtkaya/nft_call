@@ -22,7 +22,7 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
           options.length,
           (int idx) {
             return Transform(
-              transform: Matrix4.identity()..scale(0.8), // ??
+              transform: Matrix4.identity()..scale(0.85), // ??
               child: InkWell(
                 onDoubleTap: () {},
                 child: ChoiceChip(

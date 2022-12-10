@@ -23,13 +23,14 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
         child: DefaultTabController(
       length: 4,
       child: Scaffold(
-          body: Center(
-            child: Padding(
-          padding: const EdgeInsets.all(DimenConstant.MEDIUM),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [const ChoiceChipWidget(), getListView(context)],
-          ),
+        body: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Padding(
+                padding: EdgeInsets.all(10), child: ChoiceChipWidget()),
+            getListView(context)
+          ],
         )),
       ),
     ));
