@@ -4,6 +4,7 @@ import 'package:nft_call/core/components/kt_icon.dart';
 import 'package:nft_call/core/constants/asset.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
+import 'package:nft_call/core/constants/theme/theme_manager.dart';
 
 import '../constants/horizontal_space.dart';
 import 'card_info.dart';
@@ -38,15 +39,15 @@ class _NftCardState extends State<NftCard> {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
-                color: Colors.grey,
+                color: ThemeManager.instance?.getCurrentTheme.colorTheme.colors.abbey ?? Colors.black,
                 offset: Offset(0.0, 1.5),
                 blurRadius: 5,
               ),
             ],
-            border: Border.all(color: Colors.black),
-            color: Colors.black,
+            border: Border.all(color: Colors.black, width: 1.5),
+
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

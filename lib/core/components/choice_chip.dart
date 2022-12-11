@@ -16,36 +16,39 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List<Widget>.generate(
-          options.length,
-          (int idx) {
-            return Transform(
-              transform: Matrix4.identity()..scale(0.7), // ??
-              child: InkWell(
-                onDoubleTap: () {},
-                child: ChoiceChip(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      side: const BorderSide(width: 3.0, color: Colors.white10),
-                    ),
-                    label: Text(
-                      options[idx],
-                      style: TextStyle(
-                          color: ThemeManager
-                              .instance?.getCurrentTheme.colorTheme.textColor),
-                    ),
-                    selected: _value == idx,
-                    selectedColor: const Color(0xff264d64),
-                    onSelected: (bool selected) {
-                      setState(() {
-                        _value = selected ? idx : idx;
-                      });
-                    }),
-              ),
-            );
-          },
-        ).toList(),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 5),
+        child: Row(
+          children: List<Widget>.generate(
+            options.length,
+            (int idx) {
+              return Padding(
+                padding: const EdgeInsets.only(left: 5,right: 15),
+                child: InkWell(
+                  onDoubleTap: () {},
+                  child: ChoiceChip(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: const BorderSide(width: 1, color: Colors.white),
+                      ),
+                      label: Text(
+                        options[idx],
+                        style: TextStyle(fontSize: 14,
+                            color: ThemeManager
+                                .instance?.getCurrentTheme.colorTheme.textColor),
+                      ),
+                      selected: _value == idx,
+                      selectedColor: const Color(0xff264d64),
+                      onSelected: (bool selected) {
+                        setState(() {
+                          _value = selected ? idx : idx;
+                        });
+                      }),
+                ),
+              );
+            },
+          ).toList(),
+        ),
       ),
     );
   }
