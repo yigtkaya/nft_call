@@ -33,7 +33,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 0, left: 15),
+                  padding: EdgeInsets.only(top: 10),
                   child: ChoiceChipWidget()),
               getListView(context),
             ],

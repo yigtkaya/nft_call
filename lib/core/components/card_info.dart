@@ -62,7 +62,7 @@ class _CardInfoState extends State<CardInfo> {
           const VerticalSpace(spaceAmount: 20,),
           const DTText(
             label:
-                "Place Holder Place Holder Place Holder Place Holder Place Holder Place Holder",
+                "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder", maxLines: 2,
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
           const VerticalSpace(
@@ -77,7 +77,7 @@ class _CardInfoState extends State<CardInfo> {
             style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

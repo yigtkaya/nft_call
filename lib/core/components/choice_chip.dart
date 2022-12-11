@@ -10,7 +10,7 @@ class ChoiceChipWidget extends StatefulWidget {
 }
 
 class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
-  List<String> options = ["Today", "Ongoing", "Upcoming", "News"];
+  List<String> options = ["Today", "Ongoing", "Upcoming", "News", "Popular"];
   var _value = 0;
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
             options.length,
             (int idx) {
               return Padding(
-                padding: const EdgeInsets.only(left: 5,right: 15),
+                padding: const EdgeInsets.only(left: 15, right: 10),
                 child: InkWell(
                   onDoubleTap: () {},
                   child: ChoiceChip(
