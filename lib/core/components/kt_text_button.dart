@@ -17,14 +17,15 @@ class DTTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-        gradient: const LinearGradient(colors: [Color(0xff16161f), Color(0xff364d64)],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
+      borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white),
+        gradient:  LinearGradient(colors: [const Color(0xff16161f),const Color(0xff364d64), Colors.white.withOpacity(0.0)],
+          begin: Alignment.bottomLeft,
+          end: Alignment.bottomRight,
         ),
         boxShadow: const [
           BoxShadow(
-            color: Color(0xff16161f),
+            color: Color(0xff16164f),
             offset: Offset(0.0, 1),
             blurRadius: 5,
           ),

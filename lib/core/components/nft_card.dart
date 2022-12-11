@@ -5,7 +5,6 @@ import 'package:nft_call/core/constants/asset.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
 
-
 import '../constants/horizontal_space.dart';
 import 'card_info.dart';
 
@@ -13,7 +12,10 @@ class NftCard extends StatefulWidget {
   bool isSelected = false;
   final void Function(bool) onFavChanged;
 
-  NftCard({Key? key, this.isSelected = false,  required this.onFavChanged,
+  NftCard({
+    Key? key,
+    this.isSelected = false,
+    required this.onFavChanged,
   }) : super(key: key);
 
   @override
@@ -26,13 +28,16 @@ class _NftCardState extends State<NftCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
         child: Container(
           decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [Color(0xff16161f), Color(0xff364d64)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
+            gradient: const LinearGradient(
+              colors: [Color(0xff16161f), Color(0xff364d64)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
             boxShadow: const [
               BoxShadow(
                 color: Colors.grey,
@@ -40,40 +45,48 @@ class _NftCardState extends State<NftCard> {
                 blurRadius: 5,
               ),
             ],
-              border: Border.all(color: Colors.black),
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(10)),
+            border: Border.all(color: Colors.black),
+            color: Colors.black,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      "https://nftcalendar.io/storage/uploads/events/2022/12/1v6jVJUOdSJgvV2ExCpXzOkktGOOmseW6WOmhfN5.webp",
-                      fit: BoxFit.fill,
-                    ),
+                  Image.network(
+                    "https://nftcalendar.io/storage/uploads/events/2022/12/1v6jVJUOdSJgvV2ExCpXzOkktGOOmseW6WOmhfN5.webp",
+                    fit: BoxFit.cover,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 5, right: 15, top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Container(decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0)
+                        Container(
+                          decoration:
+                              BoxDecoration(color: Colors.black.withOpacity(0)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              ITIcon(
+                                iconName: getFavoriteIcon,
+                                width: 28,
+                                height: 28,
+                                onPress: () =>
+                                    {changeFavoriteIcon(widget.isSelected)},
+                              ),
+                              const HorizontalSpace(),
+                              DTText(
+                                label: "1.2 M",
+                                style: context.regular12,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ITIcon(iconName: getFavoriteIcon,  width: 28, height: 28, onPress: () => {changeFavoriteIcon(widget.isSelected)},),
-                            const HorizontalSpace(),
-                            DTText(label: "1.2 M", style: context.regular12, color: Colors.white,)
-                          ],
-                        ))
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
               const Padding(
@@ -115,16 +128,18 @@ class _NftCardState extends State<NftCard> {
               )
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   void doNothing() {
     setState(() {
       widget.isSelected = !widget.isSelected;
       widget.onFavChanged(widget.isSelected);
-
     });
   }
+
   void changeFavoriteIcon(bool isSelected) {
     setState(() {
       widget.isSelected = !widget.isSelected;
