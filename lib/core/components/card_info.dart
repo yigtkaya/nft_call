@@ -2,6 +2,7 @@ import 'dart:core';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:nft_call/core/components/kt_text_button.dart';
+import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/horizontal_space.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +35,39 @@ class _CardInfoState extends State<CardInfo> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const DTText(
+            label: "NFT Collection Name",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            color: Colors.white,
+          ),
+          const VerticalSpace(spaceAmount: 25,),
+          Row(
+            children: [
+              Center(
+                  child: DTText(
+                    label: "#Chain",
+                    style: context.regular16,
+                    color: Colors.grey,
+                  )),
+              const HorizontalSpace(
+                spaceAmount: 10,
+              ),
+              Center(
+                  child: DTText(
+                    label: "#NFT Drop",
+                    style: context.regular16,
+                    color: Colors.grey,
+                  ))
+            ],
+          ),
+          const VerticalSpace(spaceAmount: 10,),
+
+          const DTText(
             label:
                 "Place Holder Place Holder Place Holder Place Holder Place Holder Place Holder",
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
           const VerticalSpace(
-            spaceAmount: 20,
+            spaceAmount: 10,
           ),
           DTText(
             label: "Mint Date: ${widget.mintDate}",

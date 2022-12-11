@@ -42,7 +42,7 @@ class _NftCardState extends State<NftCard> {
             boxShadow: [
               BoxShadow(
                 color: ThemeManager.instance?.getCurrentTheme.colorTheme.colors.abbey ?? Colors.black,
-                offset: Offset(0.0, 1.5),
+                offset: const Offset(0.0, 1.5),
                 blurRadius: 5,
               ),
             ],
@@ -90,36 +90,7 @@ class _NftCardState extends State<NftCard> {
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 20, top: 20),
-                child: DTText(
-                  label: "NFT Collection Name",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  color: Colors.white,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15, left: 20),
-                child: Row(
-                  children: [
-                    Center(
-                        child: DTText(
-                      label: "#Chain",
-                      style: context.regular16,
-                      color: Colors.grey,
-                    )),
-                    const HorizontalSpace(
-                      spaceAmount: 10,
-                    ),
-                    Center(
-                        child: DTText(
-                      label: "#NFT Drop",
-                      style: context.regular16,
-                      color: Colors.grey,
-                    ))
-                  ],
-                ),
-              ),
+
               const Padding(
                 padding: EdgeInsets.only(top: 15, left: 20, right: 5),
                 child: CardInfo(
