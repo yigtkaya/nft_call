@@ -1,34 +1,49 @@
 import 'package:flutter/material.dart';
 
-import '../constants/asset.dart';
-import '../constants/dimen.dart';
-import '../constants/horizontal_space.dart';
-import 'kt_icon.dart';
-
-
 class DTTextButton extends StatelessWidget {
   const DTTextButton({Key? key, required this.child, required this.onPress})
       : iconName = null,
         super(key: key);
-  const DTTextButton.withIcon({Key? key, required this.child, required this.onPress, this.iconName = "right_arrow_green_small"})
+  const DTTextButton.withIcon(
+      {Key? key,
+      required this.child,
+      required this.onPress,
+      this.iconName = "right_arrow_green_small"})
       : super(key: key);
   final VoidCallback? onPress;
   final Widget child;
   final String? iconName;
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-
-        style: TextButton.styleFrom(side: const BorderSide(color: Colors.red, width: 2),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap, minimumSize: Size.zero, padding: EdgeInsets.zero, backgroundColor: Colors.amberAccent),
-        onPressed: onPress,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            child,
-            const HorizontalSpace(spaceAmount: DimenConstant.SMALL),
-            ITIcon(iconName: AssetConstants.icons.drawer_menu),
-          ],
-        ));
+    return Container(
+      decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+        gradient: const LinearGradient(colors: [Color(0xff16161f), Color(0xff364d64)],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0xff16161f),
+            offset: Offset(0.0, 1),
+            blurRadius: 5,
+          ),
+        ],
+      ),
+      child: TextButton(
+          style: TextButton.styleFrom(
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              minimumSize: Size.zero,
+              padding: EdgeInsets.zero,),
+          onPressed: onPress,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                child,
+              ],
+            ),
+          )),
+    );
   }
 }

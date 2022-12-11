@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nft_call/core/constants/extension.dart';
+
 import '../constants/asset.dart';
 import 'kt_icon.dart';
 
@@ -16,13 +18,15 @@ class _KTLandingBottomNavigationBarState extends State<KTLandingBottomNavigation
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 60,
+        height: 50,
         child: Container(
-          decoration:const BoxDecoration(
-            color: Colors.black,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [Color(0xff16161f), Color(0xff364d64)],
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+            ),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(65),
-              topRight: Radius.circular(65),
+              topLeft: Radius.circular(25),
             ),
           ),
 

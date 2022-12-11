@@ -19,19 +19,28 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
     // TODO: implement build
     return SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.blueGrey,
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 0, left: 15), child: ChoiceChipWidget()),
-                getListView(context),
-              ],
+      resizeToAvoidBottomInset: false,
+      body: Center(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xf916161f), Color(0xf5364d64)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
             ),
           ),
-        ));
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 0, left: 15),
+                  child: ChoiceChipWidget()),
+              getListView(context),
+            ],
+          ),
+        ),
+      ),
+    ));
   }
 
   @override
@@ -43,7 +52,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
   Widget getListView(BuildContext context) {
     return Expanded(
       child: PageView.builder(
-        scrollDirection: Axis.vertical,
+          scrollDirection: Axis.vertical,
           itemCount: 10,
           itemBuilder: (context, index) {
             return NftCard(

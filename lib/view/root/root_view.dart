@@ -19,7 +19,7 @@ class RootView extends BaseView<RootView, RootViewModel> {
     return SafeArea(
         top: false,
         child: Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor:const Color(0xff16161f),
           resizeToAvoidBottomInset: false,
           body: Column(
             children: [

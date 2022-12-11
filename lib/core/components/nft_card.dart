@@ -30,6 +30,17 @@ class _NftCardState extends State<NftCard> {
         padding: const EdgeInsets.all(15),
         child: Container(
           decoration: BoxDecoration(
+              gradient: const LinearGradient(colors: [Color(0xff16161f), Color(0xff364d64)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.grey,
+                offset: Offset(0.0, 1.5),
+                blurRadius: 5,
+              ),
+            ],
               border: Border.all(color: Colors.black),
               color: Colors.black,
               borderRadius: BorderRadius.circular(10)),
@@ -41,7 +52,7 @@ class _NftCardState extends State<NftCard> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
-                      "https://nftcalendar.io/storage/uploads/2022/12/05/the-apes-official-1_Hu707baN5HCyNfYx.jpg",
+                      "https://nftcalendar.io/storage/uploads/events/2022/12/1v6jVJUOdSJgvV2ExCpXzOkktGOOmseW6WOmhfN5.webp",
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -87,7 +98,13 @@ class _NftCardState extends State<NftCard> {
                   ],
                 ),
               ),
-              const Padding(padding: EdgeInsets.all(10),child: CardInfo(mintDate: "27/12/2022 - 03/01/2023", mintPrice: "00.2 ETH", website: "website"))
+              const Padding(
+                padding: EdgeInsets.only(top: 15, left: 20, right: 5),
+                child: CardInfo(
+                    mintDate: "27/12/2022 - 03/01/2023",
+                    mintPrice: "00.2 ETH",
+                    website: "website"),
+              )
             ],
           ),
         ));
