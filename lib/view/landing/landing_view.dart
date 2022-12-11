@@ -56,7 +56,9 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
           itemCount: 10,
           itemBuilder: (context, index) {
             return NftCard(
-              show: false,
+              isSelected: false,
+              onFavChanged: (isSelected) {
+              },
             );
           }),
     );

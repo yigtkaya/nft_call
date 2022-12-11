@@ -36,7 +36,7 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
                               .instance?.getCurrentTheme.colorTheme.textColor),
                     ),
                     selected: _value == idx,
-                    selectedColor: Colors.orange,
+                    selectedColor: const Color(0xff264d64),
                     onSelected: (bool selected) {
                       setState(() {
                         _value = selected ? idx : idx;

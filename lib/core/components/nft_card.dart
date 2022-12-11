@@ -1,21 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:nft_call/core/components/kt_icon.dart';
 import 'package:nft_call/core/constants/asset.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
-import 'package:nft_call/core/constants/theme/theme_manager.dart';
-import 'package:nft_call/core/constants/vertical_space.dart';
+
 
 import '../constants/horizontal_space.dart';
 import 'card_info.dart';
-import 'kt_info_card.dart';
 
 class NftCard extends StatefulWidget {
-  bool show = false;
+  bool isSelected = false;
+  final void Function(bool) onFavChanged;
 
-  NftCard({Key? key, this.show = false}) : super(key: key);
+  NftCard({Key? key, this.isSelected = false,  required this.onFavChanged,
+  }) : super(key: key);
 
   @override
   State<NftCard> createState() => _NftCardState();
@@ -57,12 +56,21 @@ class _NftCardState extends State<NftCard> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 5, top: 5),
+                    padding: const EdgeInsets.only(left: 5, right: 15, top: 15),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        ITIcon(iconName: AssetConstants.icons.cross),
-                        ITIcon(iconName: AssetConstants.icons.website)
+                        Container(decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0)
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            ITIcon(iconName: getFavoriteIcon,  width: 28, height: 28, onPress: () => {changeFavoriteIcon(widget.isSelected)},),
+                            const HorizontalSpace(),
+                            DTText(label: "1.2 M", style: context.regular12, color: Colors.white,)
+                          ],
+                        ))
                       ],
                     ),
                   )
@@ -112,7 +120,18 @@ class _NftCardState extends State<NftCard> {
 
   void doNothing() {
     setState(() {
-      widget.show = !widget.show;
+      widget.isSelected = !widget.isSelected;
+      widget.onFavChanged(widget.isSelected);
+
     });
   }
+  void changeFavoriteIcon(bool isSelected) {
+    setState(() {
+      widget.isSelected = !widget.isSelected;
+    });
+  }
+
+  String get getFavoriteIcon => widget.isSelected == true
+      ? AssetConstants.icons.favorite_menu_selected
+      : AssetConstants.icons.favorite_menu_un_selected;
 }
