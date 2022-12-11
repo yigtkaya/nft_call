@@ -8,7 +8,7 @@ class SplashViewModel extends BaseViewModel<SplashViewModel> {
   @override
   void onReady() {
     super.onReady();
-    sleep(Duration(seconds:2));
+    sleep(const Duration(seconds:4));
     navigateToRoot();
   }
 

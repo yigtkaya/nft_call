@@ -16,6 +16,7 @@ class SplashView extends BaseView<SplashView, SplashViewModel> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          backgroundColor: const Color(0xff16161f),
           body: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

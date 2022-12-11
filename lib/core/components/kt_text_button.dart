@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nft_call/core/constants/extension.dart';
 
 class DTTextButton extends StatelessWidget {
   const DTTextButton({Key? key, required this.child, required this.onPress})
@@ -35,7 +36,9 @@ class DTTextButton extends StatelessWidget {
           style: TextButton.styleFrom(
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               minimumSize: Size.zero,
-              padding: EdgeInsets.zero,),
+              padding: EdgeInsets.zero,
+            textStyle: context.regular16
+          ),
           onPressed: onPress,
           child: Padding(
             padding: const EdgeInsets.all(10.0),

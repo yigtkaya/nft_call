@@ -27,11 +27,13 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        backgroundColor: const Color(0xf1343467),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(18),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -41,57 +43,41 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                     },)
                   ],
                 ),
-                const HorizontalSpace(spaceAmount: 30,),
+                const VerticalSpace(
+                  spaceAmount: 10,
+                ),
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.network(
+                      "https://nftcalendar.io/storage/uploads/events/2022/11/sDcQjGT8XenfEYu1wlbPbm8tvcWlAcpG555GTDGb.webp",
+                      fit: BoxFit.cover,
+                    )),
+                const VerticalSpace(
+                  spaceAmount: 8,
+                ),
                 DTText(
                   style: context.semiBold20,
                   label: "NFT Collection Title PlaceHolder",
                   color: Colors.white,
                 ),
                 const VerticalSpace(
-                  spaceAmount: 20,
-                ),
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(35),
-                    child: Image.network(
-                      "https://nftcalendar.io/storage/uploads/events/2022/11/sDcQjGT8XenfEYu1wlbPbm8tvcWlAcpG555GTDGb.webp",
-                      fit: BoxFit.cover,
-                    )),
-                const VerticalSpace(
-                  spaceAmount: 20,
+                  spaceAmount: 5,
                 ),
                 Row(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        border: Border.all(color: Colors.blueAccent),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(3),
-                        child: Center(
-                            child: DTText(
-                          label: "#Chain",
+                    Center(
+                        child: DTText(
+                      label: "#Chain",
+                      style: context.regular16,
+                          color: Colors.white,
+                    )),
+                    const HorizontalSpace(spaceAmount: 5,),
+                    Center(
+                        child: DTText(
+                          label: "#NFT Drop",
                           style: context.regular16,
-                        )),
-                      ),
-                    ),
-                    const HorizontalSpace(spaceAmount: 10,),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.pink,
-                        border: Border.all(color: Colors.pinkAccent),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(3),
-                        child: Center(
-                            child: DTText(
-                              label: "#NFT Drop",
-                              style: context.regular16,
-                            )),
-                      ),
-                    )
+                          color: Colors.white
+                        ))
                   ],
                 ),
                 const VerticalSpace(

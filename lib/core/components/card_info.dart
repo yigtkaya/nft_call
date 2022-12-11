@@ -76,16 +76,19 @@ class _CardInfoState extends State<CardInfo> {
             label: "Mint Price: ${widget.mintPrice}",
             style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              DTTextButton(
-                  child: const Text("read more", style: TextStyle(color: Colors.white, fontSize: 14),),
-                  onPress: () {
-                    Get.to(EventDetailView());
-                  }),
-              const HorizontalSpace(spaceAmount: 15,)
-            ],
+          Padding(
+            padding: EdgeInsets.only(bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                DTTextButton(
+                    child: const Text("read more", style: TextStyle(color: Colors.white, fontSize: 14),),
+                    onPress: () {
+                      Get.to(EventDetailView());
+                    }),
+                const HorizontalSpace(spaceAmount: 15,)
+              ],
+            ),
           )
         ],
       ),

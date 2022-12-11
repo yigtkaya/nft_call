@@ -33,7 +33,7 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
                       ),
                       label: Text(
                         options[idx],
-                        style: TextStyle(fontSize: 14,
+                        style: TextStyle(fontSize: 12,
                             color: ThemeManager
                                 .instance?.getCurrentTheme.colorTheme.textColor),
                       ),
