@@ -17,22 +17,18 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List<Widget>.generate(
           options.length,
           (int idx) {
             return Transform(
-              transform: Matrix4.identity()..scale(0.85), // ??
+              transform: Matrix4.identity()..scale(0.7), // ??
               child: InkWell(
                 onDoubleTap: () {},
                 child: ChoiceChip(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        side: BorderSide(
-                            width: 2.0,
-                            color: ThemeManager.instance?.getCurrentTheme
-                                    .colorTheme.primaryScaffoldBackground ??
-                                const Color(0xff312b4f))),
+                      borderRadius: BorderRadius.circular(10.0),
+                      side: const BorderSide(width: 3.0, color: Colors.white10),
+                    ),
                     label: Text(
                       options[idx],
                       style: TextStyle(

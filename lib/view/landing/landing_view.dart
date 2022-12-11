@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:nft_call/core/base/view/base_view.dart';
-import 'package:nft_call/core/constants/dimen.dart';
-import 'package:nft_call/core/constants/theme/theme_manager.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/choice_chip.dart';
 import '../../core/components/nft_card.dart';
@@ -20,20 +18,20 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return SafeArea(
-        child: DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        body: Center(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.blueGrey,
+          body: Center(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const Padding(
-                padding: EdgeInsets.all(10), child: ChoiceChipWidget()),
-            getListView(context)
-          ],
-        )),
-      ),
-    ));
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 0, left: 15), child: ChoiceChipWidget()),
+                getListView(context),
+              ],
+            ),
+          ),
+        ));
   }
 
   @override
@@ -44,7 +42,8 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
 
   Widget getListView(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
+      child: PageView.builder(
+        scrollDirection: Axis.vertical,
           itemCount: 10,
           itemBuilder: (context, index) {
             return NftCard(

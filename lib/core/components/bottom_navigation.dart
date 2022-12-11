@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nft_call/core/constants/extension.dart';
-
 import '../constants/asset.dart';
 import 'kt_icon.dart';
 
@@ -18,11 +16,11 @@ class _KTLandingBottomNavigationBarState extends State<KTLandingBottomNavigation
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 70,
+        height: 60,
         child: Container(
-          decoration: BoxDecoration(
-            color: context.bottomNavigationBackground,
-            borderRadius: const BorderRadius.only(
+          decoration:const BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.only(
               topLeft: Radius.circular(65),
               topRight: Radius.circular(65),
             ),
@@ -35,11 +33,11 @@ class _KTLandingBottomNavigationBarState extends State<KTLandingBottomNavigation
               Expanded(
                   flex: 1,
                   child: GestureDetector(
-                      onTap: () => {changeCurrentPage(0)}, child: ITIcon(height: 32, width: 32, iconName: getHomePageIcon, color: Colors.white))),
+                      onTap: () => {changeCurrentPage(0)}, child: ITIcon(height: 28, width: 28, iconName: getHomePageIcon, color: Colors.white))),
               Expanded(
                   flex: 1,
                   child: GestureDetector(
-                      onTap: () => {changeCurrentPage(2)}, child: ITIcon(height: 32, width: 32, iconName: getStaticsPageIcon, color: Colors.white,)))
+                      onTap: () => {changeCurrentPage(2)}, child: ITIcon(height: 28, width: 28, iconName: getStaticsPageIcon, color: Colors.white,)))
             ],
           ),
         ));

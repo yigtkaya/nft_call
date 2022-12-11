@@ -52,6 +52,7 @@ extension TextExtention on BuildContext {
   TextStyle? get medium14 => textTheme.titleSmall;
   TextStyle? get medium12 => textTheme.titleMedium?.copyWith(fontSize: 12);
 
+  TextStyle? get semiBold0 => textTheme.labelLarge;
   TextStyle? get semiBold20 => textTheme.labelLarge;
   TextStyle? get semiBold16 => textTheme.labelMedium;
   TextStyle? get semiBold14 => textTheme.labelSmall;
