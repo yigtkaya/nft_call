@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nft_call/core/constants/dimen.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
 
@@ -17,22 +16,34 @@ class _NotificationViewState extends State<NotificationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(padding: const EdgeInsets.all(20),
-          child: !isSubscribe ?
-              Opacity(
-                opacity: 0.3,
-                child: DTText(
-                  label:
-                  "There is subscription yet.",
-                  style: context.semiBold14, color: Colors.white,),
-              ) :
-          Opacity(
-            opacity: 0.3,
-            child: DTText(
-              label:
-              "There is subscription.",
-              style: context.semiBold14, color: Colors.white,),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xf916161f), Color(0xf5263848)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: !isSubscribe
+                ? Opacity(
+                    opacity: 0.3,
+                    child: DTText(
+                      label: "There is subscription yet.",
+                      style: context.semiBold14,
+                      color: Colors.white,
+                    ),
+                  )
+                : Opacity(
+                    opacity: 0.3,
+                    child: DTText(
+                      label: "There is subscription.",
+                      style: context.semiBold14,
+                      color: Colors.white,
+                    ),
+                  ),
           ),
         ),
       ),

@@ -39,7 +39,7 @@ class _CardInfoState extends State<CardInfo> {
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             color: Colors.white,
           ),
-          const VerticalSpace(spaceAmount: 25,),
+          const VerticalSpace(spaceAmount: 10,),
           Row(
             children: [
               Center(
@@ -49,7 +49,7 @@ class _CardInfoState extends State<CardInfo> {
                     color: Colors.grey,
                   )),
               const HorizontalSpace(
-                spaceAmount: 10,
+                spaceAmount: 5,
               ),
               Center(
                   child: DTText(
@@ -59,8 +59,7 @@ class _CardInfoState extends State<CardInfo> {
                   ))
             ],
           ),
-          const VerticalSpace(spaceAmount: 10,),
-
+          const VerticalSpace(spaceAmount: 20,),
           const DTText(
             label:
                 "Place Holder Place Holder Place Holder Place Holder Place Holder Place Holder",
