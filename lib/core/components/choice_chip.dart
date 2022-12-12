@@ -23,12 +23,12 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
             options.length,
             (int idx) {
               return Padding(
-                padding: const EdgeInsets.only(left: 15, right: 10),
+                padding: const EdgeInsets.only(left: 14),
                 child: InkWell(
                   onDoubleTap: () {},
                   child: ChoiceChip(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(28.0),
                         side: const BorderSide(width: 1, color: Colors.white),
                       ),
                       label: Text(

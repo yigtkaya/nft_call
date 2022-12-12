@@ -39,7 +39,7 @@ class _CardInfoState extends State<CardInfo> {
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             color: Colors.white,
           ),
-          const VerticalSpace(spaceAmount: 10,),
+          const VerticalSpace(spaceAmount: 5,),
           Row(
             children: [
               Center(
@@ -59,7 +59,7 @@ class _CardInfoState extends State<CardInfo> {
                   ))
             ],
           ),
-          const VerticalSpace(spaceAmount: 20,),
+          const VerticalSpace(spaceAmount: 25,),
           const DTText(
             label:
                 "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder", maxLines: 2,
@@ -77,7 +77,7 @@ class _CardInfoState extends State<CardInfo> {
             style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 10, right: 10, left: 10, top: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

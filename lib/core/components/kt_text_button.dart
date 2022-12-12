@@ -16,38 +16,30 @@ class DTTextButton extends StatelessWidget {
   final String? iconName;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.white),
-        gradient:  const LinearGradient(colors: [ Color(0xff16161f), Color(0xff364d64)],
-          begin: Alignment.bottomLeft,
-          end: Alignment.topCenter,
+    return Material(
+      elevation: 20,
+      child: Container(
+        decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+            border: Border.all(color: Colors.white),
         ),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0xff16164f),
-            offset: Offset(0.0, 1),
-            blurRadius: 5,
-          ),
-        ],
-      ),
-      child: TextButton(
-          style: TextButton.styleFrom(
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              minimumSize: Size.zero,
-              padding: EdgeInsets.zero,
-            textStyle: context.regular16
-          ),
-          onPressed: onPress,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                child,
-              ],
+        child: TextButton(
+            style: TextButton.styleFrom(
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                minimumSize: Size.zero,
+                padding: EdgeInsets.zero,
+              textStyle: context.regular10
             ),
-          )),
+            onPressed: onPress,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  child,
+                ],
+              ),
+            )),
+      ),
     );
   }
 }

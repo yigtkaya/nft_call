@@ -29,7 +29,7 @@ class _NftCardState extends State<NftCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+      padding: const EdgeInsets.all(15),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(14),
         child: Container(
