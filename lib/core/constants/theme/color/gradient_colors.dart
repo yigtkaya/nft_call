@@ -9,6 +9,7 @@ class ColorConstants {
     MenuGradientColor(const Color(0xfffad0c4), const Color(0xffff9a9e)),
     MenuGradientColor(const Color(0xfff09819), const Color(0xfffe6767)),
     MenuGradientColor(const Color(0xfffbc2eb), const Color(0xffa18cd1)),
+    MenuGradientColor(const Color(0xff16161f), const Color(0xff364d64))
   ];
 }
 

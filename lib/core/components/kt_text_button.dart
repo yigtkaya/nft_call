@@ -20,7 +20,7 @@ class DTTextButton extends StatelessWidget {
       elevation: 20,
       child: Container(
         decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28),
+        borderRadius: BorderRadius.circular(14),
             border: Border.all(color: Colors.white),
         ),
         child: TextButton(

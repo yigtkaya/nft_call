@@ -5,6 +5,7 @@ import 'package:nft_call/core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/choice_chip.dart';
 import '../../core/components/nft_card.dart';
+import '../../core/constants/theme/color/gradient_colors.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
 import 'landing_view_model.dart';
@@ -22,12 +23,16 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
       resizeToAvoidBottomInset: false,
       body: Center(
         child: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xf916161f), Color(0xf5364d64)],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
+                colors: [
+                  ColorConstants.colorPlateList[7 % (ColorConstants.colorPlateList.length)].startColor,
+                  ColorConstants.colorPlateList[7 % (ColorConstants.colorPlateList.length)].endColor,
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                stops: const [0.0, 1.2],
+                tileMode: TileMode.clamp),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
