@@ -8,6 +8,7 @@ import 'package:nft_call/core/constants/theme/theme_manager.dart';
 
 import '../constants/horizontal_space.dart';
 import 'card_info.dart';
+import 'image_card.dart';
 
 class NftCard extends StatefulWidget {
   bool isSelected = false;
@@ -41,64 +42,28 @@ class _NftCardState extends State<NftCard> {
             ),
             boxShadow: [
               BoxShadow(
-                color: ThemeManager.instance?.getCurrentTheme.colorTheme.colors.abbey ?? Colors.black,
+                color: ThemeManager
+                        .instance?.getCurrentTheme.colorTheme.colors.abbey ??
+                    Colors.black,
                 offset: const Offset(0.0, 1.5),
                 blurRadius: 5,
               ),
             ],
             border: Border.all(color: Colors.black, width: 1.5),
-
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                children: [
-                  Image.network(
-                    "https://nftcalendar.io/storage/uploads/events/2022/12/1v6jVJUOdSJgvV2ExCpXzOkktGOOmseW6WOmhfN5.webp",
-                    fit: BoxFit.cover,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 15, top: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          decoration:
-                              BoxDecoration(color: Colors.black.withOpacity(0)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              ITIcon(
-                                iconName: getFavoriteIcon,
-                                width: 28,
-                                height: 28,
-                                onPress: () =>
-                                    {changeFavoriteIcon(widget.isSelected)},
-                              ),
-                              const HorizontalSpace(),
-                              DTText(
-                                label: "1.2 M",
-                                style: context.regular12,
-                                color: Colors.white,
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              ImageNFT(onFavChanged: (isSelected) => {}),
+              const Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 15, left: 20, right: 5),
+                  child: CardInfo(
+                      mintDate: "27/12/2022 - 03/01/2023",
+                      mintPrice: "00.2 ETH",
+                      website: "website"),
+                ),
               ),
-               const Expanded(
-                 child:  Padding(
-                 padding: EdgeInsets.only(top: 15, left: 20, right: 5),
-                 child: CardInfo(
-                     mintDate: "27/12/2022 - 03/01/2023",
-                     mintPrice: "00.2 ETH",
-                     website: "website"),
-                    ),
-               ),
             ],
           ),
         ),

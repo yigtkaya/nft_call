@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:nft_call/core/components/image_card.dart';
 import 'package:nft_call/core/components/kt_icon.dart';
+import 'package:nft_call/core/components/kt_text_button.dart';
+import 'package:nft_call/core/constants/dimen.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
-import 'package:nft_call/core/constants/horizontal_space.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
+import '../../core/components/event_detail_info.dart';
 import '../../core/constants/asset.dart';
-import '../../core/constants/theme/theme_manager.dart';
 import '../../core/constants/vertical_space.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
@@ -27,114 +29,68 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: const Color(0xf1343467),
-        body: SingleChildScrollView(
+        backgroundColor: const Color(0xf5263848),
+        body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(18),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ITIcon(iconName: AssetConstants.icons.cross, width: 14, height: 14, onPress: () {
-                      Get.back();
-                    },)
-                  ],
-                ),
-                const VerticalSpace(
-                  spaceAmount: 10,
-                ),
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.network(
-                      "https://nftcalendar.io/storage/uploads/events/2022/11/sDcQjGT8XenfEYu1wlbPbm8tvcWlAcpG555GTDGb.webp",
-                      fit: BoxFit.cover,
-                    )),
-                const VerticalSpace(
-                  spaceAmount: 8,
-                ),
-                DTText(
-                  style: context.semiBold20,
-                  label: "NFT Collection Title PlaceHolder",
-                  color: Colors.white,
-                ),
-                const VerticalSpace(
-                  spaceAmount: 5,
-                ),
-                Row(
-                  children: [
-                    Center(
-                        child: DTText(
-                      label: "#Chain",
-                      style: context.regular16,
-                          color: Colors.white,
-                    )),
-                    const HorizontalSpace(spaceAmount: 5,),
-                    Center(
-                        child: DTText(
-                          label: "#NFT Drop",
-                          style: context.regular16,
-                          color: Colors.white
-                        ))
-                  ],
-                ),
-                const VerticalSpace(
-                  spaceAmount: 20,
-                ),
-                DTText(
-                  label:
-                      'Place Holder,Place Holder,Place HolderPlace HolderPlace Holder,Place HolderPlace Holder,Place Holder,Place HolderPlace HolderPlace Holder,Place HolderPlace Holder,Place Holder,Place HolderPlace HolderPlace Holder,Place HolderPlace Holder,Place Holder,Place HolderPlace HolderPlace Holder,Place HolderPlace Holder,Place Holder,Place HolderPlace HolderPlace Holder,Place HolderPlace Holder,Place Holder,Place HolderPlace HolderPlace Holder,Place HolderPlace Holder,Place Holder,Place HolderPlace HolderPlace Holder,Place HolderPlace Holder,Place Holder,Place HolderPlace HolderPlace Holder,Place Holder',
-                  style: context.semiBold14,
-                  color: Colors.white70,
-                ),
-                const VerticalSpace(
-                  spaceAmount: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ITIcon(
-                      iconName: AssetConstants.icons.website,
-                      height: 30,
-                      width: 30,
-                      color: Colors.white,
-                      onPress: () {
-                        _launchURL("https://nftcalendar.io/event/41-years-terry-lex/");
-
-                      },
+            padding: const EdgeInsets.all(DimenConstant.LARGE),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      ITIcon(
+                        iconName: AssetConstants.icons.cross,
+                        onPress: () => {Get.back()},
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: DTText(
+                            label: 'Detail',
+                            style: context.bold20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 20,
+                  ),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(10),
                     ),
-                    ITIcon(
-                      iconName: AssetConstants.icons.discord,
-                      height: 30,
-                      width: 30,
-                      onPress: () {
-                        _launchURL("https://www.google.com/search?q=componnet+name+is+null+url+launcer&oq=componnet+name+is+null+url+launcer&aqs=chrome..69i57j0i22i30.6719j1j4&sourceid=chrome&ie=UTF-8");
-
-                      },
+                    child: ImageNFT(onFavChanged: (isSelected) => {}),
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 20,
+                  ),
+                  const EventDetailInfo(),
+                  const VerticalSpace(
+                    spaceAmount: 30,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        DTText(
+                            label: "Remaining time to mint",
+                            style: context.semiBold20,
+                            color: Colors.white),
+                        DTText(
+                          label: "18:53:13",
+                          style: context.regular20,
+                          color: Colors.blue,
+                        )
+                      ],
                     ),
-                    ITIcon(
-                      iconName: AssetConstants.icons.twitter,
-                      height: 30,
-                      width: 30,
-                      onPress: () {
-                        _launchURL("https://api.flutter.dev/flutter/widgets/SlideTransition-class.html");
-
-                      },
-                    ),
-                    ITIcon(
-                      iconName: AssetConstants.icons.link,
-                      height: 30,
-                      width: 30,
-                      color: Colors.white,
-                      onPress: () {
-                        _launchURL("https://www.youtube.com/watch?v=ZKMboIROxOM&ab_channel=Aniket");
-                      },
-                    ),
-                  ],
-                )
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -150,7 +106,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
 
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
-    if(!await launchUrl(uri)){
+    if (!await launchUrl(uri)) {
       throw "Can not launch url";
     }
   }
