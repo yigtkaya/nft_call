@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nft_call/core/constants/extension.dart';
 
 import '../constants/asset.dart';
 import 'kt_icon.dart';
