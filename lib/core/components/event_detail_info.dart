@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nft_call/core/components/costum_switch.dart';
 import 'package:nft_call/core/constants/extension.dart';
-
 import '../constants/asset.dart';
 import '../constants/dt_text.dart';
 import '../constants/horizontal_space.dart';
@@ -21,16 +21,64 @@ class EventDetailInfo extends StatelessWidget {
           color: Colors.white,
         ),
         const VerticalSpace(
+          spaceAmount: 5,
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              DTText(
+                  label: "Remaining time to mint",
+                  style: context.semiBold14,
+                  color: Colors.white),
+              const HorizontalSpace(),
+              DTText(
+                label: "00.5 ETH",
+                style: context.regular20,
+                color: Colors.blue,
+              ),
+            ],
+          ),
+        ),
+        const Opacity(
+          opacity: 0.4,
+          child: Divider(
+            color: Colors.grey,
+            thickness: 1.5,
+          ),
+        ),
+        const VerticalSpace(
           spaceAmount: 25,
         ),
         DTText(
           label:
-              "Place HolderPlace HolderPlace HolderPlace HolderPlace HolderPlace HolderPlace HolderPlace Holder Place Holder",
+              "Place HolderPlace HolderPlaceHolderPlaceHolHolderPlaceHolderPlaceHolderPlaceHoldelaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderrlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlacederPlaceHolderPlaceHolderPlace HolderPlace HolderPlace HolderPlace HolderPlace HolderPlace Holder Place Holder",
           style: context.regular16,
           color: Colors.white,
         ),
         const VerticalSpace(
-          spaceAmount: 30,
+          spaceAmount: 35,
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              DTText(
+                  label: "Remaining time to mint",
+                  style: context.semiBold20,
+                  color: Colors.white),
+              DTText(
+                label: "18:53:13",
+                style: context.regular20,
+                color: Colors.blue,
+              )
+            ],
+          ),
+        ),
+        const VerticalSpace(
+          spaceAmount: 40,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -56,7 +104,7 @@ class EventDetailInfo extends StatelessWidget {
                   ],
                 ),
                 const VerticalSpace(
-                  spaceAmount: 10,
+                  spaceAmount: 15,
                 ),
                 Row(
                   children: [
@@ -102,7 +150,7 @@ class EventDetailInfo extends StatelessWidget {
                   ],
                 ),
                 const VerticalSpace(
-                  spaceAmount: 10,
+                  spaceAmount: 15,
                 ),
                 Row(
                   children: [

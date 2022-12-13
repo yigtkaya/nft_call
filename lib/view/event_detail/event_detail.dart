@@ -72,23 +72,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                   const VerticalSpace(
                     spaceAmount: 30,
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        DTText(
-                            label: "Remaining time to mint",
-                            style: context.semiBold20,
-                            color: Colors.white),
-                        DTText(
-                          label: "18:53:13",
-                          style: context.regular20,
-                          color: Colors.blue,
-                        )
-                      ],
-                    ),
-                  ),
+                  
                 ],
               ),
             ),
