@@ -33,7 +33,7 @@ class RootView extends BaseView<RootView, RootViewModel> {
 
 
                   /// Stats View
-                  const NotificationView()
+                  NotificationView()
                 ],
               )),
 

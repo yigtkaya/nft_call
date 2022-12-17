@@ -1,54 +1,60 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nft_call/core/constants/dt_text.dart';
-import 'package:nft_call/core/constants/extension.dart';
+import 'package:nft_call/core/components/alert_list_item.dart';
+import '../../core/base/view/base_view.dart';
+import '../../core/base/view/view_info.dart';
+import '../../core/constants/theme/color/gradient_colors.dart';
+import '../../product/menu/menu_key.dart';
+import '../../product/menu/screen_name.dart';
+import 'notification_view_model.dart';
 
-class NotificationView extends StatefulWidget {
-  const NotificationView({Key? key}) : super(key: key);
-
-  @override
-  State<NotificationView> createState() => _NotificationViewState();
-}
-
-class _NotificationViewState extends State<NotificationView> {
-  get isSubscribe => false;
+class NotificationView
+    extends BaseView<NotificationView, NotificationViewModel> {
+  NotificationView({Key? key}) : super(key: key) {
+    initViewModel(NotificationViewModel());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xf916161f), Color(0xf5263848)],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [
+                  ColorConstants.colorPlateList[7 % (ColorConstants.colorPlateList.length)].startColor,
+                  ColorConstants.colorPlateList[7 % (ColorConstants.colorPlateList.length)].endColor,
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                stops: const [0.0, 1.2],
+                tileMode: TileMode.clamp),
           ),
-        ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: !isSubscribe
-                ? Opacity(
-                    opacity: 0.3,
-                    child: DTText(
-                      label: "There is subscription yet.",
-                      style: context.semiBold14,
-                      color: Colors.white,
-                    ),
-                  )
-                : Opacity(
-                    opacity: 0.3,
-                    child: DTText(
-                      label: "There is subscription.",
-                      style: context.semiBold14,
-                      color: Colors.white,
-                    ),
-                  ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  AlertListItem(),
+                  AlertListItem(),
+                  AlertListItem(),
+                  AlertListItem(),
+                  AlertListItem(),
+                  AlertListItem(),
+                ],
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 
-  // subscribe listesi çekilecek çekilebilirse visibilty false olarak atancak
+  @override
+  void setViewInfo() {
+    viewInfo = ViewInfoModel(
+        menuKey: MenuKey.notification, screenName: ScreenName.notification);
+  }
 }

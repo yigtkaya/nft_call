@@ -7,6 +7,7 @@ import '../constants/horizontal_space.dart';
 import 'kt_icon.dart';
 
 class ImageNFT extends StatefulWidget {
+
   bool isSelected = false;
   final void Function(bool) onFavChanged;
 

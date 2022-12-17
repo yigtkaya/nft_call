@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:nft_call/core/components/image_card.dart';
 import 'package:nft_call/core/components/kt_icon.dart';
-import 'package:nft_call/core/components/kt_text_button.dart';
 import 'package:nft_call/core/constants/dimen.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
