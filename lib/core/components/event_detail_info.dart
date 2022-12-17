@@ -49,6 +49,29 @@ class EventDetailInfo extends StatelessWidget {
           ),
         ),
         const VerticalSpace(
+          spaceAmount: 5,
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
+              child: DTText(
+                  label:
+                      'If you want to receive notifications from this collection change the switch',
+                  style: context.semiBold14, color: Colors.white,),
+            ),
+            ITCustomSwitch(callback: (isOn) {}),
+          ],
+        ),
+        const Opacity(
+          opacity: 0.4,
+          child: Divider(
+            color: Colors.grey,
+            thickness: 1.5,
+          ),
+        ),
+        const VerticalSpace(
           spaceAmount: 25,
         ),
         DTText(
@@ -78,7 +101,17 @@ class EventDetailInfo extends StatelessWidget {
           ),
         ),
         const VerticalSpace(
-          spaceAmount: 40,
+          spaceAmount: 20,
+        ),
+        const Opacity(
+          opacity: 0.4,
+          child: Divider(
+            color: Colors.grey,
+            thickness: 1.5,
+          ),
+        ),
+        const VerticalSpace(
+          spaceAmount: 20,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -94,7 +127,7 @@ class EventDetailInfo extends StatelessWidget {
                       width: 30,
                     ),
                     const HorizontalSpace(
-                      spaceAmount: 5,
+                      spaceAmount: 8,
                     ),
                     DTText(
                       label: "discord",
@@ -115,7 +148,7 @@ class EventDetailInfo extends StatelessWidget {
                       color: Colors.white,
                     ),
                     const HorizontalSpace(
-                      spaceAmount: 5,
+                      spaceAmount: 8,
                     ),
                     DTText(
                       label: "marketplace",
@@ -140,7 +173,7 @@ class EventDetailInfo extends StatelessWidget {
                       width: 30,
                     ),
                     const HorizontalSpace(
-                      spaceAmount: 5,
+                      spaceAmount: 8,
                     ),
                     DTText(
                       label: "twitter",
@@ -161,7 +194,7 @@ class EventDetailInfo extends StatelessWidget {
                       color: Colors.white,
                     ),
                     const HorizontalSpace(
-                      spaceAmount: 5,
+                      spaceAmount: 8,
                     ),
                     DTText(
                       label: "website",

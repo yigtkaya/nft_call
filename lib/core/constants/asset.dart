@@ -43,6 +43,7 @@ class KIcons {
   final String discord = AssetConstants.toIcon("discord");
   final String website = AssetConstants.toIcon("website");
   final String link = AssetConstants.toIcon("link");
+  final String notification_on = AssetConstants.toIcon("notification_on");
 
 
 }

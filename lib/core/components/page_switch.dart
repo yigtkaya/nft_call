@@ -5,8 +5,8 @@ import '../constants/asset.dart';
 import '../constants/horizontal_space.dart';
 import 'kt_icon.dart';
 
-class ITCustomSwitch extends StatefulWidget {
-  ITCustomSwitch({Key? key, this.onPress, this.width, this.height, this.isRadarViewSelected = true, required this.callback})
+class ITPageCustomSwitch extends StatefulWidget {
+  ITPageCustomSwitch({Key? key, this.onPress, this.width, this.height, this.isRadarViewSelected = true, required this.callback})
       : super(key: key);
   final VoidCallback? onPress;
   final double? width;
@@ -15,10 +15,10 @@ class ITCustomSwitch extends StatefulWidget {
   void Function(bool) callback;
 
   @override
-  State<ITCustomSwitch> createState() => _ITCustomSwitchState();
+  State<ITPageCustomSwitch> createState() => _ITPageCustomSwitchState();
 }
 
-class _ITCustomSwitchState extends State<ITCustomSwitch> {
+class _ITPageCustomSwitchState extends State<ITPageCustomSwitch> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
