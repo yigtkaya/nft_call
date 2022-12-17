@@ -54,15 +54,25 @@ class EventDetailInfo extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              flex: 2,
+            Flexible(
               child: DTText(
-                  label:
-                      'If you want to receive notifications from this collection change the switch',
-                  style: context.semiBold14, color: Colors.white,),
+                label:
+                    'If you want to receive notifications from this collection change the switch',
+                style: context.semiBold14,
+                color: Colors.white,
+              ),
             ),
-            ITCustomSwitch(callback: (isOn) {}),
+            const HorizontalSpace(
+              spaceAmount: 10,
+            ),
+            ITCustomSwitch(callback: (isOn) {}), // on off ??
+            const HorizontalSpace(
+              spaceAmount: 10,
+            ),
           ],
+        ),
+        const VerticalSpace(
+          spaceAmount: 10,
         ),
         const Opacity(
           opacity: 0.4,

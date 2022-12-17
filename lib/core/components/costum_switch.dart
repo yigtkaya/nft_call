@@ -37,8 +37,8 @@ class _ITCustomSwitchState extends State<ITCustomSwitch> {
             children: [
               ITIcon(
                 iconName: AssetConstants.icons.notification_on,
-                height: 18,
-                width: 18,
+                height: 20,
+                width: 20,
                 color: widget.isRadarViewSelected ? Colors.amber : Colors.blueGrey,
               ),
               const HorizontalSpace(),
