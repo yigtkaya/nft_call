@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:nft_call/core/base/view/base_view.dart';
+import 'package:nft_call/core/components/kt_icon.dart';
+import 'package:nft_call/core/constants/asset.dart';
+import 'package:nft_call/core/constants/dt_text.dart';
+import 'package:nft_call/core/constants/extension.dart';
+import 'package:nft_call/core/constants/vertical_space.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/choice_chip.dart';
 import '../../core/components/nft_card.dart';
@@ -26,8 +31,14 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: [
-                  ColorConstants.colorPlateList[7 % (ColorConstants.colorPlateList.length)].startColor,
-                  ColorConstants.colorPlateList[7 % (ColorConstants.colorPlateList.length)].endColor,
+                  ColorConstants
+                      .colorPlateList[
+                          7 % (ColorConstants.colorPlateList.length)]
+                      .startColor,
+                  ColorConstants
+                      .colorPlateList[
+                          7 % (ColorConstants.colorPlateList.length)]
+                      .endColor,
                 ],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
@@ -35,11 +46,10 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                 tileMode: TileMode.clamp),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: ChoiceChipWidget()),
+                  padding: EdgeInsets.only(top: 10), child: ChoiceChipWidget()),
               getListView(context),
             ],
           ),
@@ -62,8 +72,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
           itemBuilder: (context, index) {
             return NftCard(
               isSelected: false,
-              onFavChanged: (isSelected) {
-              },
+              onFavChanged: (isSelected) {},
             );
           }),
     );

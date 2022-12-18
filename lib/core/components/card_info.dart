@@ -60,21 +60,30 @@ class _CardInfoState extends State<CardInfo> {
             ],
           ),
           const VerticalSpace(spaceAmount: 25,),
-          const DTText(
-            label:
-                "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder", maxLines: 2,
-            style: TextStyle(color: Colors.white, fontSize: 16),
+         const Padding(
+            padding:  EdgeInsets.symmetric(vertical: 10),
+            child:  DTText(
+              label:
+                  "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder", maxLines: 2,
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
           ),
           const VerticalSpace(
-            spaceAmount: 10,
+            spaceAmount: 20,
           ),
           DTText(
             label: "Mint Date: ${widget.mintDate}",
             style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
+          const VerticalSpace(
+            spaceAmount: 10,
+          ),
           DTText(
             label: "Mint Price: ${widget.mintPrice}",
             style: const TextStyle(color: Colors.white, fontSize: 16),
+          ),
+          const VerticalSpace(
+            spaceAmount: 20,
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 10, right: 10, left: 10, top: 5),

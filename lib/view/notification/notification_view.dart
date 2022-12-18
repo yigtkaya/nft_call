@@ -36,7 +36,7 @@ class NotificationView
               padding: const EdgeInsets.only(top: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   AlertListItem(),
                   AlertListItem(),
                   AlertListItem(),

@@ -20,7 +20,7 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [ SystemUiOverlay.bottom ]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     /// Get any initial dynamic links
     ///final PendingDynamicLinkData? initialLink = await FirebaseDynamicLinks.instance.getInitialLink();
     runApp(const MyApp());

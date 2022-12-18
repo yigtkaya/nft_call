@@ -21,7 +21,7 @@ class _KTLandingBottomNavigationBarState
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 50,
+        height: 70,
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(

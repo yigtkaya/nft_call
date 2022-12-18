@@ -136,14 +136,6 @@ class EventDetailInfo extends StatelessWidget {
                       height: 30,
                       width: 30,
                     ),
-                    const HorizontalSpace(
-                      spaceAmount: 8,
-                    ),
-                    DTText(
-                      label: "discord",
-                      style: context.regular16,
-                      color: Colors.white,
-                    ),
                   ],
                 ),
                 const VerticalSpace(
@@ -152,17 +144,9 @@ class EventDetailInfo extends StatelessWidget {
                 Row(
                   children: [
                     ITIcon(
-                      iconName: AssetConstants.icons.link,
+                      iconName: AssetConstants.icons.marketplace,
                       height: 30,
                       width: 30,
-                      color: Colors.white,
-                    ),
-                    const HorizontalSpace(
-                      spaceAmount: 8,
-                    ),
-                    DTText(
-                      label: "marketplace",
-                      style: context.regular16,
                       color: Colors.white,
                     ),
                   ],
@@ -182,14 +166,6 @@ class EventDetailInfo extends StatelessWidget {
                       height: 30,
                       width: 30,
                     ),
-                    const HorizontalSpace(
-                      spaceAmount: 8,
-                    ),
-                    DTText(
-                      label: "twitter",
-                      style: context.regular16,
-                      color: Colors.white,
-                    ),
                   ],
                 ),
                 const VerticalSpace(
@@ -201,14 +177,6 @@ class EventDetailInfo extends StatelessWidget {
                       iconName: AssetConstants.icons.website,
                       height: 30,
                       width: 30,
-                      color: Colors.white,
-                    ),
-                    const HorizontalSpace(
-                      spaceAmount: 8,
-                    ),
-                    DTText(
-                      label: "website",
-                      style: context.regular16,
                       color: Colors.white,
                     ),
                   ],
