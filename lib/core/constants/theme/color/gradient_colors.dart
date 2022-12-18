@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorConstants {
   static List<MenuGradientColor> colorPlateList = [
-    MenuGradientColor(const Color(0xff889eff), const Color(0xff515aff)),
+    MenuGradientColor(const Color(0xff394872), const Color(0xff36395d)),
     MenuGradientColor(const Color(0xfffbab7e), const Color(0xfff7ce68)),
     MenuGradientColor(const Color(0xffff3ea2), const Color(0xfffa424e)),
     MenuGradientColor(const Color(0xff0ba360), const Color(0xff3cba92)),
