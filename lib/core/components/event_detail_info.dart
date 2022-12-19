@@ -124,64 +124,30 @@ class EventDetailInfo extends StatelessWidget {
           spaceAmount: 20,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    ITIcon(
-                      iconName: AssetConstants.icons.discord,
-                      height: 30,
-                      width: 30,
-                    ),
-                  ],
-                ),
-                const VerticalSpace(
-                  spaceAmount: 15,
-                ),
-                Row(
-                  children: [
-                    ITIcon(
-                      iconName: AssetConstants.icons.marketplace,
-                      height: 30,
-                      width: 30,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-              ],
+            ITIcon(
+              iconName: AssetConstants.icons.discord,
+              height: 30,
+              width: 30,
             ),
-            const HorizontalSpace(
-              spaceAmount: 50,
+            ITIcon(
+              iconName: AssetConstants.icons.twitter,
+              height: 30,
+              width: 30,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    ITIcon(
-                      iconName: AssetConstants.icons.twitter,
-                      height: 30,
-                      width: 30,
-                    ),
-                  ],
-                ),
-                const VerticalSpace(
-                  spaceAmount: 15,
-                ),
-                Row(
-                  children: [
-                    ITIcon(
-                      iconName: AssetConstants.icons.website,
-                      height: 30,
-                      width: 30,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-              ],
+            ITIcon(
+              iconName: AssetConstants.icons.marketplace,
+              height: 30,
+              width: 30,
+              color: Colors.white,
+            ),
+            ITIcon(
+              iconName: AssetConstants.icons.website,
+              height: 30,
+              width: 30,
+              color: Colors.white,
             ),
           ],
         ),

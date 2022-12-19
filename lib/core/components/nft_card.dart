@@ -1,12 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nft_call/core/components/kt_icon.dart';
 import 'package:nft_call/core/constants/asset.dart';
-import 'package:nft_call/core/constants/dt_text.dart';
-import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/theme/theme_manager.dart';
-
-import '../constants/horizontal_space.dart';
 import 'card_info.dart';
 import 'image_card.dart';
 
