@@ -1,11 +1,13 @@
-import 'package:flutter/material.dart';
+import 'dart:core';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import '../../core/base/view/base_view_model.dart';
-import '../../product/menu/menu_key.dart';
 
 class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _message = "Main Page".obs;
-  List<String> _options = ['Today', 'Up Coming', 'On Going'];
+  final database = FirebaseDatabase.instance.ref();
+  Object? demo;
   final _isSelected = false.obs;
 
   @override
@@ -13,8 +15,13 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
     super.onReady();
   }
 
-  void chipSelected(bool value){
-    _isSelected.value = value;
+  void ChoiceChipApiCall(String callName) {
+    database.child("/nft_calendar/today/bir").onValue.listen((event) {
+      demo = event.snapshot.value!;
+    });
+    print(callName);
+    print(demo);
   }
+
   bool get isSelected => _isSelected.value;
 }

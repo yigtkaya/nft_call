@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:nft_call/core/constants/theme/theme_manager.dart';
 
 class ChoiceChipWidget extends StatefulWidget {
-  const ChoiceChipWidget({Key? key}) : super(key: key);
+  final void Function(String) callback;
+
+  const ChoiceChipWidget({Key? key, required this.callback}) : super(key: key);
 
   @override
   State<ChoiceChipWidget> createState() => _ChoiceChipWidgetState();
@@ -25,7 +27,6 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
               return Padding(
                 padding: const EdgeInsets.only(left: 16),
                 child: InkWell(
-                  onDoubleTap: () {},
                   child: ChoiceChip(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14.0),
@@ -33,15 +34,17 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
                       ),
                       label: Text(
                         options[idx],
-                        style: TextStyle(fontSize: 12,
-                            color: ThemeManager
-                                .instance?.getCurrentTheme.colorTheme.textColor),
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: ThemeManager.instance?.getCurrentTheme
+                                .colorTheme.textColor),
                       ),
                       selected: _value == idx,
                       selectedColor: const Color(0xff264d64),
                       onSelected: (bool selected) {
                         setState(() {
                           _value = selected ? idx : idx;
+                          widget.callback(options[_value]);
                         });
                       }),
                 ),
