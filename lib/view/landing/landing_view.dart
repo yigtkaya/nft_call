@@ -43,8 +43,8 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(
-                  padding: EdgeInsets.only(top: 10), child: ChoiceChipWidget()),
+                Padding(
+                  padding: EdgeInsets.only(top: 10), child: ChoiceChipWidget(callback:(idx) => viewModel.ChoiceChipApiCall(idx),)),
               getListView(context),
             ],
           ),

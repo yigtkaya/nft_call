@@ -40,6 +40,7 @@ dependencies:
   firebase_crashlytics: ^3.0.7
   firebase_analytics: ^10.0.7
   firebase_messaging: ^14.1.4
+  firebase_database:
 
   #Permission
   permission_handler: ^10.0.0
