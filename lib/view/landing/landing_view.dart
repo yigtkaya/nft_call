@@ -44,7 +44,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 10), child: ChoiceChipWidget(callback:(idx) => viewModel.ChoiceChipApiCall(idx),)),
+                  padding: const EdgeInsets.only(top: 10), child: ChoiceChipWidget(callback:(idx) => viewModel.choiceChipApiCall(idx),)),
               getListView(context),
             ],
           ),
@@ -67,7 +67,9 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
           itemBuilder: (context, index) {
             return NftCard(
               isSelected: false,
-              onFavChanged: (isSelected) {},
+              onFavChanged: (isSelected) {
+
+              },
             );
           }),
     );

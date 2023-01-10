@@ -13,9 +13,9 @@ import 'core/constants/theme/app_theme.dart';
 import 'core/constants/theme/theme_manager.dart';
 
 Future<void> main() async {
+
   await Hive.initFlutter();
   Binding().dependencies();
-
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
@@ -25,6 +25,7 @@ Future<void> main() async {
     ///final PendingDynamicLinkData? initialLink = await FirebaseDynamicLinks.instance.getInitialLink();
     runApp(const MyApp());
   }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
+
 }
 
 class MyApp extends StatelessWidget {
