@@ -18,6 +18,7 @@ import '../../product/menu/screen_name.dart';
 import 'event_detail_model.dart';
 
 class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
+
   EventDetailView({Key? key}) : super(key: key) {
     initViewModel(EventDetailViewModel());
   }
@@ -67,7 +68,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
-                  const EventDetailInfo(),
+                  EventDetailInfo(),
                   const VerticalSpace(
                     spaceAmount: 30,
                   ),

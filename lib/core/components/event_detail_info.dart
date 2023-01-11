@@ -7,9 +7,15 @@ import '../constants/horizontal_space.dart';
 import '../constants/vertical_space.dart';
 import 'kt_icon.dart';
 
-class EventDetailInfo extends StatelessWidget {
-  const EventDetailInfo({Key? key}) : super(key: key);
+class EventDetailInfo extends StatefulWidget {
+  bool isAlertOn = false;
+  EventDetailInfo({this.isAlertOn = false, Key? key}) : super(key: key);
 
+  @override
+  State<EventDetailInfo> createState() => _EventDetailInfoState();
+}
+
+class _EventDetailInfoState extends State<EventDetailInfo> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -65,7 +71,14 @@ class EventDetailInfo extends StatelessWidget {
             const HorizontalSpace(
               spaceAmount: 10,
             ),
-            ITCustomSwitch(callback: (isOn) {}), // on off ??
+            // bildirim add kısmı ekelencek
+            ITIcon(
+              iconName: getAlertIcon,
+              width: 40,
+              height: 40,
+              onPress: () =>
+              {changeFavoriteIcon(widget.isAlertOn)},
+            ),
             const HorizontalSpace(
               spaceAmount: 10,
             ),
@@ -154,4 +167,14 @@ class EventDetailInfo extends StatelessWidget {
       ],
     );
   }
+
+  void changeFavoriteIcon(bool isSelected) {
+    setState(() {
+      widget.isAlertOn = !widget.isAlertOn;
+    });
+  }
+
+  String get getAlertIcon => widget.isAlertOn == true
+      ? AssetConstants.icons.add_alarm
+      : AssetConstants.icons.added_alarm;
 }
