@@ -10,6 +10,7 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _message = "Main Page".obs;
   final _isSelected = false.obs;
   final database = FirebaseDatabase.instance.ref();
+  KTCardItem? ktCardItem;
 
   @override
   void onReady() {
@@ -17,9 +18,21 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   }
 
   Future<void> choiceChipApiCall(String callName) async {
-    final snapshot = await database.child("nft_calendar/${callName.toLowerCase()}/iki").get();
 
+    database.child("nft_calendar/${callName.toLowerCase()}/eventDetail").once().then((event) {
+      final data = event.snapshot.value as List;
+      final item = Map<String, dynamic>.from(data[2] as Map);
+      // final ktCardItem = KTCardItem.fromRTDB(data);
+      ktCardItem = KTCardItem.fromRTDB(item);
+    });
+    database.child("nft_calendar/${callName.toLowerCase()}/descriptions").once().then((event) {
+      final data = event.snapshot.value as List;
+      // final ktCardItem = KTCardItem.fromRTDB(data);
+      ktCardItem?.description = data[2];
+    });
+    print(ktCardItem?.twitter);
   }
 
   bool get isSelected => _isSelected.value;
 }
+

@@ -1,3 +1,5 @@
+import 'package:firebase_database/firebase_database.dart';
+
 class KTCardItem {
   String? collectionName;
   String? mintDate;
@@ -12,66 +14,33 @@ class KTCardItem {
   bool? isAlertsOn;
 
   KTCardItem({
-    this.collectionName,
-    this.mintDate,
-    this.mintPrice,
-    this.blockchain,
-    this.website,
-    this.discord,
+    required this.collectionName,
+    required this.mintDate,
+    required this.mintPrice,
+    required this.blockchain,
+    required this.website,
+    required this.discord,
     this.description,
-    this.twitter,
-    this.marketplace,
-    this.isFavorite,
-    this.isAlertsOn,
+    required this.twitter,
+    required this.marketplace,
+    required this.isFavorite,
+    required this.isAlertsOn,
   });
 
-  @override
-  KTCardItem fromJson(Map<String, dynamic> json) {
-    collectionName = json['menuKey'];
-    mintDate = json['parentMenuKey'];
-    mintPrice = json['resourceKey'];
-    blockchain = json['imageUrl'];
-    website = json['order'];
-    discord = json['badge'];
-    description = json['description'];
-    twitter = json['explanation'];
-    marketplace = json['type'];
-    isFavorite = json['isFavorite'];
-    isAlertsOn = json['isAlertsOn'];
-    return this;
+  factory KTCardItem.fromRTDB(Map<String, dynamic> data) {
+   return KTCardItem(collectionName: data['collectionName'],
+       mintDate: data['mintDate'],
+       mintPrice: data['mintDate'],
+       blockchain: data['blockchain'],
+       website: data['website'],
+       discord: data['discord'],
+       description: data['description'],
+       twitter: data['twitter'],
+       marketplace: data['marketplace'],
+       isFavorite: data['isFavorite'],
+       isAlertsOn: data['isAlertsOn']);
   }
 
-  @override
-  KTCardItem.fromJson(Map<String, dynamic> json) {
-    collectionName = json['menuKey'];
-    mintDate = json['parentMenuKey'];
-    mintPrice = json['resourceKey'];
-    blockchain = json['imageUrl'];
-    website = json['order'];
-    discord = json['badge'];
-    description = json['description'];
-    twitter = json['explanation'];
-    marketplace = json['type'];
-    isFavorite = json['isFavorite'];
-    isAlertsOn = json['isAlertsOn'];
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['menuKey'] = collectionName;
-    data['parentMenuKey'] = mintDate;
-    data['resourceKey'] = mintPrice;
-    data['imageUrl'] = blockchain;
-    data['order'] = website;
-    data['badge'] = discord;
-    data['description'] = description;
-    data['explanation'] = twitter;
-    data['type'] = marketplace;
-    data['isFavorite'] = isFavorite;
-    data['isAlertsOn'] = isAlertsOn;
-    return data;
-  }
 
   String get getSafeDescription => description ?? "";
   bool get getSafeIsFavorite => isFavorite ?? false;

@@ -68,7 +68,6 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
             return NftCard(
               isSelected: false,
               onFavChanged: (isSelected) {
-
               },
             );
           }),
