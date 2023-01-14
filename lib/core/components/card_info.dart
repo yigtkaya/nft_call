@@ -12,7 +12,7 @@ import '../../product/model/nft_info_model.dart';
 import '../constants/dt_text.dart';
 
 class CardInfo extends StatefulWidget {
-  final KTCardItem ktCardItem;
+  final KTCardItem? ktCardItem;
   final String currentChip;
   final int index;
   const CardInfo({
@@ -36,7 +36,7 @@ class _CardInfoState extends State<CardInfo> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DTText(
-            label: widget.ktCardItem.collectionName ?? "NFT Collection Name",
+            label: widget.ktCardItem?.collectionName ?? "NFT Collection Name",
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             color: Colors.white,
           ),
@@ -47,7 +47,7 @@ class _CardInfoState extends State<CardInfo> {
             children: [
               Center(
                   child: DTText(
-                label: widget.ktCardItem.blockchain ?? "#Chain",
+                label: widget.ktCardItem?.blockchain ?? "#Chain",
                 style: context.regular16,
                 color: Colors.grey,
               )),
@@ -69,7 +69,7 @@ class _CardInfoState extends State<CardInfo> {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: DTText(
               label:
-                 widget.ktCardItem.description ?? "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder",
+                 widget.ktCardItem?.description ?? "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder",
               maxLines: 2,
               style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
@@ -78,14 +78,14 @@ class _CardInfoState extends State<CardInfo> {
             spaceAmount: 20,
           ),
           DTText(
-            label: "Mint Date: ${widget.ktCardItem.mintDate}",
+            label: "Mint Date: ${widget.ktCardItem?.mintDate}",
             style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
           const VerticalSpace(
             spaceAmount: 10,
           ),
           DTText(
-            label: "Mint Price: ${widget.ktCardItem.mintPrice}",
+            label: "Mint Price: ${widget.ktCardItem?.mintPrice}",
             style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
           const VerticalSpace(

@@ -11,6 +11,7 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
   final _database = FirebaseDatabase.instance.ref();
   final callName = "".obs;
   final index = 0.obs;
+  final _ktCardItem = KTCardItem().obs;
 
 
   @override
@@ -31,10 +32,21 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
       print(e.toString());
     }
   }
+  Future<void> getDetail(String callName, int index) async {
+    _database
+        .child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index")
+        .onValue
+        .listen((event) {
+      final data = event.snapshot.value;
+      _ktCardItem.value = Map<String, dynamic>.from(data as Map) as KTCardItem;
+      // ktCardItem = KTCardItem.fromRTDB(item);
+      print(_ktCardItem.value.mintDate);
+    });
+  }
   /// Navigate to Notification page
   void navigateToRoot() {
     navigation?.navigateToReset(MenuKey.root);
   }
 
-  bool get isAlertChanged => _isAlertsOn.value;
+  bool get isAlertOn => _isAlertsOn.value;
 }

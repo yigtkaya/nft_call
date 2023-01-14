@@ -10,9 +10,19 @@ import 'kt_icon.dart';
 
 class EventDetailInfo extends StatefulWidget {
   bool isAlertOn;
+  final String currentChip;
+  final int index;
   final KTCardItem? ktCardItem;
+  final void Function() onAlertChanged;
 
-  EventDetailInfo({this.isAlertOn = false, required this.ktCardItem ,Key? key}) : super(key: key);
+  EventDetailInfo(
+      {this.isAlertOn = false,
+      required this.ktCardItem,
+        required this.onAlertChanged,
+        Key? key,
+      required this.currentChip,
+      required this.index})
+      : super(key: key);
 
   @override
   State<EventDetailInfo> createState() => _EventDetailInfoState();
@@ -76,13 +86,13 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
             ),
             // bildirim add kısmı ekelencek
             ITIcon(
-              iconName: "",
+              iconName: widget.isAlertOn ? AssetConstants.icons.added_alarm : AssetConstants.icons.add_alarm,
               width: 40,
               height: 40,
-              onPress: () =>
-              {
-
-              },
+              onPress: () => {
+                changeFavoriteIcon(widget.isAlertOn),
+                widget.onAlertChanged(),
+            },
             ),
             const HorizontalSpace(
               spaceAmount: 10,
@@ -103,8 +113,8 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
           spaceAmount: 25,
         ),
         DTText(
-          label:
-          widget.ktCardItem?.description ?? "Place HolderPlace HolderPlaceHolderPlaceHolHolderPlaceHolderPlaceHolderPlaceHoldelaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderrlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlacederPlaceHolderPlaceHolderPlace HolderPlace HolderPlace HolderPlace HolderPlace HolderPlace Holder Place Holder",
+          label: widget.ktCardItem?.description ??
+              "Place HolderPlace HolderPlaceHolderPlaceHolHolderPlaceHolderPlaceHolderPlaceHoldelaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderrlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlacederPlaceHolderPlaceHolderPlace HolderPlace HolderPlace HolderPlace HolderPlace HolderPlace Holder Place Holder",
           style: context.regular16,
           color: Colors.white,
         ),
@@ -149,32 +159,27 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
               iconName: AssetConstants.icons.discord,
               height: 30,
               width: 30,
-              onPress: () => {
-
-              },
+              onPress: () => {},
             ),
             ITIcon(
               iconName: AssetConstants.icons.twitter,
               height: 30,
               width: 30,
-              onPress: () => {
-              },
+              onPress: () => {},
             ),
             ITIcon(
               iconName: AssetConstants.icons.marketplace,
               height: 30,
               width: 30,
               color: Colors.white,
-              onPress: () => {
-              },
+              onPress: () => {},
             ),
             ITIcon(
               iconName: AssetConstants.icons.website,
               height: 30,
               width: 30,
               color: Colors.white,
-              onPress: () => {
-              },
+              onPress: () => {},
             ),
           ],
         ),
@@ -182,8 +187,12 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
     );
   }
 
-
-
-
-
+  void changeFavoriteIcon(bool isSelected) {
+    setState(() {
+      widget.isAlertOn= !widget.isAlertOn;
+    });
+  }
+  String get getAlertIcon => widget.isAlertOn
+      ? AssetConstants.icons.added_alarm
+      : AssetConstants.icons.add_alarm;
 }

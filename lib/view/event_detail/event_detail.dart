@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:nft_call/core/components/event_detail_info.dart';
 import 'package:nft_call/core/components/image_card.dart';
 import 'package:nft_call/core/components/kt_icon.dart';
 import 'package:nft_call/core/constants/dimen.dart';
@@ -22,14 +23,13 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   late KTCardItem? ktCardItem;
   final String currentChip;
   final int index;
-  late bool isAlertsOn = false;
 
-  EventDetailView(
-      {Key? key,
-      this.ktCardItem,
-      required this.currentChip,
-      required this.index})
-      : super(key: key) {
+  EventDetailView({
+    Key? key,
+    this.ktCardItem,
+    required this.currentChip,
+    required this.index,
+  }) : super(key: key) {
     initViewModel(EventDetailViewModel());
   }
 
@@ -78,172 +78,13 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      DTText(
-                        label:
-                        ktCardItem?.collectionName ??"NFT Collection Name",
-                        style: context.semiBold20,
-                        color: Colors.white,
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 5,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            DTText(
-                                label: "Mint Price :",
-                                style: context.semiBold14,
-                                color: Colors.white),
-                            const HorizontalSpace(),
-                            DTText(
-                              label: ktCardItem?.mintPrice ?? "00.5 ETH",
-                              style: context.regular20,
-                              color: Colors.blue,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Opacity(
-                        opacity: 0.4,
-                        child: Divider(
-                          color: Colors.grey,
-                          thickness: 1.5,
-                        ),
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 5,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            child: DTText(
-                              label:
-                                  'If you want to receive notifications from this collection tap the bell!',
-                              style: context.semiBold14,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const HorizontalSpace(
-                            spaceAmount: 10,
-                          ),
-                          // bildirim add kısmı ekelencek
-                          ITIcon(
-                            iconName: isAlertsOn
-                                ? AssetConstants.icons.add_alarm
-                                : AssetConstants.icons.added_alarm,
-                            width: 40,
-                            height: 40,
-                            onPress: () =>
-                                {
-                                  changeAlertIcon(isAlertsOn),
-                                  viewModel.onAlertChange(currentChip, index)
-                                },
-                          ),
-                          const HorizontalSpace(
-                            spaceAmount: 10,
-                          ),
-                        ],
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 10,
-                      ),
-                      const Opacity(
-                        opacity: 0.4,
-                        child: Divider(
-                          color: Colors.grey,
-                          thickness: 1.5,
-                        ),
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 25,
-                      ),
-                      DTText(
-                        label: ktCardItem?.description ??
-                            "Place HolderPlace HolderPlaceHolderPlaceHolHolderPlaceHolderPlaceHolderPlaceHoldelaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderrlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlacederPlaceHolderPlaceHolderPlace HolderPlace HolderPlace HolderPlace HolderPlace HolderPlace Holder Place Holder",
-                        style: context.regular16,
-                        color: Colors.white,
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 35,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            DTText(
-                                label: "Mint Date",
-                                style: context.semiBold20,
-                                color: Colors.white),
-                            DTText(
-                              label: ktCardItem?.mintDate ?? "18:53:13",
-                              style: context.regular20,
-                              color: Colors.blue,
-                            )
-                          ],
-                        ),
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 20,
-                      ),
-                      const Opacity(
-                        opacity: 0.4,
-                        child: Divider(
-                          color: Colors.grey,
-                          thickness: 1.5,
-                        ),
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 20,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ITIcon(
-                            iconName: AssetConstants.icons.discord,
-                            height: 30,
-                            width: 30,
-                            onPress: () => {
-                              launchURL(ktCardItem?.discord ?? ""),
-                            },
-                          ),
-                          ITIcon(
-                            iconName: AssetConstants.icons.twitter,
-                            height: 30,
-                            width: 30,
-                            onPress: () => {
-                              launchURL(ktCardItem?.twitter ?? ""),
-                            },
-                          ),
-                          ITIcon(
-                            iconName: AssetConstants.icons.marketplace,
-                            height: 30,
-                            width: 30,
-                            color: Colors.white,
-                            onPress: () => {
-                              launchURL(ktCardItem?.marketplace ?? ""),
-                            },
-                          ),
-                          ITIcon(
-                            iconName: AssetConstants.icons.website,
-                            height: 30,
-                            width: 30,
-                            color: Colors.white,
-                            onPress: () => {
-                              launchURL(ktCardItem?.website ?? ""),
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  EventDetailInfo(
+                      ktCardItem: ktCardItem,
+                      currentChip: currentChip,
+                      onAlertChanged: () {
+                        viewModel.onAlertChange(currentChip, index);
+                      },
+                      index: index),
                   const VerticalSpace(
                     spaceAmount: 30,
                   ),
@@ -267,8 +108,5 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
     if (!await launchUrl(uri)) {
       throw "Can not launch url";
     }
-  }
-  void changeAlertIcon(bool isSelected) {
-    isAlertsOn = !isSelected;
   }
 }

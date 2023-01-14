@@ -35,17 +35,7 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
     _chip.value = callName.toLowerCase();
     print(cardList.length);
   }
-  Future<void> getDetail(String callName, int index) async {
-    _database
-        .child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index")
-        .onValue
-        .listen((event) {
-      final data = event.snapshot.value;
-      _ktCardItem.value = Map<String, dynamic>.from(data as Map) as KTCardItem;
-      // ktCardItem = KTCardItem.fromRTDB(item);
-      print(_ktCardItem.value.mintDate);
-    });
-  }
+
 
   Future<void> onFavoriteChanged(String callName, int index) async {
     try {
