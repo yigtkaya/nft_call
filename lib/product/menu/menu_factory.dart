@@ -30,7 +30,7 @@ class MenuFactory extends IMenuFactory {
       GetPage(name: MenuKey.root.key, page: () =>  RootView(), transition: Transition.fadeIn),
       GetPage(name: MenuKey.notification.key, page: () =>  NotificationView()),
       GetPage(name: MenuKey.drawer.key, page: () =>  DrawerView(), transition: Transition.rightToLeft),
-      GetPage(name: MenuKey.detail.key, page: () =>  EventDetailView(), transition: Transition.fadeIn),
+      GetPage(name: MenuKey.detail.key, page: () =>  EventDetailView(ktCardItem: null, currentChip: '', index: 0,), transition: Transition.fadeIn),
 
     ];
   }

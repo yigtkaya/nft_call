@@ -1,7 +1,8 @@
 ///[ScreenName] naming must be created with lowercase letters and english characters.
 enum ScreenName {
   no_view(""),
-  splash_ekrani("splash "),
+  splash_ekrani("splash"),
+  nft("nft"),
   login("login"),
   test("test"),
   stats("istatistik ekrani"),

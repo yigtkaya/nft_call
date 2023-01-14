@@ -2,6 +2,7 @@
 enum MenuKey {
   empty(""),
   home("/home"),
+  nft("/nft"),
   splash("/splashKey"),
   login("/login"),
   loading("/loading"),

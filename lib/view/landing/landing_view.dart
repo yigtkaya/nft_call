@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:nft_call/core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/choice_chip.dart';
-import '../../core/components/nft_card.dart';
+import '../nft_card/nft_view.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
@@ -17,6 +18,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
 
   @override
   Widget build(BuildContext context) {
+
     // TODO: implement build
     return SafeArea(
         child: Scaffold(
@@ -43,9 +45,13 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10), child: ChoiceChipWidget(callback:(idx) => viewModel.choiceChipApiCall(idx),)),
-              getListView(context),
+              Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: ChoiceChipWidget(
+                      callback: (idx) => {
+                            viewModel.choiceChipApiCall(idx),
+                          })),
+              Expanded(child: getListView(context, viewModel.chip)),
             ],
           ),
         ),
@@ -59,18 +65,22 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
         ViewInfoModel(menuKey: MenuKey.landing, screenName: ScreenName.landing);
   }
 
-  Widget getListView(BuildContext context) {
-    return Expanded(
-      child: PageView.builder(
+  Widget getListView(BuildContext context, String chip) {
+    return Obx(() => PageView.builder(
+      controller: PageController(keepPage: true),
           scrollDirection: Axis.vertical,
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return NftCard(
-              isSelected: false,
-              onFavChanged: (isSelected) {
+          itemCount: viewModel.pageItemsList.length,
+          itemBuilder: (BuildContext context, index) {
+            return NFTCardView(
+              currentChip: viewModel.chip,
+              index: index,
+              isFavorite: viewModel.isSelected,
+              ktCardItem: viewModel.pageItemsList[index],
+              onFavChanged: () {
+                viewModel.onFavoriteChanged(chip, index);
               },
             );
-          }),
-    );
+          },
+        ));
   }
 }

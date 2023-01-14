@@ -46,7 +46,9 @@ class _ImageNFTState extends State<ImageNFT> {
                       width: 28,
                       height: 28,
                       onPress: () =>
-                      {changeFavoriteIcon(widget.isSelected)},
+                      {
+                        changeFavoriteIcon(widget.isSelected),
+                        widget.onFavChanged(widget.isSelected)},
                     ),
                     const HorizontalSpace(),
                     DTText(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nft_call/core/components/costum_switch.dart';
 import 'package:nft_call/core/constants/extension.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../product/model/nft_info_model.dart';
 import '../constants/asset.dart';
 import '../constants/dt_text.dart';
 import '../constants/horizontal_space.dart';
@@ -8,8 +9,10 @@ import '../constants/vertical_space.dart';
 import 'kt_icon.dart';
 
 class EventDetailInfo extends StatefulWidget {
-  bool isAlertOn = false;
-  EventDetailInfo({this.isAlertOn = false, Key? key}) : super(key: key);
+  bool isAlertOn;
+  final KTCardItem? ktCardItem;
+
+  EventDetailInfo({this.isAlertOn = false, required this.ktCardItem ,Key? key}) : super(key: key);
 
   @override
   State<EventDetailInfo> createState() => _EventDetailInfoState();
@@ -22,7 +25,7 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DTText(
-          label: "NFT Collection Name",
+          label: widget.ktCardItem?.collectionName ?? "NFT Collection Name",
           style: context.semiBold20,
           color: Colors.white,
         ),
@@ -35,12 +38,12 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               DTText(
-                  label: "Remaining time to mint",
+                  label: "Mint Price :",
                   style: context.semiBold14,
                   color: Colors.white),
               const HorizontalSpace(),
               DTText(
-                label: "00.5 ETH",
+                label: widget.ktCardItem?.mintPrice ?? "00.5 ETH",
                 style: context.regular20,
                 color: Colors.blue,
               ),
@@ -63,7 +66,7 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
             Flexible(
               child: DTText(
                 label:
-                    'If you want to receive notifications from this collection change the switch',
+                    'If you want to receive notifications from this collection tap the bell!',
                 style: context.semiBold14,
                 color: Colors.white,
               ),
@@ -73,11 +76,13 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
             ),
             // bildirim add kısmı ekelencek
             ITIcon(
-              iconName: getAlertIcon,
+              iconName: "",
               width: 40,
               height: 40,
               onPress: () =>
-              {changeFavoriteIcon(widget.isAlertOn)},
+              {
+
+              },
             ),
             const HorizontalSpace(
               spaceAmount: 10,
@@ -99,7 +104,7 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
         ),
         DTText(
           label:
-              "Place HolderPlace HolderPlaceHolderPlaceHolHolderPlaceHolderPlaceHolderPlaceHoldelaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderrlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlacederPlaceHolderPlaceHolderPlace HolderPlace HolderPlace HolderPlace HolderPlace HolderPlace Holder Place Holder",
+          widget.ktCardItem?.description ?? "Place HolderPlace HolderPlaceHolderPlaceHolHolderPlaceHolderPlaceHolderPlaceHoldelaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderrlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlaceHolderPlacederPlaceHolderPlaceHolderPlace HolderPlace HolderPlace HolderPlace HolderPlace HolderPlace Holder Place Holder",
           style: context.regular16,
           color: Colors.white,
         ),
@@ -112,11 +117,11 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               DTText(
-                  label: "Remaining time to mint",
+                  label: "Mint Date",
                   style: context.semiBold20,
                   color: Colors.white),
               DTText(
-                label: "18:53:13",
+                label: widget.ktCardItem?.mintDate ?? "18:53:13",
                 style: context.regular20,
                 color: Colors.blue,
               )
@@ -144,23 +149,32 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
               iconName: AssetConstants.icons.discord,
               height: 30,
               width: 30,
+              onPress: () => {
+
+              },
             ),
             ITIcon(
               iconName: AssetConstants.icons.twitter,
               height: 30,
               width: 30,
+              onPress: () => {
+              },
             ),
             ITIcon(
               iconName: AssetConstants.icons.marketplace,
               height: 30,
               width: 30,
               color: Colors.white,
+              onPress: () => {
+              },
             ),
             ITIcon(
               iconName: AssetConstants.icons.website,
               height: 30,
               width: 30,
               color: Colors.white,
+              onPress: () => {
+              },
             ),
           ],
         ),
@@ -168,13 +182,8 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
     );
   }
 
-  void changeFavoriteIcon(bool isSelected) {
-    setState(() {
-      widget.isAlertOn = !widget.isAlertOn;
-    });
-  }
 
-  String get getAlertIcon => widget.isAlertOn == true
-      ? AssetConstants.icons.add_alarm
-      : AssetConstants.icons.added_alarm;
+
+
+
 }

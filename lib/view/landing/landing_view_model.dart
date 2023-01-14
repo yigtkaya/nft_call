@@ -1,38 +1,67 @@
-import 'dart:convert';
 import 'dart:core';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
-import 'package:nft_call/view/nft_info_model.dart';
+import 'package:nft_call/product/model/nft_info_model.dart';
 import '../../core/base/view/base_view_model.dart';
 
 class LandingViewModel extends BaseViewModel<LandingViewModel> {
-  final _message = "Main Page".obs;
   final _isSelected = false.obs;
-  final database = FirebaseDatabase.instance.ref();
-  KTCardItem? ktCardItem;
+  final _chip = "today".obs;
+  final List<KTCardItem> cardList = <KTCardItem>[].obs;
+  final _database = FirebaseDatabase.instance.ref();
+  final _ktCardItem = KTCardItem().obs;
 
   @override
   void onReady() {
+    choiceChipApiCall("today");
     super.onReady();
   }
-
   Future<void> choiceChipApiCall(String callName) async {
+    cardList.clear();
+    _database
+        .child("nft_calendar/${callName.toLowerCase()}/eventDetail")
+        .onValue
+        .listen((event) {
+      final data = event.snapshot.value as List;
+      for (var element in data) {
+        cardList.add(KTCardItem.fromList(element));
+      }
+      //final item = Map<String, dynamic>.from(data[2] as Map);
+      // final ktCardItem = KTCardItem.fromRTDB(data);
+      // ktCardItem = KTCardItem.fromRTDB(item);
+    });
 
-    database.child("nft_calendar/${callName.toLowerCase()}/eventDetail").once().then((event) {
-      final data = event.snapshot.value as List;
-      final item = Map<String, dynamic>.from(data[2] as Map);
-      // final ktCardItem = KTCardItem.fromRTDB(data);
-      ktCardItem = KTCardItem.fromRTDB(item);
+    //print(ktCardItem?.twitter);
+    _chip.value = callName.toLowerCase();
+    print(cardList.length);
+  }
+  Future<void> getDetail(String callName, int index) async {
+    _database
+        .child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index")
+        .onValue
+        .listen((event) {
+      final data = event.snapshot.value;
+      _ktCardItem.value = Map<String, dynamic>.from(data as Map) as KTCardItem;
+      // ktCardItem = KTCardItem.fromRTDB(item);
+      print(_ktCardItem.value.mintDate);
     });
-    database.child("nft_calendar/${callName.toLowerCase()}/descriptions").once().then((event) {
-      final data = event.snapshot.value as List;
-      // final ktCardItem = KTCardItem.fromRTDB(data);
-      ktCardItem?.description = data[2];
-    });
-    print(ktCardItem?.twitter);
   }
 
+  Future<void> onFavoriteChanged(String callName, int index) async {
+    try {
+      _isSelected.value = !_isSelected.value;
+      await _database
+          .child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index")
+          .update({"isFavorite": _isSelected.value});
+
+      choiceChipApiCall(callName);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  String get chip => _chip.value;
+  List<KTCardItem> get pageItemsList => cardList;
+  KTCardItem get ktCardItem => _ktCardItem.value;
   bool get isSelected => _isSelected.value;
 }
-
