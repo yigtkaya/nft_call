@@ -11,9 +11,9 @@ class RootViewModel extends BaseViewModel<RootViewModel> {
 
   @override
   void onInit() {
-    super.onInit();
     pageController = PageController(keepPage: true);
     _currentPage.value = 0;
+    super.onInit();
   }
   /// set current page if the selected page is different page then current page.
   void setCurrentPage(int currentPage) {

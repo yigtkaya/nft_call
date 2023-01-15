@@ -41,6 +41,7 @@ dependencies:
   firebase_analytics: ^10.0.7
   firebase_messaging: ^14.1.4
   firebase_database:
+  firebase_auth:
 
   #Permission
   permission_handler: ^10.0.0
