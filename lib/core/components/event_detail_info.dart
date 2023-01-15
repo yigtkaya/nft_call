@@ -18,8 +18,8 @@ class EventDetailInfo extends StatefulWidget {
   EventDetailInfo(
       {this.isAlertOn = false,
       required this.ktCardItem,
-        required this.onAlertChanged,
-        Key? key,
+      required this.onAlertChanged,
+      Key? key,
       required this.currentChip,
       required this.index})
       : super(key: key);
@@ -86,13 +86,15 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
             ),
             // bildirim add kısmı ekelencek
             ITIcon(
-              iconName: widget.isAlertOn ? AssetConstants.icons.added_alarm : AssetConstants.icons.add_alarm,
-              width: 40,
-              height: 40,
+              iconName: widget.isAlertOn
+                  ? AssetConstants.icons.added_alarm
+                  : AssetConstants.icons.add_alarm,
+              width: 50,
+              height: 50,
               onPress: () => {
                 changeFavoriteIcon(widget.isAlertOn),
                 widget.onAlertChanged(),
-            },
+              },
             ),
             const HorizontalSpace(
               spaceAmount: 10,
@@ -189,9 +191,10 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
 
   void changeFavoriteIcon(bool isSelected) {
     setState(() {
-      widget.isAlertOn= !widget.isAlertOn;
+      widget.isAlertOn = !widget.isAlertOn;
     });
   }
+
   String get getAlertIcon => widget.isAlertOn
       ? AssetConstants.icons.added_alarm
       : AssetConstants.icons.add_alarm;
