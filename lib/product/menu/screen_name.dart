@@ -4,6 +4,7 @@ enum ScreenName {
   splash_ekrani("splash"),
   nft("nft"),
   login("login"),
+  signUp("kayıt ekrani"),
   test("test"),
   stats("istatistik ekrani"),
   favorite("favori ekrani"),
