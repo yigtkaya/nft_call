@@ -6,7 +6,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:nft_call/core/components/kt_text_field.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
-import 'package:nft_call/core/constants/horizontal_space.dart';
 import 'package:nft_call/core/constants/theme/theme_manager.dart';
 import 'package:nft_call/core/constants/vertical_space.dart';
 import 'package:nft_call/view/login/login_view_model.dart';
@@ -129,44 +128,44 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
               const VerticalSpace(
                 spaceAmount: 30,
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 40, left: 30, right: 30),
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: const Color(0xFF4989D7),
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        )),
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 35.0,
-                          width: 30.0,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/images/google.png'),
-                                fit: BoxFit.cover),
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
-                          child: DTText(
-                            label: "Sign in with Google",
-                            color: ThemeManager.instance?.getCurrentTheme
-                                .colorTheme.colors.abbey,
-                            style: KTLabelStyle,
-                          ),
-                        )
-                      ],
-                    )),
-              ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 40, left: 50, right: 50),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              foregroundColor: const Color(0xFF4989D7),
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25),
+                              )),
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 35.0,
+                                width: 30.0,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage('assets/images/google.png'),
+                                      fit: BoxFit.cover),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              const Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 5),
+                                child: DTText(
+                                  label: "Sign in with Google",
+                                  color: ThemeManager.instance?.getCurrentTheme
+                                      .colorTheme.colors.abbey,
+                                  style: KTLabelStyle,
+                                ),
+                              )
+                            ],
+                          )),
+                    ),
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),

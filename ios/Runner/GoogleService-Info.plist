@@ -30,5 +30,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:327903857793:ios:01becd0ab9d6a4f3ea1180</string>
+	<key>DATABASE_URL</key>
+	<string>https://nftcalender-4530b-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>

@@ -9,7 +9,6 @@ import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/kt_text_field.dart';
 import '../../core/constants/dt_text.dart';
-import '../../core/constants/horizontal_space.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
 import '../../core/constants/theme/styles.dart';
 import '../../core/constants/theme/theme_manager.dart';
