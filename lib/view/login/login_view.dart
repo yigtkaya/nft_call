@@ -13,6 +13,7 @@ import 'package:nft_call/view/login/login_view_model.dart';
 import 'package:nft_call/view/login/sign_up_view.dart';
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
+import '../../core/constants/theme/color/gradient_colors.dart';
 import '../../core/constants/theme/styles.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
@@ -31,18 +32,22 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
         resizeToAvoidBottomInset: false,
         body: Center(
           child: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Color(0xFF73AEF5),
-                  Color(0xFF61A4F1),
-                  Color(0xFF478DE0),
-                  Color(0xFF398AE5),
-                ],
-                stops: [0.1, 0.4, 0.7, 0.9],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
+                  colors: [
+                    ColorConstants
+                        .colorPlateList[
+                    7 % (ColorConstants.colorPlateList.length)]
+                        .startColor,
+                    ColorConstants
+                        .colorPlateList[
+                    7 % (ColorConstants.colorPlateList.length)]
+                        .endColor,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: const [0.0, 1.2],
+                  tileMode: TileMode.clamp),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -72,7 +77,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    foregroundColor: const Color(0xFF4989D7),
+                    foregroundColor: const  Color(0xff364d64),
                   ),
                   onPressed: () {},
                   child: const Text('Forgot Password ?', style: KTLabelStyle),
@@ -84,7 +89,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                       value: true,
                       side: const BorderSide(color: Colors.white),
                       checkColor: Colors.white,
-                      activeColor: const Color(0xFF4989D7),
+                      activeColor: const  Color(0xff364d64),
                       onChanged: (isSelected) {}),
                   const DTText(
                     label: "Remember me",
@@ -101,7 +106,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                 width: double.infinity,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        foregroundColor: const Color(0xFF4989D7),
+                        foregroundColor: const Color(0xff364d64),
                         backgroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 20),
@@ -111,7 +116,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                     onPressed: () {},
                     child: const DTText(
                       label: "LOGIN",
-                      color: Colors.blue,
+                      color: Colors.black,
                       style: KTLabelStyle,
                     )),
               ),
@@ -125,7 +130,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                 spaceAmount: 30,
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 40, left: 50, right: 50),
+                padding: const EdgeInsets.only(bottom: 40, left: 30, right: 30),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         foregroundColor: const Color(0xFF4989D7),
@@ -149,7 +154,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                             shape: BoxShape.circle,
                           ),
                         ),
-                        const HorizontalSpace(),
+                        const Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 5),
                           child: DTText(

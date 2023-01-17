@@ -29,11 +29,13 @@ class _KTTextFieldState extends State<KTTextField> {
           style: context.semiBold14,
           color: Colors.white,
         ),
-        const VerticalSpace(spaceAmount: 2,),
+        const VerticalSpace(
+          spaceAmount: 2,
+        ),
         Container(
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            color: const Color(0xFF6CA8F1),
+            color: const Color(0xff3a5979),
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: const [
               BoxShadow(
@@ -49,7 +51,7 @@ class _KTTextFieldState extends State<KTTextField> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextField(
-              obscureText: true,
+                obscureText: widget.title == "Email" ? false : true,
                 autocorrect: false,
                 enableSuggestions: false,
                 decoration: InputDecoration(
@@ -70,7 +72,7 @@ class _KTTextFieldState extends State<KTTextField> {
                       ),
                     ),
                     filled: true,
-                    hintStyle: TextStyle(color: context.disableButtonColor),
+                    hintStyle: TextStyle(color: context.textColor),
                     hintText: "Type in your text",
                     fillColor: Colors.transparent.withOpacity(0.1)),
                 controller: widget.textController),
@@ -79,7 +81,6 @@ class _KTTextFieldState extends State<KTTextField> {
       ],
     );
   }
-  void changeObsecure(bool isSelected){
 
-  }
+  void changeObsecure(bool isSelected) {}
 }

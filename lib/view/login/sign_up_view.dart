@@ -10,6 +10,7 @@ import '../../core/base/view/view_info.dart';
 import '../../core/components/kt_text_field.dart';
 import '../../core/constants/dt_text.dart';
 import '../../core/constants/horizontal_space.dart';
+import '../../core/constants/theme/color/gradient_colors.dart';
 import '../../core/constants/theme/styles.dart';
 import '../../core/constants/theme/theme_manager.dart';
 import '../../core/constants/vertical_space.dart';
@@ -30,17 +31,21 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
           resizeToAvoidBottomInset: false,
           body: Center(
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Color(0xFF73AEF5),
-                    Color(0xFF61A4F1),
-                    Color(0xFF478DE0),
-                    Color(0xFF398AE5),
+                    ColorConstants
+                        .colorPlateList[
+                    7 % (ColorConstants.colorPlateList.length)]
+                        .startColor,
+                    ColorConstants
+                        .colorPlateList[
+                    7 % (ColorConstants.colorPlateList.length)]
+                        .endColor,
                   ],
-                  stops: [0.1, 0.4, 0.7, 0.9],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
+                  stops: const [0.0, 1.2],
                 ),
               ),
               child: Padding(
@@ -125,7 +130,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                                   shape: BoxShape.circle,
                                 ),
                               ),
-                              const HorizontalSpace(),
+                              const Spacer(),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 5),
                                 child: DTText(
