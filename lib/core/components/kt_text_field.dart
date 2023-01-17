@@ -5,7 +5,14 @@ import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/vertical_space.dart';
 
 class KTTextField extends StatefulWidget {
-  const KTTextField({Key? key}) : super(key: key);
+  final TextEditingController textController;
+  final String title;
+
+  const KTTextField({
+    Key? key,
+    required this.textController,
+    required this.title,
+  }) : super(key: key);
 
   @override
   State<KTTextField> createState() => _KTTextFieldState();
@@ -17,29 +24,62 @@ class _KTTextFieldState extends State<KTTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DTText(label: "Email", style: context.regular8),
-        const VerticalSpace(),
+        DTText(
+          label: widget.title,
+          style: context.semiBold14,
+          color: Colors.white,
+        ),
+        const VerticalSpace(spaceAmount: 2,),
         Container(
           alignment: Alignment.centerLeft,
-          height: 50.0,
-          child: const TextField(
-            keyboardType: TextInputType.emailAddress,
-            style:  TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.email,
-                color: Colors.white,
+          decoration: BoxDecoration(
+            color: const Color(0xFF6CA8F1),
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6.0,
+                offset: Offset(0, 2),
               ),
-              hintText: 'Enter your Email',
+            ],
+          ),
+          height: 60.0,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
             ),
+            child: TextField(
+              obscureText: true,
+                autocorrect: false,
+                enableSuggestions: false,
+                decoration: InputDecoration(
+                    prefixIcon: widget.title == "Email"
+                        ? const Icon(
+                            Icons.email,
+                            color: Colors.white,
+                          )
+                        : const Icon(
+                            Icons.key,
+                            color: Colors.white,
+                          ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                    filled: true,
+                    hintStyle: TextStyle(color: context.disableButtonColor),
+                    hintText: "Type in your text",
+                    fillColor: Colors.transparent.withOpacity(0.1)),
+                controller: widget.textController),
           ),
         ),
       ],
     );
+  }
+  void changeObsecure(bool isSelected){
+
   }
 }

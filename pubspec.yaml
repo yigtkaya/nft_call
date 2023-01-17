@@ -42,6 +42,8 @@ dependencies:
   firebase_messaging: ^14.1.4
   firebase_database:
   firebase_auth:
+  google_sign_in: ^5.4.3
+  flutter_signin_button: ^2.0.0
 
   #Permission
   permission_handler: ^10.0.0

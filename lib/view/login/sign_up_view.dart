@@ -1,20 +1,173 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:nft_call/core/constants/extension.dart';
+import 'package:nft_call/view/login/login_view.dart';
+import 'package:nft_call/view/login/sign_up_view_model.dart';
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
+import '../../core/components/kt_text_field.dart';
+import '../../core/constants/dt_text.dart';
+import '../../core/constants/horizontal_space.dart';
+import '../../core/constants/theme/styles.dart';
+import '../../core/constants/theme/theme_manager.dart';
+import '../../core/constants/vertical_space.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
-import 'login_view_model.dart';
 
-class SignUpView extends BaseView<SignUpView, LoginViewModel> {
+class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
   SignUpView({Key? key}) : super(key: key) {
-    initViewModel(LoginViewModel());
+    initViewModel(SignUpViewModel());
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return SafeArea(child: Scaffold(body:Center(child: Text("deneme"),)));
+    return SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          resizeToAvoidBottomInset: false,
+          body: Center(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF73AEF5),
+                    Color(0xFF61A4F1),
+                    Color(0xFF478DE0),
+                    Color(0xFF398AE5),
+                  ],
+                  stops: [0.1, 0.4, 0.7, 0.9],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Spacer(),
+                    Align(
+                        alignment: Alignment.center,
+                        child: DTText(
+                          label: "Sign Up",
+                          style: context.bold20,
+                          color: Colors.white,
+                        )),
+                    const VerticalSpace(spaceAmount: 20,),
+                    KTTextField(
+                      textController: viewModel.emailController,
+                      title: "Email",
+                    ),
+                    const VerticalSpace(spaceAmount: 30,),
+                    KTTextField(
+                      textController: viewModel.paswordController,
+                      title: "Pasword",
+                    ),
+                    const VerticalSpace(spaceAmount: 20,),
+                    KTTextField(
+                      textController: viewModel.confirmPaswordController,
+                      title: "Confirm Pasword",
+                    ),
+                    const VerticalSpace(spaceAmount: 50,),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              foregroundColor: const Color(0xFF4989D7),
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              )),
+                          onPressed: () {},
+                          child: const DTText(
+                            label: "SIGN UP",
+                            color: Colors.blue,
+                            style: KTLabelStyle,
+                          )),
+                    ),
+                    const VerticalSpace(
+                      spaceAmount: 50,
+                    ),
+                    const Align(
+                        alignment: Alignment.center,
+                        child: DTText(label: "OR", style: KTLabelStyle)),
+                    const VerticalSpace(
+                      spaceAmount: 30,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 40, left: 50, right: 50),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              foregroundColor: const Color(0xFF4989D7),
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25),
+                              )),
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 35.0,
+                                width: 30.0,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage('assets/images/google.png'),
+                                      fit: BoxFit.cover),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              const HorizontalSpace(),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 5),
+                                child: DTText(
+                                  label: "Sign up with Google",
+                                  color: ThemeManager.instance?.getCurrentTheme
+                                      .colorTheme.colors.abbey,
+                                  style: KTLabelStyle,
+                                ),
+                              )
+                            ],
+                          )),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: GestureDetector(
+                          onTap: () => Get.to(() => LoginView()),
+                          child: RichText(
+                            text: const TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: 'Already have account? ',
+                                    style: KTLabelStyle
+                                ),
+                                TextSpan(
+                                    text: 'Sign In',
+                                    style: KTLabelStyle
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ));
   }
 
   @override
