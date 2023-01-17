@@ -45,6 +45,8 @@ dependencies:
   google_sign_in: ^5.4.3
   flutter_signin_button: ^2.0.0
 
+  fluttertoast:
+
   #Permission
   permission_handler: ^10.0.0
 

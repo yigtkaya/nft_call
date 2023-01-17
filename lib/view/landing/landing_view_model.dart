@@ -2,6 +2,7 @@ import 'dart:core';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/product/model/nft_info_model.dart';
+import '../../auth/auth.dart';
 import '../../core/base/view/base_view_model.dart';
 
 class LandingViewModel extends BaseViewModel<LandingViewModel> {
@@ -10,6 +11,9 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final List<KTCardItem> cardList = <KTCardItem>[].obs;
   final _database = FirebaseDatabase.instance.ref();
   final _ktCardItem = KTCardItem().obs;
+
+  final AuthController _auth = AuthController();
+
 
   @override
   void onReady() {
@@ -30,10 +34,11 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
       // final ktCardItem = KTCardItem.fromRTDB(data);
       // ktCardItem = KTCardItem.fromRTDB(item);
     });
-
+var dd = _auth.getCurrentUserId();
     //print(ktCardItem?.twitter);
     _chip.value = callName.toLowerCase();
     print(cardList.length);
+    print(_auth.currentUser.value);
   }
 
 

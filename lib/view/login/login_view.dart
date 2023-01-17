@@ -11,6 +11,7 @@ import 'package:nft_call/core/constants/vertical_space.dart';
 import 'package:nft_call/view/login/login_view_model.dart';
 import 'package:nft_call/view/login/reset_password_view.dart';
 import 'package:nft_call/view/login/sign_up_view.dart';
+import 'package:nft_call/view/root/root_view.dart';
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
@@ -119,7 +120,10 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           )),
-                      onPressed: () {},
+                      onPressed: () {
+                        viewModel.signIn(viewModel.emailController.text.trim(), viewModel.paswordController.text.trim());
+
+                      },
                       child: const DTText(
                         label: "LOGIN",
                         color: Colors.black,
