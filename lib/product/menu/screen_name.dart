@@ -2,6 +2,7 @@
 enum ScreenName {
   no_view(""),
   splash_ekrani("splash"),
+  reset("reset"),
   nft("nft"),
   login("login"),
   signUp("kayıt ekrani"),
