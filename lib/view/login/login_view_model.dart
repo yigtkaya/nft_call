@@ -16,10 +16,4 @@ class LoginViewModel extends BaseViewModel<LoginViewModel> {
   void googleSignIn() {
     _auth.signInWithGoogle();
   }
-  void navigateToForgotPassword() {
-    navigation?.navigateToReset(MenuKey.reset);
-  }
-  void navigateToSignUp() {
-    navigation?.navigateToReset(MenuKey.signUp);
-  }
 }

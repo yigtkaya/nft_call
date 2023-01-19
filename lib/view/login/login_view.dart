@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+
 import 'package:nft_call/core/components/kt_text_field.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
@@ -11,7 +12,7 @@ import 'package:nft_call/core/constants/vertical_space.dart';
 import 'package:nft_call/view/login/login_view_model.dart';
 import 'package:nft_call/view/login/reset_password_view.dart';
 import 'package:nft_call/view/login/sign_up_view.dart';
-import 'package:nft_call/view/root/root_view.dart';
+
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
@@ -85,7 +86,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                       foregroundColor: const Color(0xff364d64),
                     ),
                     onPressed: () {
-                      viewModel.navigateToForgotPassword();
+                      Get.to(() => ResetPasswordView());
                     },
                     child: const Text('Forgot Password ?', style: KTLabelStyle),
                   ),
@@ -186,7 +187,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: GestureDetector(
-                      onTap: () => viewModel.navigateToSignUp(),
+                      onTap: () => Get.to(() => SignUpView()),
                       child: RichText(
                         text: const TextSpan(
                           children: [

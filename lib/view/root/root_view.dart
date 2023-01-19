@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/core/base/view/base_view.dart';
+import 'package:nft_call/view/login/reset_password_view.dart';
 import 'package:nft_call/view/notification/notification_view.dart';
 import 'package:nft_call/view/root/root_view_model.dart';
 import '../../core/base/view/view_info.dart';
@@ -35,7 +36,7 @@ class RootView extends BaseView<RootView, RootViewModel> {
                   /// Stats View
                   NotificationView(),
 
-                  LandingView(),
+                  ResetPasswordView(),
                 ],
               )),
 
