@@ -88,7 +88,9 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               )),
-                          onPressed: () {},
+                          onPressed: () {
+                            viewModel.signUp(viewModel.emailController.text.trim(), viewModel.paswordController.text.trim());
+                          },
                           child: const DTText(
                             label: "SIGN UP",
                             color: Colors.blue,

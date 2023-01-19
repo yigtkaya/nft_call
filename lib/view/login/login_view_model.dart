@@ -7,7 +7,6 @@ import '../../product/menu/menu_key.dart';
 class LoginViewModel extends BaseViewModel<LoginViewModel> {
   TextEditingController emailController = TextEditingController();
   TextEditingController paswordController = TextEditingController();
-
   final AuthController _auth = AuthController();
 
   void signIn(String email, String password) {
