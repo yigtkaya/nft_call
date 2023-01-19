@@ -28,8 +28,8 @@ class MenuFactory extends IMenuFactory {
   static List<GetPage> getAllPages() {
     return [
       GetPage(name: MenuKey.splash.key, page: () =>  SplashView()),
-      GetPage(name: MenuKey.login.key, page: () =>  LoginView()),
-      GetPage(name: MenuKey.signUp.key, page: () =>  SignUpView()),
+      GetPage(name: MenuKey.login.key, page: () =>  LoginView(), transition: Transition.fadeIn),
+      GetPage(name: MenuKey.signUp.key, page: () =>  SignUpView(), transition: Transition.fadeIn),
       GetPage(name: MenuKey.landing.key, page: () =>  LandingView()),
       GetPage(name: MenuKey.root.key, page: () =>  RootView(), transition: Transition.fadeIn),
       GetPage(name: MenuKey.notification.key, page: () =>  NotificationView()),

@@ -22,7 +22,7 @@ class AuthController extends GetxController {
   }
 
   _setInitialScreen(User? user) {
-    user == null ? Get.offAll(() => RootView()) : Get.offAll(() => LoginView());
+    user == null ? Get.offAll(() => LoginView()) : Get.offAll(() => RootView());
   }
 
   Future<void> signOut() async {
@@ -34,7 +34,7 @@ class AuthController extends GetxController {
       {required String email, required String password}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      Get.to(RootView());
+      Get.offAll(RootView());
     } on FirebaseAuthException catch (e) {
       showToastMessage(e.toString());
     } catch (e) {
@@ -80,7 +80,7 @@ class AuthController extends GetxController {
 
         await _auth.signInWithCredential(credential);
 
-        Get.to(() => RootView());
+        Get.offAll(() => RootView());
       }
     } catch (e) {
       showToastMessage(e.toString());
