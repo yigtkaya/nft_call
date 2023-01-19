@@ -11,4 +11,7 @@ class SignUpViewModel extends BaseViewModel<SignUpViewModel> {
   void signUp(String email, String password){
     _auth.createUserWithEmailAndPassword(email, password);
   }
+  void googleSignIn() {
+    _auth.signInWithGoogle();
+  }
 }

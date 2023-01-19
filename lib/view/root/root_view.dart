@@ -36,7 +36,9 @@ class RootView extends BaseView<RootView, RootViewModel> {
                   /// Stats View
                   NotificationView(),
 
-                  ResetPasswordView(),
+                  Center(child: TextButton(onPressed: () { viewModel.singOut(); }, child: Text("sign Out"),
+
+                  ),)
                 ],
               )),
 

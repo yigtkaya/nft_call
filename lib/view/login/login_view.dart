@@ -91,24 +91,6 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                     child: const Text('Forgot Password ?', style: KTLabelStyle),
                   ),
                 ),
-                Row(
-                  children: [
-                    Checkbox(
-                        value: true,
-                        side: const BorderSide(color: Colors.white),
-                        checkColor: Colors.white,
-                        activeColor: const Color(0xff364d64),
-                        onChanged: (isSelected) {}),
-                    const DTText(
-                      label: "Remember me",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OpenSans',
-                      ),
-                    ),
-                  ],
-                ),
                 const VerticalSpace(),
                 SizedBox(
                   width: double.infinity,
@@ -187,7 +169,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: GestureDetector(
-                      onTap: () => Get.to(() => SignUpView()),
+                      onTap: () => Get.offAll(() => SignUpView()),
                       child: RichText(
                         text: const TextSpan(
                           children: [

@@ -117,7 +117,9 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(25),
                               )),
-                          onPressed: () {},
+                          onPressed: () {
+                            viewModel.googleSignIn();
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -135,7 +137,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 5),
                                 child: DTText(
-                                  label: "Sign up with Google",
+                                  label: "Sign in with Google",
                                   color: ThemeManager.instance?.getCurrentTheme
                                       .colorTheme.colors.abbey,
                                   style: KTLabelStyle,
@@ -150,7 +152,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: GestureDetector(
-                          onTap: () => Get.to(() => LoginView()),
+                          onTap: () => Get.offAll(() => LoginView()),
                           child: RichText(
                             text: const TextSpan(
                               children: [

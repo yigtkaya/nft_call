@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/view/login/reset_password_view_model.dart';
-import 'package:nft_call/view/login/sign_up_view.dart';
-
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/kt_icon.dart';
@@ -14,7 +12,6 @@ import '../../core/constants/asset.dart';
 import '../../core/constants/dt_text.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
 import '../../core/constants/theme/styles.dart';
-import '../../core/constants/theme/theme_manager.dart';
 import '../../core/constants/vertical_space.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
@@ -34,6 +31,7 @@ class ResetPasswordView
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             ITIcon(

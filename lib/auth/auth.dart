@@ -47,6 +47,7 @@ class AuthController extends GetxController {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
       Fluttertoast.showToast(
           msg: "You can login now",
           toastLength: Toast.LENGTH_SHORT,
