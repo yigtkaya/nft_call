@@ -40,7 +40,9 @@ var dd = _auth.getCurrentUserId();
     print(cardList.length);
     print(_auth.currentUser.value);
   }
-
+void signOut() {
+    _auth.signOut();
+}
 
   Future<void> onFavoriteChanged(String callName, int index) async {
     try {

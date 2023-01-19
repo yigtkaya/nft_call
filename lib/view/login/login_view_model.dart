@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:nft_call/auth/auth.dart';
 import '../../core/base/view/base_view_model.dart';
-import '../root/root_view.dart';
+import '../../product/menu/menu_key.dart';
 
 class LoginViewModel extends BaseViewModel<LoginViewModel> {
   TextEditingController emailController = TextEditingController();
@@ -16,6 +13,13 @@ class LoginViewModel extends BaseViewModel<LoginViewModel> {
   void signIn(String email, String password) {
       _auth.signInWithEmailAndPassword(email: email, password: password);
   }
-
-
+  void googleSignIn() {
+    _auth.signInWithGoogle();
+  }
+  void navigateToForgotPassword() {
+    navigation?.navigateToReset(MenuKey.reset);
+  }
+  void navigateToSignUp() {
+    navigation?.navigateToReset(MenuKey.signUp);
+  }
 }

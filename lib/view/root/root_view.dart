@@ -33,7 +33,9 @@ class RootView extends BaseView<RootView, RootViewModel> {
 
 
                   /// Stats View
-                  NotificationView()
+                  NotificationView(),
+
+                  LandingView(),
                 ],
               )),
 

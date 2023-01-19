@@ -32,28 +32,21 @@ class _KTLandingBottomNavigationBarState
           ),
 
           /// Listen Bottom navigation changes
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child:Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                   flex: 1,
                   child: GestureDetector(
-                      onTap: () => {changeCurrentPage(0)},
-                      child: ITIcon(
-                          height: 28,
-                          width: 28,
-                          iconName: getHomePageIcon,
-                          color: Colors.white))),
+                      onTap: () => {changeCurrentPage(0)}, child: ITIcon(height: 38, width: 38, iconName: getHomePageIcon, color: Colors.white,),)),
               Expanded(
                   flex: 1,
                   child: GestureDetector(
-                      onTap: () => {changeCurrentPage(2)},
-                      child: ITIcon(
-                        height: 28,
-                        width: 28,
-                        iconName: getStaticsPageIcon,
-                        color: Colors.white,
-                      )))
+                      onTap: () => {changeCurrentPage(1)}, child: ITIcon(height: 38, width: 38, iconName: getStaticsPageIcon, color: Colors.white))),
+              Expanded(
+                  flex: 1,
+                  child: GestureDetector(
+                      onTap: () => {changeCurrentPage(2)}, child: ITIcon(height: 38, width: 38, iconName: getThirdPageIcon, color: Colors.white,)))
             ],
           ),
         ));
@@ -72,7 +65,11 @@ class _KTLandingBottomNavigationBarState
   String get getStaticsPageIcon => widget.currentPage == 1
       ? AssetConstants.icons.notification_selected
       : AssetConstants.icons.notification_un_selected;
+  String get getThirdPageIcon => widget.currentPage == 2
+      ? AssetConstants.icons.favorite_menu_selected
+      : AssetConstants.icons.favorite_menu_un_selected;
 
   bool get isHomeSelected => widget.currentPage == 0;
   bool get isStaticsSelected => widget.currentPage == 1;
+  bool get isThirdSelected => widget.currentPage == 2;
 }

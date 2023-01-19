@@ -11,7 +11,7 @@ class AuthController extends GetxController {
   static AuthController get instance => Get.find();
   final _auth = FirebaseAuth.instance;
   final Rx<User?> currentUser = Rx<User?>(FirebaseAuth.instance.currentUser);
-  final _googleSignIn = GoogleSignIn();
+  final _googleSignIn = GoogleSignIn(scopes: ['email']);
   final googleUser = Rx<GoogleSignInAccount?>(null);
 
   @override
@@ -22,7 +22,7 @@ class AuthController extends GetxController {
   }
 
   _setInitialScreen(User? user) {
-    user == null ? Get.offAll(() => LoginView()) : Get.offAll(() => RootView());
+    user == null ? Get.offAll(() => RootView()) : Get.offAll(() => LoginView());
   }
 
   Future<void> signOut() async {
@@ -32,30 +32,72 @@ class AuthController extends GetxController {
 
   Future<void> signInWithEmailAndPassword(
       {required String email, required String password}) async {
-
-    try{
-      await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       Get.to(RootView());
+    } on FirebaseAuthException catch (e) {
+      showToastMessage(e.toString());
     } catch (e) {
-          showToastMessage(e.toString());
+      showToastMessage(e.toString());
     }
   }
+
   Future<void> createUserWithEmailAndPassword(
       String email, String password) async {
-    await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      Fluttertoast.showToast(
+          msg: "You can login now",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blueGrey,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } on FirebaseAuthException catch (e) {
+      showToastMessage(e.code);
+    } catch (e) {
+      showToastMessage(e.toString());
+    }
   }
+
   Future<String?> getCurrentUserId() async {
     return _auth.currentUser?.uid;
   }
 
   Future<void> signInWithGoogle() async {
-    googleUser.value = await _googleSignIn.signIn();
+    try {
+      googleUser.value = await _googleSignIn.signIn();
+
+      if(googleUser.value != null) {
+        final GoogleSignInAuthentication? googleSignInAuthentication = await googleUser.value?.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication?.idToken,
+          accessToken: googleSignInAuthentication?.accessToken,
+        );
+
+        await _auth.signInWithCredential(credential);
+
+        Get.to(() => RootView());
+      }
+    } catch (e) {
+      showToastMessage(e.toString());
+      print(e.toString());
+
+    }
   }
+
+
   Future<void> resetPassword({required String email}) async {
-    await _auth.sendPasswordResetEmail(email: email);
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      showToastMessage(e.toString());
+    }
   }
+
   void showToastMessage(String message) {
     Fluttertoast.showToast(
         msg: message,

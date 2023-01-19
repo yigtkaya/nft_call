@@ -85,7 +85,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                       foregroundColor: const Color(0xff364d64),
                     ),
                     onPressed: () {
-                      Get.to(() => ResetPasswordView());
+                      viewModel.navigateToForgotPassword();
                     },
                     child: const Text('Forgot Password ?', style: KTLabelStyle),
                   ),
@@ -151,7 +151,9 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
                           )),
-                      onPressed: () {},
+                      onPressed: () {
+                        viewModel.googleSignIn();
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -184,7 +186,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: GestureDetector(
-                      onTap: () => Get.to(() => SignUpView()),
+                      onTap: () => viewModel.navigateToSignUp(),
                       child: RichText(
                         text: const TextSpan(
                           children: [
