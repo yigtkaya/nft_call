@@ -75,6 +75,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                     textController: viewModel.emailController,
                     title: "Email",
                   ),
+              Obx(() => DTText(label: viewModel.errorMessage ?? "", style: context.regular12, color: Colors.red)),
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
@@ -83,6 +84,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                     textController: viewModel.passwordController,
                     title: "Password",
                   ),
+                  Obx(() => DTText(label: viewModel.pwErrorMessage ?? "", style: context.regular12, color: Colors.red)),
                   Container(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -92,9 +94,11 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                       onPressed: () {
                         Get.to(() => ResetPasswordView());
                       },
-                      child: const Text('Forgot Password ?', style: KTLabelStyle),
+                      child:
+                      const Text('Forgot Password ?', style: KTLabelStyle),
                     ),
                   ),
+
                   const VerticalSpace(),
                   SizedBox(
                     width: double.infinity,
@@ -108,8 +112,14 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                               borderRadius: BorderRadius.circular(30),
                             )),
                         onPressed: () {
-                          viewModel.signIn(viewModel.emailController.text.trim(), viewModel.passwordController.text.trim());
-
+                          viewModel.validateEmail();
+                          viewModel.validatePassword();
+                          if (viewModel.errorMessage == "" &&
+                              viewModel.pwErrorMessage == "") {
+                            viewModel.signIn(
+                                viewModel.emailController.text.trim(),
+                                viewModel.passwordController.text.trim());
+                          }
                         },
                         child: const DTText(
                           label: "LOGIN",
@@ -149,7 +159,8 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                               width: 30.0,
                               decoration: const BoxDecoration(
                                 image: DecorationImage(
-                                    image: AssetImage('assets/images/google.png'),
+                                    image:
+                                        AssetImage('assets/images/google.png'),
                                     fit: BoxFit.cover),
                                 shape: BoxShape.circle,
                               ),

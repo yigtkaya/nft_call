@@ -1,9 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import '../../core/base/view/base_view_model.dart';
 
 class ResetPasswordViewModel extends BaseViewModel<ResetPasswordViewModel> {
   TextEditingController emailController = TextEditingController();
+  final _emailError = "".obs;
   final GlobalKey<FormState> addressFormKey = GlobalKey<FormState>();
 
   @override
@@ -15,9 +17,13 @@ class ResetPasswordViewModel extends BaseViewModel<ResetPasswordViewModel> {
     });
   }
   void validateEmail() {
-    bool isValid = true;
-    if (emailController.text.isEmpty || !EmailValidator.validate(emailController.text)) {
-      isValid = false;
+    if (emailController.text.isEmpty ||
+        !EmailValidator.validate(emailController.text)) {
+      _emailError.value = "Enter a valid email";
+    } else {
+      _emailError.value = "";
     }
   }
+  String get errorMessage => _emailError.value;
+
 }

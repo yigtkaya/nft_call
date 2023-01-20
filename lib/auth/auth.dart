@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:nft_call/auth/auth_handler.dart';
 import 'package:nft_call/view/login/login_view.dart';
 import 'package:nft_call/view/root/root_view.dart';
 
@@ -36,7 +37,8 @@ class AuthController extends GetxController {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       Get.offAll(RootView());
     } on FirebaseAuthException catch (e) {
-      showToastMessage(e.toString());
+      final message = AuthExceptionHandler.generateExceptionMessage(e.code);
+      showToastMessage(message);
     } catch (e) {
       showToastMessage(e.toString());
     }
@@ -57,7 +59,8 @@ class AuthController extends GetxController {
           textColor: Colors.white,
           fontSize: 16.0);
     } on FirebaseAuthException catch (e) {
-      showToastMessage(e.code);
+      final message = AuthExceptionHandler.generateExceptionMessage(e.code);
+      showToastMessage(message);
     } catch (e) {
       showToastMessage(e.toString());
     }
@@ -71,8 +74,9 @@ class AuthController extends GetxController {
     try {
       googleUser.value = await _googleSignIn.signIn();
 
-      if(googleUser.value != null) {
-        final GoogleSignInAuthentication? googleSignInAuthentication = await googleUser.value?.authentication;
+      if (googleUser.value != null) {
+        final GoogleSignInAuthentication? googleSignInAuthentication =
+            await googleUser.value?.authentication;
 
         final AuthCredential credential = GoogleAuthProvider.credential(
           idToken: googleSignInAuthentication?.idToken,
@@ -86,15 +90,17 @@ class AuthController extends GetxController {
     } catch (e) {
       showToastMessage(e.toString());
       print(e.toString());
-
     }
   }
-
 
   Future<void> resetPassword({required String email}) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
+      final message = AuthExceptionHandler.generateExceptionMessage(e.code);
+      showToastMessage(message);
+    }
+    catch (e) {
       showToastMessage(e.toString());
     }
   }

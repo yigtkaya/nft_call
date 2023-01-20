@@ -86,6 +86,10 @@ class ResetPasswordView
                     textController: viewModel.emailController,
                     title: "Email",
                   ),
+                  Obx(() => DTText(
+                      label: viewModel.errorMessage ?? "",
+                      style: context.regular12,
+                      color: Colors.red)),
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
@@ -104,7 +108,10 @@ class ResetPasswordView
                               borderRadius: BorderRadius.circular(30),
                             )),
                         onPressed: () {
-                          Get.back();
+                          viewModel.validateEmail();
+                          if (viewModel.errorMessage =="") {
+                            // show toast message
+                          }
                         },
                         child: const DTText(
                           label: "Send reset email",

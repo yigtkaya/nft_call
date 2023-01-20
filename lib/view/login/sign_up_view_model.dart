@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import '../../auth/auth.dart';
 import '../../core/base/view/base_view_model.dart';
 
@@ -8,7 +9,11 @@ class SignUpViewModel extends BaseViewModel<SignUpViewModel> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   final GlobalKey<FormState> addressFormKey = GlobalKey<FormState>();
-  RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  final _emailError = "".obs;
+  final _passwordError = "".obs;
+  final _confirmPasswordError = "".obs;
+  RegExp regex =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
   final AuthController _auth = AuthController();
 
   @override
@@ -23,41 +28,55 @@ class SignUpViewModel extends BaseViewModel<SignUpViewModel> {
       validatePassword();
     });
     confirmPasswordController.addListener(() {
-validateConfirmPassword();
+      validateConfirmPassword();
     });
   }
-  void signUp(String email, String password){
+
+  void signUp(String email, String password) {
     _auth.createUserWithEmailAndPassword(email, password);
   }
+
   void googleSignIn() {
     _auth.signInWithGoogle();
   }
+
   void validatePassword() {
-    bool isValid = true;
     if (passwordController.text.isEmpty) {
-      isValid = false;
-    }
-    else {
-      if(!regex.hasMatch(passwordController.text)){
-        isValid = false;
+      _passwordError.value = "Password can not be empty";
+    } else {
+      if (passwordController.text.length < 6) {
+        _passwordError.value = "Password needs to at least 6 characters";
+      } else {
+        _passwordError.value = "";
       }
     }
   }
+
   void validateConfirmPassword() {
-    bool isValid = true;
     if (confirmPasswordController.text.isEmpty) {
-      isValid = false;
-    }
-    else {
-      if(!regex.hasMatch(confirmPasswordController.text)){
-        isValid = false;
+      _confirmPasswordError.value = "Password can not be empty";
+    } else {
+      if (passwordController.text.length < 6) {
+        _confirmPasswordError.value = "Password needs to at least 6 characters";
+      }
+      if (passwordController.text != confirmPasswordController.text) {
+        _passwordError.value = "Passwords are not the same";
+      } else {
+        _confirmPasswordError.value = "";
       }
     }
   }
+
   void validateEmail() {
-    bool isValid = true;
-    if (emailController.text.isEmpty || !EmailValidator.validate(emailController.text)) {
-      isValid = false;
+    if (emailController.text.isEmpty ||
+        !EmailValidator.validate(emailController.text)) {
+      _emailError.value = "Enter a valid email";
+    } else {
+      _emailError.value = "";
     }
   }
+
+  String get errorMessage => _emailError.value;
+  String get pwErrorMessage => _passwordError.value;
+  String get confirmPwErrorMessage => _confirmPasswordError.value;
 }
