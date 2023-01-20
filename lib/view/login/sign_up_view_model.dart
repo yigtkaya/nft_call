@@ -32,6 +32,14 @@ class SignUpViewModel extends BaseViewModel<SignUpViewModel> {
     });
   }
 
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   void signUp(String email, String password) {
     _auth.createUserWithEmailAndPassword(email, password);
   }

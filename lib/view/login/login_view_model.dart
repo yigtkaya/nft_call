@@ -18,7 +18,12 @@ class LoginViewModel extends BaseViewModel<LoginViewModel> {
   void onReady() {
     super.onReady();
   }
-
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
   void signIn(String email, String password) {
     _auth.signInWithEmailAndPassword(email: email, password: password);
   }

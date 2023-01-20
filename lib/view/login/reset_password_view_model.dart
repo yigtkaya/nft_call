@@ -16,6 +16,12 @@ class ResetPasswordViewModel extends BaseViewModel<ResetPasswordViewModel> {
       validateEmail();
     });
   }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
   void validateEmail() {
     if (emailController.text.isEmpty ||
         !EmailValidator.validate(emailController.text)) {
