@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:nft_call/core/constants/extension.dart';
@@ -111,6 +112,14 @@ class ResetPasswordView
                           viewModel.validateEmail();
                           if (viewModel.errorMessage =="") {
                             // show toast message
+                            Fluttertoast.showToast(
+                                msg: "Mail successfully sent",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.blueGrey,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
                           }
                         },
                         child: const DTText(
