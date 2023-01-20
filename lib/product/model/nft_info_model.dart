@@ -10,8 +10,8 @@ class KTCardItem {
   String? discord;
   String? twitter;
   String? marketplace;
-  bool? isFavorite;
-  bool? isAlertsOn;
+  List<String>? isFavorite;
+  List<String>? isAlertsOn;
 
   KTCardItem({
     this.collectionName,
@@ -57,6 +57,6 @@ class KTCardItem {
   }
 
   String get getSafeDescription => description ?? "";
-  bool get getSafeIsFavorite => isFavorite ?? false;
-  bool get getSafeIsAlertsOn => isFavorite ?? false;
+  List<String> get getSafeIsFavorite => isFavorite ?? [];
+  List<String> get getSafeIsAlertsOn => isFavorite ?? [];
 }

@@ -74,7 +74,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
             return NFTCardView(
               currentChip: viewModel.chip,
               index: index,
-              isFavorite: viewModel.isSelected,
+              isFavorite: viewModel.isFavoritedByUser(index, viewModel.getCurrentUser()),
               ktCardItem: viewModel.pageItemsList[index],
               onFavChanged: () {
                 viewModel.onFavoriteChanged(chip, index);

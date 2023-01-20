@@ -66,7 +66,7 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<String?> getCurrentUserId() async {
+  String? getCurrentUserId() {
     return _auth.currentUser?.uid;
   }
 
@@ -99,8 +99,23 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       final message = AuthExceptionHandler.generateExceptionMessage(e.code);
       showToastMessage(message);
+    } catch (e) {
+      showToastMessage(e.toString());
     }
-    catch (e) {
+  }
+
+  Future<void> emailVerification() async {
+    try {
+      User? user = _auth.currentUser;
+      if (!(user!.emailVerified)) {
+        user!.sendEmailVerification();
+      } else {
+        showToastMessage("Already avtivated account");
+      }
+    } on FirebaseAuthException catch (e) {
+      final message = AuthExceptionHandler.generateExceptionMessage(e.code);
+      showToastMessage(message);
+    } catch (e) {
       showToastMessage(e.toString());
     }
   }

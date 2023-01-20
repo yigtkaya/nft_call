@@ -14,12 +14,12 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
 
   final AuthController _auth = AuthController();
 
-
   @override
   void onReady() {
     choiceChipApiCall("today");
     super.onReady();
   }
+
   Future<void> choiceChipApiCall(String callName) async {
     cardList.clear();
     _database
@@ -34,22 +34,43 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
       // final ktCardItem = KTCardItem.fromRTDB(data);
       // ktCardItem = KTCardItem.fromRTDB(item);
     });
-var dd = _auth.getCurrentUserId();
+    var dd = _auth.getCurrentUserId();
     //print(ktCardItem?.twitter);
     _chip.value = callName.toLowerCase();
     print(cardList.length);
     print(_auth.currentUser.value);
   }
-void signOut() {
-    _auth.signOut();
-}
 
+  void signOut() {
+    _auth.signOut();
+  }
+  String? getCurrentUser() {
+    return _auth.getCurrentUserId();
+  }
+  bool isFavoritedByUser(int index, String? uid) {
+    List<String>? uidList = cardList[index].isFavorite;
+    if(uidList != null) {
+      return uidList.contains(uid);
+    }
+    else{
+      return false;
+    }
+  }
   Future<void> onFavoriteChanged(String callName, int index) async {
     try {
       _isSelected.value = !_isSelected.value;
-      await _database
-          .child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index")
-          .update({"isFavorite": _isSelected.value});
+      List<String>? uidList = cardList[index].isFavorite;
+      final String? uid = getCurrentUser();
+      if (uidList!.contains(getCurrentUser()) && uid != null){
+        uidList.remove(uid);
+        await _database
+            .child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index/isFavorite")
+            .update({"isFavorite" : uidList});
+      } else {
+        uidList.add(uid!);
+        await _database.child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index/").ref.update({"isFavorite": uidList},);
+      }
+
 
       choiceChipApiCall(callName);
     } catch (e) {
