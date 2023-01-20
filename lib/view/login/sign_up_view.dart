@@ -115,6 +115,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                           viewModel.validateEmail();
                           viewModel.validatePassword();
                           viewModel.validateConfirmPassword();
+                          viewModel.sendVerification();
                           if (viewModel.errorMessage == "" &&
                               viewModel.pwErrorMessage == "" &&
                               viewModel.confirmPwErrorMessage == "") {
