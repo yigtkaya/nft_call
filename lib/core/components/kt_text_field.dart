@@ -44,7 +44,7 @@ class _KTTextFieldState extends State<KTTextField> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
-            child: TextField(
+            child: TextFormField(
                 obscureText: widget.title == "Email" ? false : true,
                 autocorrect: false,
                 enableSuggestions: false,

@@ -46,11 +46,12 @@ class LoginViewModel extends BaseViewModel<LoginViewModel> {
       }
     }
   }
-  void validateEmail() {
+  String? validateEmail() {
     bool isValid = true;
     if (emailController.text.isEmpty || !EmailValidator.validate(emailController.text)) {
-      isValid = false;
+      return "Enter a valid email";
     }
+    return null;
   }
 
 }
