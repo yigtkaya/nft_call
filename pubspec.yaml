@@ -46,7 +46,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
 
   fluttertoast:
-
+  email_validator: '^2.1.16'
   #Permission
   permission_handler: ^10.0.0
 

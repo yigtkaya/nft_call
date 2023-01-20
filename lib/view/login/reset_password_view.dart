@@ -65,58 +65,61 @@ class ResetPasswordView
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                    alignment: Alignment.center,
-                    child: DTText(
-                      label:
-                          "Reset your password by filling in your e-mail address. You will then receive an email with a link that will let you enter a new password.",
-                      style: context.regular14,
-                      color: Colors.white,
-                    )),
-                const VerticalSpace(
-                  spaceAmount: 20,
-                ),
-                KTTextField(
-                  textController: viewModel.emailController,
-                  title: "Email",
-                ),
-                const VerticalSpace(
-                  spaceAmount: 20,
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          foregroundColor: const Color(0xff364d64),
-                          backgroundColor: Colors.white,
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                            right: 10,
-                            bottom: 5,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          )),
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: const DTText(
-                        label: "Send reset email",
-                        color: Colors.black,
-                        style: KTLabelStyle,
+            child: Form(
+              key: viewModel.addressFormKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
+                      alignment: Alignment.center,
+                      child: DTText(
+                        label:
+                            "Reset your password by filling in your e-mail address. You will then receive an email with a link that will let you enter a new password.",
+                        style: context.regular14,
+                        color: Colors.white,
                       )),
-                ),
-                const VerticalSpace(
-                  spaceAmount: 50,
-                ),
-                const VerticalSpace(
-                  spaceAmount: 30,
-                ),
-              ],
+                  const VerticalSpace(
+                    spaceAmount: 20,
+                  ),
+                  KTTextField(
+                    textController: viewModel.emailController,
+                    title: "Email",
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 20,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            foregroundColor: const Color(0xff364d64),
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                              bottom: 5,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            )),
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: const DTText(
+                          label: "Send reset email",
+                          color: Colors.black,
+                          style: KTLabelStyle,
+                        )),
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 50,
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 30,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/vertical_space.dart';
 
@@ -24,11 +23,6 @@ class _KTTextFieldState extends State<KTTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DTText(
-          label: widget.title,
-          style: context.semiBold14,
-          color: Colors.white,
-        ),
         const VerticalSpace(
           spaceAmount: 2,
         ),

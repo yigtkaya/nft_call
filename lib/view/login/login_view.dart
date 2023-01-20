@@ -53,137 +53,142 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Spacer(),
-                Align(
-                    alignment: Alignment.center,
-                    child: DTText(
-                      label: "Sign In",
-                      style: context.bold20,
-                      color: Colors.white,
-                    )),
-                const VerticalSpace(
-                  spaceAmount: 20,
-                ),
-                KTTextField(
-                  textController: viewModel.emailController,
-                  title: "Email",
-                ),
-                const VerticalSpace(
-                  spaceAmount: 20,
-                ),
-                KTTextField(
-                  textController: viewModel.paswordController,
-                  title: "Pasword",
-                ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: const Color(0xff364d64),
-                    ),
-                    onPressed: () {
-                      Get.to(() => ResetPasswordView());
-                    },
-                    child: const Text('Forgot Password ?', style: KTLabelStyle),
+            child: Form(
+              key: viewModel.addressFormKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Spacer(),
+                  Align(
+                      alignment: Alignment.center,
+                      child: DTText(
+                        label: "Sign In",
+                        style: context.bold20,
+                        color: Colors.white,
+                      )),
+                  const VerticalSpace(
+                    spaceAmount: 20,
                   ),
-                ),
-                const VerticalSpace(),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          foregroundColor: const Color(0xff364d64),
-                          backgroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          )),
+                  const DTText(label: "Email", style: KTLabelStyle),
+                  KTTextField(
+                    textController: viewModel.emailController,
+                    title: "Email",
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 20,
+                  ),
+                  const DTText(label: "Password", style: KTLabelStyle),
+                  KTTextField(
+                    textController: viewModel.passwordController,
+                    title: "Password",
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: const Color(0xff364d64),
+                      ),
                       onPressed: () {
-                        viewModel.signIn(viewModel.emailController.text.trim(), viewModel.paswordController.text.trim());
+                        Get.to(() => ResetPasswordView());
+                      },
+                      child: const Text('Forgot Password ?', style: KTLabelStyle),
+                    ),
+                  ),
+                  const VerticalSpace(),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            foregroundColor: const Color(0xff364d64),
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            )),
+                        onPressed: () {
+                          viewModel.signIn(viewModel.emailController.text.trim(), viewModel.passwordController.text.trim());
 
-                      },
-                      child: const DTText(
-                        label: "LOGIN",
-                        color: Colors.black,
-                        style: KTLabelStyle,
-                      )),
-                ),
-                const VerticalSpace(
-                  spaceAmount: 50,
-                ),
-                const Align(
-                    alignment: Alignment.center,
-                    child: DTText(label: "OR", style: KTLabelStyle)),
-                const VerticalSpace(
-                  spaceAmount: 30,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 40, left: 50, right: 50),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          foregroundColor: const Color(0xFF4989D7),
-                          backgroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          )),
-                      onPressed: () {
-                        viewModel.googleSignIn();
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 35.0,
-                            width: 30.0,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/images/google.png'),
-                                  fit: BoxFit.cover),
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          const Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 5),
-                            child: DTText(
-                              label: "Sign in with Google",
-                              color: ThemeManager.instance?.getCurrentTheme
-                                  .colorTheme.colors.abbey,
-                              style: KTLabelStyle,
-                            ),
-                          )
-                        ],
-                      )),
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: GestureDetector(
-                      onTap: () => Get.offAll(() => SignUpView()),
-                      child: RichText(
-                        text: const TextSpan(
+                        },
+                        child: const DTText(
+                          label: "LOGIN",
+                          color: Colors.black,
+                          style: KTLabelStyle,
+                        )),
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 50,
+                  ),
+                  const Align(
+                      alignment: Alignment.center,
+                      child: DTText(label: "OR", style: KTLabelStyle)),
+                  const VerticalSpace(
+                    spaceAmount: 30,
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(bottom: 40, left: 50, right: 50),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            foregroundColor: const Color(0xFF4989D7),
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            )),
+                        onPressed: () {
+                          viewModel.googleSignIn();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            TextSpan(
-                                text: 'Don\'t have an Account? ',
-                                style: KTLabelStyle),
-                            TextSpan(text: 'Sign Up', style: KTLabelStyle),
+                            Container(
+                              height: 35.0,
+                              width: 30.0,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage('assets/images/google.png'),
+                                    fit: BoxFit.cover),
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5),
+                              child: DTText(
+                                label: "Sign in with Google",
+                                color: ThemeManager.instance?.getCurrentTheme
+                                    .colorTheme.colors.abbey,
+                                style: KTLabelStyle,
+                              ),
+                            )
                           ],
+                        )),
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: GestureDetector(
+                        onTap: () => Get.offAll(() => SignUpView()),
+                        child: RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: 'Don\'t have an Account? ',
+                                  style: KTLabelStyle),
+                              TextSpan(text: 'Sign Up', style: KTLabelStyle),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
