@@ -34,43 +34,41 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
       // final ktCardItem = KTCardItem.fromRTDB(data);
       // ktCardItem = KTCardItem.fromRTDB(item);
     });
-    var dd = _auth.getCurrentUserId();
     //print(ktCardItem?.twitter);
     _chip.value = callName.toLowerCase();
-    print(cardList.length);
-    print(_auth.currentUser.value);
   }
 
   void signOut() {
     _auth.signOut();
   }
+
   String? getCurrentUser() {
     return _auth.getCurrentUserId();
   }
+
   bool isFavoritedByUser(int index, String? uid) {
-    List<String>? uidList = cardList[index].isFavorite;
-    if(uidList != null) {
+    List? uidList = cardList[index].isFavorite;
+    if (uidList != null) {
       return uidList.contains(uid);
-    }
-    else{
+    } else {
       return false;
     }
   }
+
   Future<void> onFavoriteChanged(String callName, int index) async {
     try {
       _isSelected.value = !_isSelected.value;
-      List<String>? uidList = cardList[index].isFavorite;
+      List? uidList = cardList[index].isFavorite;
       final String? uid = getCurrentUser();
-      if (uidList!.contains(getCurrentUser()) && uid != null){
+      if (uidList!.contains(getCurrentUser()) && uid != null) {
+        await _database.child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index/isFavorite/${uidList.indexOf(uid)}").remove();
         uidList.remove(uid);
-        await _database
-            .child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index/isFavorite")
-            .update({"isFavorite" : uidList});
       } else {
-        uidList.add(uid!);
-        await _database.child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index/").ref.update({"isFavorite": uidList},);
+        print(uidList);
+        await _database
+            .child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index/")
+            .update({"isFavorite/${uidList.length - 1}": uid});
       }
-
 
       choiceChipApiCall(callName);
     } catch (e) {

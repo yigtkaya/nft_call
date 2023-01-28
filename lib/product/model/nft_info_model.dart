@@ -10,8 +10,8 @@ class KTCardItem {
   String? discord;
   String? twitter;
   String? marketplace;
-  List<String>? isFavorite;
-  List<String>? isAlertsOn;
+  List? isFavorite;
+  List? isAlertsOn;
 
   KTCardItem({
     this.collectionName,
@@ -42,6 +42,15 @@ class KTCardItem {
         isAlertsOn: data['isAlertsOn']);
   }
   factory KTCardItem.fromList(Map<dynamic, dynamic> data) {
+    List<String>? favs = [];
+    List<String>? alerts = [];
+
+      for (var i in data["isFavorite"]) {
+        favs.add(i);
+      }
+    for (var i in data["isAlertsOn"]) {
+      favs.add(i);
+    }
     return KTCardItem(
         collectionName: data['collectionName'],
         mintDate: data['mintDate'],
@@ -52,11 +61,11 @@ class KTCardItem {
         description: data['description'],
         twitter: data['twitter'],
         marketplace: data['marketplace'],
-        isFavorite: data['isFavorite'],
-        isAlertsOn: data['isAlertsOn']);
+        isFavorite: favs ?? [],
+        isAlertsOn: alerts ?? []);
   }
 
   String get getSafeDescription => description ?? "";
-  List<String> get getSafeIsFavorite => isFavorite ?? [];
-  List<String> get getSafeIsAlertsOn => isFavorite ?? [];
+  List get getSafeIsFavorite => isFavorite ?? [];
+  List get getSafeIsAlertsOn => isFavorite ?? [];
 }
