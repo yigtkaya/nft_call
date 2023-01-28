@@ -73,7 +73,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(10),
                     ),
-                    child: ImageNFT(onFavChanged: (isSelected) => {}),
+                    child: ImageNFT(url: ktCardItem?.imageUrl ?? "", onFavChanged: (isSelected) => {}),
                   ),
                   const VerticalSpace(
                     spaceAmount: 20,

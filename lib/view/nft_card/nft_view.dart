@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft_call/core/constants/asset.dart';
@@ -59,9 +60,11 @@ class NFTCardViewState extends State<NFTCardView> {
             children: [
               Stack(
                 children: [
-                  Image.network(
-                    "https://nftcalendar.io/storage/uploads/events/2022/12/1v6jVJUOdSJgvV2ExCpXzOkktGOOmseW6WOmhfN5.webp",
+                  CachedNetworkImage(
+                    imageUrl: widget.ktCardItem.imageUrl ?? "",
                     fit: BoxFit.cover,
+                    placeholder: (context,url) => const Center(child: CircularProgressIndicator(color: Colors.white,)),
+                    errorWidget: (context,url,error) => const Icon(Icons.error),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 5, right: 15, top: 15),

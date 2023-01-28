@@ -9,6 +9,7 @@ class KTCardItem {
   String? website;
   String? discord;
   String? twitter;
+  String? imageUrl;
   String? marketplace;
   List? isFavorite;
   List? isAlertsOn;
@@ -20,6 +21,7 @@ class KTCardItem {
     this.blockchain,
     this.website,
     this.discord,
+    this.imageUrl,
     this.description,
     this.twitter,
     this.marketplace,
@@ -35,6 +37,7 @@ class KTCardItem {
         blockchain: data['blockchain'],
         website: data['website'],
         discord: data['discord'],
+        imageUrl: data['imageUrl'],
         description: data['description'],
         twitter: data['twitter'],
         marketplace: data['marketplace'],
@@ -58,6 +61,7 @@ class KTCardItem {
         blockchain: data['blockchain'],
         website: data['website'],
         discord: data['discord'],
+        imageUrl: data['imageUrl'],
         description: data['description'],
         twitter: data['twitter'],
         marketplace: data['marketplace'],

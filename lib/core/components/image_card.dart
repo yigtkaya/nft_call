@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nft_call/core/constants/asset.dart';
 import 'package:nft_call/core/constants/extension.dart';
@@ -10,9 +11,10 @@ class ImageNFT extends StatefulWidget {
 
   bool isSelected = false;
   final void Function(bool) onFavChanged;
-
+  final String url;
   ImageNFT({
     Key? key,
+    required this.url,
     this.isSelected = false,
     required this.onFavChanged,
   }) : super(key: key);
@@ -26,9 +28,11 @@ class _ImageNFTState extends State<ImageNFT> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.network(
-          "https://nftcalendar.io/storage/uploads/events/2022/12/1v6jVJUOdSJgvV2ExCpXzOkktGOOmseW6WOmhfN5.webp",
+        CachedNetworkImage(
+          imageUrl: widget.url,
           fit: BoxFit.cover,
+          placeholder: (context,url) => const Center(child: CircularProgressIndicator(color: Colors.white,)),
+          errorWidget: (context,url,error) => const Icon(Icons.error),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 5, right: 15, top: 15),
