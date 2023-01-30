@@ -9,14 +9,14 @@ import '../constants/vertical_space.dart';
 import 'kt_icon.dart';
 
 class EventDetailInfo extends StatefulWidget {
-  bool isAlertOn;
+  bool isAlertIconOn;
   final String currentChip;
   final int index;
   final KTCardItem? ktCardItem;
   final void Function() onAlertChanged;
 
   EventDetailInfo(
-      {this.isAlertOn = false,
+      {this.isAlertIconOn = false,
       required this.ktCardItem,
       required this.onAlertChanged,
       Key? key,
@@ -86,14 +86,16 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
             ),
             // bildirim add kısmı ekelencek
             ITIcon(
-              iconName: widget.isAlertOn
+              iconName: widget.isAlertIconOn
                   ? AssetConstants.icons.added_alarm
                   : AssetConstants.icons.add_alarm,
               width: 50,
               height: 50,
               onPress: () => {
-                changeFavoriteIcon(widget.isAlertOn),
-                widget.onAlertChanged(),
+                setState(() {
+                  widget.onAlertChanged();
+                  widget.isAlertIconOn = !widget.isAlertIconOn;
+                })
               },
             ),
             const HorizontalSpace(
@@ -189,13 +191,8 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
     );
   }
 
-  void changeFavoriteIcon(bool isSelected) {
-    setState(() {
-      widget.isAlertOn = !widget.isAlertOn;
-    });
-  }
 
-  String get getAlertIcon => widget.isAlertOn
+  String get getAlertIcon => widget.isAlertIconOn
       ? AssetConstants.icons.added_alarm
       : AssetConstants.icons.add_alarm;
 }
