@@ -36,14 +36,14 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: const Color(0xf5263848),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(DimenConstant.LARGE),
-            child: SingleChildScrollView(
-              child: Column(
+        child: Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xf5263848),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(DimenConstant.LARGE),
+          child: SingleChildScrollView(
+            child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -72,174 +72,169 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(10),
                     ),
-                    child: ImageNFT(url: ktCardItem?.imageUrl ?? "", onFavChanged: (isSelected) => {}),
+                    child: ImageNFT(
+                        url: ktCardItem?.imageUrl ?? "",
+                        onFavChanged: (isSelected) => {}),
                   ),
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
-            DTText(
-              label: ktCardItem?.collectionName ?? "NFT Collection Name",
-              style: context.semiBold20,
-              color: Colors.white,
-            ),
-            const VerticalSpace(
-              spaceAmount: 5,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
                   DTText(
-                      label: "Mint Price :",
-                      style: context.semiBold14,
-                      color: Colors.white),
-                  const HorizontalSpace(),
-                  DTText(
-                    label: ktCardItem?.mintPrice ?? "00.5 ETH",
-                    style: context.regular20,
-                    color: Colors.blue,
-                  ),
-                ],
-              ),
-            ),
-            const Opacity(
-              opacity: 0.4,
-              child: Divider(
-                color: Colors.grey,
-                thickness: 1.5,
-              ),
-            ),
-            const VerticalSpace(
-              spaceAmount: 5,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  child: DTText(
-                    label:
-                    'If you want to receive notifications from this collection tap the bell!',
-                    style: context.semiBold14,
+                    label: ktCardItem?.collectionName ?? "NFT Collection Name",
+                    style: context.semiBold20,
                     color: Colors.white,
                   ),
-                ),
-                const HorizontalSpace(
-                  spaceAmount: 10,
-                ),
-                // bildirim add kısmı ekelencek
-                Obx(() => ITIcon(
-                    iconName: viewModel.isAlertOn
-                        ? AssetConstants.icons.added_alarm
-                        : AssetConstants.icons.add_alarm,
-                    width: 50,
-                    height: 50,
-                    onPress: () => {
-                      viewModel.getEventDetail(currentChip, index),
-                      viewModel.onAlertChanged(currentChip, index)
-                    },
-                  ),
-                ),
-                const HorizontalSpace(
-                  spaceAmount: 10,
-                ),
-              ],
-            ),
-            const VerticalSpace(
-              spaceAmount: 10,
-            ),
-            const Opacity(
-              opacity: 0.4,
-              child: Divider(
-                color: Colors.grey,
-                thickness: 1.5,
-              ),
-            ),
-            const VerticalSpace(
-              spaceAmount: 25,
-            ),
-            DTText(
-              label: ktCardItem?.description ?? "empty desc",
-              style: context.regular16,
-              color: Colors.white,
-            ),
-            const VerticalSpace(
-              spaceAmount: 35,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  DTText(
-                      label: "Mint Date",
-                      style: context.semiBold20,
-                      color: Colors.white),
-                  DTText(
-                    label: ktCardItem?.mintDate ?? "00:00:00",
-                    style: context.regular20,
-                    color: Colors.blue,
-                  )
-                ],
-              ),
-            ),
-            const VerticalSpace(
-              spaceAmount: 20,
-            ),
-            const Opacity(
-              opacity: 0.4,
-              child: Divider(
-                color: Colors.grey,
-                thickness: 1.5,
-              ),
-            ),
-            const VerticalSpace(
-              spaceAmount: 20,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ITIcon(
-                  iconName: AssetConstants.icons.discord,
-                  height: 30,
-                  width: 30,
-                  onPress: () => {
-                    launchURL(ktCardItem?.discord ?? "")
-                  },
-                ),
-                ITIcon(
-                  iconName: AssetConstants.icons.twitter,
-                  height: 30,
-                  width: 30,
-                  onPress: () => {
-                    launchURL(ktCardItem?.twitter ?? "")
-                  },
-                ),
-                ITIcon(
-                  iconName: AssetConstants.icons.marketplace,
-                  height: 30,
-                  width: 30,
-                  color: Colors.white,
-                  onPress: () => {
-                    launchURL(ktCardItem?.marketplace ?? "")
-                  },
-                ),
-                ITIcon(
-                  iconName: AssetConstants.icons.website,
-                  height: 30,
-                  width: 30,
-                  color: Colors.white,
-                  onPress: () => {
-                    launchURL(ktCardItem?.website ?? "")
-                  },
-                ),
                   const VerticalSpace(
-                    spaceAmount: 30,
+                    spaceAmount: 5,
                   ),
-                ],
-              ),
-            ]),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        DTText(
+                            label: "Mint Price :",
+                            style: context.semiBold14,
+                            color: Colors.white),
+                        const HorizontalSpace(),
+                        DTText(
+                          label: ktCardItem?.mintPrice ?? "00.5 ETH",
+                          style: context.regular20,
+                          color: Colors.blue,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Opacity(
+                    opacity: 0.4,
+                    child: Divider(
+                      color: Colors.grey,
+                      thickness: 1.5,
+                    ),
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 5,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: DTText(
+                          label:
+                              'If you want to receive notifications from this collection tap the bell!',
+                          style: context.semiBold14,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const HorizontalSpace(
+                        spaceAmount: 10,
+                      ),
+                      // bildirim add kısmı ekelencek
+                      Obx(
+                        () => ITIcon(
+                          iconName: viewModel.isAlertOn
+                              ? AssetConstants.icons.added_alarm
+                              : AssetConstants.icons.add_alarm,
+                          width: 50,
+                          height: 50,
+                          onPress: () => {
+                              viewModel.onAlertChanged(currentChip, index)
+                          },
+                        ),
+                      ),
+                      const HorizontalSpace(
+                        spaceAmount: 10,
+                      ),
+                    ],
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 10,
+                  ),
+                  const Opacity(
+                    opacity: 0.4,
+                    child: Divider(
+                      color: Colors.grey,
+                      thickness: 1.5,
+                    ),
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 25,
+                  ),
+                  DTText(
+                    label: ktCardItem?.description ?? "empty desc",
+                    style: context.regular16,
+                    color: Colors.white,
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 35,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        DTText(
+                            label: "Mint Date",
+                            style: context.semiBold20,
+                            color: Colors.white),
+                        DTText(
+                          label: ktCardItem?.mintDate ?? "00:00:00",
+                          style: context.regular20,
+                          color: Colors.blue,
+                        )
+                      ],
+                    ),
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 20,
+                  ),
+                  const Opacity(
+                    opacity: 0.4,
+                    child: Divider(
+                      color: Colors.grey,
+                      thickness: 1.5,
+                    ),
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 20,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ITIcon(
+                        iconName: AssetConstants.icons.discord,
+                        height: 30,
+                        width: 30,
+                        onPress: () => {launchURL(ktCardItem?.discord ?? "")},
+                      ),
+                      ITIcon(
+                        iconName: AssetConstants.icons.twitter,
+                        height: 30,
+                        width: 30,
+                        onPress: () => {launchURL(ktCardItem?.twitter ?? "")},
+                      ),
+                      ITIcon(
+                        iconName: AssetConstants.icons.marketplace,
+                        height: 30,
+                        width: 30,
+                        color: Colors.white,
+                        onPress: () =>
+                            {launchURL(ktCardItem?.marketplace ?? "")},
+                      ),
+                      ITIcon(
+                        iconName: AssetConstants.icons.website,
+                        height: 30,
+                        width: 30,
+                        color: Colors.white,
+                        onPress: () => {launchURL(ktCardItem?.website ?? "")},
+                      ),
+                      const VerticalSpace(
+                        spaceAmount: 30,
+                      ),
+                    ],
+                  ),
+                ]),
           ),
         ),
       ),

@@ -1,14 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:nft_call/core/constants/asset.dart';
 import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/theme/theme_manager.dart';
 import 'package:nft_call/product/model/nft_info_model.dart';
+import '../../core/components/kt_text_button.dart';
 import '../../core/constants/dt_text.dart';
 import '../../core/constants/horizontal_space.dart';
 import '../../core/components/card_info.dart';
 import '../../core/components/kt_icon.dart';
+import '../../core/constants/vertical_space.dart';
+import '../event_detail/event_detail.dart';
 
 class NFTCardView extends StatefulWidget {
   final void Function() onFavChanged;
@@ -63,8 +68,12 @@ class NFTCardViewState extends State<NFTCardView> {
                   CachedNetworkImage(
                     imageUrl: widget.ktCardItem.imageUrl ?? "",
                     fit: BoxFit.cover,
-                    placeholder: (context,url) => const Center(child: CircularProgressIndicator(color: Colors.white,)),
-                    errorWidget: (context,url,error) => const Icon(Icons.error),
+                    placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.white,
+                    )),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 5, right: 15, top: 15),
@@ -106,11 +115,91 @@ class NFTCardViewState extends State<NFTCardView> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 15, left: 20, right: 5),
-                  child: CardInfo(
-                    ktCardItem: widget.ktCardItem,
-                    currentChip: widget.currentChip,
-                    index: widget.index,
-                  ),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        DTText(
+                          label: widget.ktCardItem.collectionName ?? "NFT Collection Name",
+                          style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                        ),
+                        const VerticalSpace(
+                          spaceAmount: 5,
+                        ),
+                        Row(
+                          children: [
+                            Center(
+                                child: DTText(
+                                  label: widget.ktCardItem.blockchain ?? "#Chain",
+                                  style: context.regular16,
+                                  color: Colors.grey,
+                                )),
+                            const HorizontalSpace(
+                              spaceAmount: 5,
+                            ),
+                            Center(
+                                child: DTText(
+                                  label: "#NFT Drop",
+                                  style: context.regular16,
+                                  color: Colors.grey,
+                                ))
+                          ],
+                        ),
+                        const VerticalSpace(
+                          spaceAmount: 25,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: DTText(
+                            label:
+                            widget.ktCardItem.description ?? "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder",
+                            maxLines: 2,
+                            style: const TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                        ),
+                        const VerticalSpace(
+                          spaceAmount: 20,
+                        ),
+                        DTText(
+                          label: "Mint Date: ${widget.ktCardItem.mintDate}",
+                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                        const VerticalSpace(
+                          spaceAmount: 10,
+                        ),
+                        DTText(
+                          label: "Mint Price: ${widget.ktCardItem.mintPrice}",
+                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                        const VerticalSpace(
+                          spaceAmount: 20,
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.only(bottom: 10, right: 10, left: 10, top: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              DTTextButton(
+                                  child: const Text(
+                                    "read more",
+                                    style: TextStyle(color: Colors.white, fontSize: 14),
+                                  ),
+                                  onPress: () {
+                                    Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, currentChip: widget.currentChip, index: widget.index));
+                                  }),
+                              const HorizontalSpace(
+                                spaceAmount: 15,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
                 ),
               ),
             ],

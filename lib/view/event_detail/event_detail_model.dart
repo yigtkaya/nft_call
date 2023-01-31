@@ -13,7 +13,6 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
   final _callName = "".obs;
   final _ktCardItem = KTCardItem().obs;
   final _index = 0.obs;
-  final _uidList = [].obs;
   final AuthController _auth = AuthController();
 
   @override
@@ -21,30 +20,39 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
     super.onReady();
   }
 
-  Future<void> getEventDetail(String chip, int ind) async {
+  Future<void> getEventDetail(String callName, int ind) async {
+    _callName.value = callName;
     _index.value = ind;
-    _callName.value = chip;
-    
-    _database.child("nft_calendar/${_callName.value.toLowerCase()}/eventDetail/${_index.value}").onValue.listen((event) {
-      final data = event.snapshot.value;
-      Map<String, dynamic> exp = jsonDecode(jsonEncode(data));
-      _ktCardItem.value = KTCardItem.fromRTDB(exp);
-      _uidList.value = _ktCardItem.value.isAlertsOn!;
-    });
+
+    final data = await _database
+        .child(
+            "nft_calendar/${_callName.value.toLowerCase()}/eventDetail/${_index.value}")
+        .get();
+    Map<String, dynamic> exp = jsonDecode(jsonEncode(data));
+    _ktCardItem.value = KTCardItem.fromRTDB(exp);
+    print(_ktCardItem.value.isAlertsOn.runtimeType);
   }
+
   Future<void> onAlertChanged(String callName, int index) async {
     try {
+      getEventDetail(callName, index);
       _isAlertsOn.value = !_isAlertsOn.value;
-      List? uidList = _uidList.value;
+      List? uidList = _ktCardItem.value.isAlertsOn;
       final String? uid = getCurrentUser();
-      print(_uidList);
-      if (uidList.contains(getCurrentUser()) && uid != null) {
-        await _database.child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index/isAlertsOn/${uidList.indexOf(uid)}").remove();
-        uidList.remove(uid);
-      } else {
-        await _database
-            .child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index/")
-            .update({"isAlertsOn/${uidList.length}": uid});
+      print(uidList);
+      if (uidList != null) {
+        if (uidList.contains(getCurrentUser()) && uid != null) {
+          await _database
+              .child(
+                  "nft_calendar/${_callName.value.toLowerCase()}/eventDetail/${_index.value}/isAlertsOn/${uidList.indexOf(uid)}")
+              .remove();
+          uidList.remove(uid);
+        } else {
+          await _database
+              .child(
+                  "nft_calendar/${_callName.value.toLowerCase()}/eventDetail/${_index.value}/")
+              .update({"isAlertsOn/${uidList.length - 1}": uid});
+        }
       }
     } catch (e) {
       print(e.toString());

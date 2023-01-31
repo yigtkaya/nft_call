@@ -10,8 +10,6 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _chip = "today".obs;
   final List<KTCardItem> cardList = <KTCardItem>[].obs;
   final _database = FirebaseDatabase.instance.ref();
-  final _ktCardItem = KTCardItem().obs;
-
   final AuthController _auth = AuthController();
 
   @override
@@ -61,7 +59,10 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
       List? uidList = cardList[index].isFavorite;
       final String? uid = getCurrentUser();
       if (uidList!.contains(getCurrentUser()) && uid != null) {
-        await _database.child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index/isFavorite/${uidList.indexOf(uid)}").remove();
+        await _database
+            .child(
+                "nft_calendar/${callName.toLowerCase()}/eventDetail/$index/isFavorite/${uidList.indexOf(uid)}")
+            .remove();
         uidList.remove(uid);
       } else {
         print(uidList);
@@ -78,6 +79,5 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
 
   String get chip => _chip.value;
   List<KTCardItem> get pageItemsList => cardList;
-  KTCardItem get ktCardItem => _ktCardItem.value;
   bool get isSelected => _isSelected.value;
 }

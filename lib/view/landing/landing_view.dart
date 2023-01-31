@@ -18,7 +18,6 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
 
   @override
   Widget build(BuildContext context) {
-
     // TODO: implement build
     return SafeArea(
         child: Scaffold(
@@ -67,14 +66,15 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
 
   Widget getListView(BuildContext context, String chip) {
     return Obx(() => PageView.builder(
-      controller: PageController(keepPage: true),
+          controller: PageController(keepPage: true),
           scrollDirection: Axis.vertical,
           itemCount: viewModel.pageItemsList.length,
           itemBuilder: (BuildContext context, index) {
             return NFTCardView(
               currentChip: viewModel.chip,
               index: index,
-              isFavorite: viewModel.isFavoritedByUser(index, viewModel.getCurrentUser()),
+              isFavorite: viewModel.isFavoritedByUser(
+                  index, viewModel.getCurrentUser()),
               ktCardItem: viewModel.pageItemsList[index],
               onFavChanged: () {
                 viewModel.onFavoriteChanged(chip, index);

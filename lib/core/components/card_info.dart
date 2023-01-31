@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft_call/core/constants/vertical_space.dart';
 import 'package:nft_call/view/event_detail/event_detail.dart';
+import '../../auth/auth.dart';
 import '../../product/model/nft_info_model.dart';
 import '../constants/dt_text.dart';
 
