@@ -11,6 +11,8 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _baseList = <KTCardItem>[].obs;
   final _filteredList = <KTCardItem>[].obs;
   final AuthController _auth = AuthController();
+  final _database = FirebaseDatabase.instance.ref();
+
 
   @override
   void onReady() {

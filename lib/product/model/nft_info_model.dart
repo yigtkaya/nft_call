@@ -1,5 +1,6 @@
 class KTCardItem {
   String? collectionName;
+  int? eventId;
   String? mintDate;
   String? mintPrice;
   String? blockchain;
@@ -14,6 +15,7 @@ class KTCardItem {
 
   KTCardItem({
     this.collectionName,
+    this.eventId,
     this.mintDate,
     this.mintPrice,
     this.blockchain,
@@ -27,20 +29,6 @@ class KTCardItem {
     this.favUidList,
   });
 
-  factory KTCardItem.fromRTDB(Map<String, dynamic> data) {
-    return KTCardItem(
-        collectionName: data['collectionName'],
-        mintDate: data['mintDate'],
-        mintPrice: data['mintPrice'],
-        blockchain: data['blockchain'],
-        website: data['website'],
-        discord: data['discord'],
-        imageUrl: data['imageUrl'],
-        description: data['description'],
-        twitter: data['twitter'],
-        marketplace: data['marketplace'],
-        favUidList: data['favUidList']);
-  }
   factory KTCardItem.fromList(Map<dynamic, dynamic> data) {
     List<String>? favs = [];
     List<String>? tags = [];
@@ -53,6 +41,7 @@ class KTCardItem {
     }
     return KTCardItem(
         collectionName: data['collectionName'],
+        eventId: data['eventId'],
         mintDate: data['mintDate'],
         mintPrice: data['mintPrice'],
         blockchain: data['blockchain'],
