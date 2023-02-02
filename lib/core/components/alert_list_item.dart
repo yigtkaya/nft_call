@@ -1,12 +1,23 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/horizontal_space.dart';
 import 'package:nft_call/core/constants/vertical_space.dart';
+import 'package:nft_call/product/model/nft_info_model.dart';
 
 class AlertListItem extends StatefulWidget {
-  const AlertListItem({Key? key}) : super(key: key);
+  final KTCardItem ktCardItem;
+  final VoidCallback? onPress;
+  final VoidCallback? onDelete;
+
+  const AlertListItem(
+      {Key? key,
+      required this.ktCardItem,
+        this.onDelete,
+      this.onPress})
+      : super(key: key);
 
   @override
   State<AlertListItem> createState() => _AlertListItemState();
@@ -16,7 +27,7 @@ class _AlertListItemState extends State<AlertListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, bottom: 10, top:20, right: 20),
+      padding: const EdgeInsets.only(left: 20, bottom: 10, top: 20, right: 20),
       child: Slidable(
         endActionPane: ActionPane(
           motion: const BehindMotion(),
@@ -44,31 +55,39 @@ class _AlertListItemState extends State<AlertListItem> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.network(
-                  "https://nftcalendar.io/storage/uploads/events/2022/12/1v6jVJUOdSJgvV2ExCpXzOkktGOOmseW6WOmhfN5.webp"),
+              CachedNetworkImage(
+                imageUrl: widget.ktCardItem.imageUrl ?? "",
+                fit: BoxFit.cover,
+                placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    )),
+                errorWidget: (context, url, error) =>
+                const Icon(Icons.error),
+              ),
               const HorizontalSpace(
                 spaceAmount: 15,
               ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(10),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        DTText(
-                            label: "NFT Collection Name",
-                            style: context.regular20,
-                            color: Colors.white),
-                        const VerticalSpace(
-                          spaceAmount: 24,
-                        ),
-                        DTText(
-                            label: "Mint Date",
-                            style: context.regular16,
-                            color: Colors.white),
-                      ],
-                    ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      DTText(
+                          label: widget.ktCardItem.collectionName ?? "NFT Collection Name",
+                          style: context.regular16,
+                          color: Colors.white),
+                      const VerticalSpace(
+                        spaceAmount: 24,
+                      ),
+                      const Spacer(),
+                      DTText(
+                          label: widget.ktCardItem.mintDate ?? "Mint Date",
+                          style: context.regular16,
+                          color: Colors.white),
+                    ],
                   ),
                 ),
               ),

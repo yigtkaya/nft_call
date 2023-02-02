@@ -27,15 +27,33 @@ class MenuFactory extends IMenuFactory {
 
   static List<GetPage> getAllPages() {
     return [
-      GetPage(name: MenuKey.splash.key, page: () =>  SplashView()),
-      GetPage(name: MenuKey.login.key, page: () =>  LoginView(), transition: Transition.fadeIn),
-      GetPage(name: MenuKey.signUp.key, page: () =>  SignUpView(), transition: Transition.fadeIn),
-      GetPage(name: MenuKey.landing.key, page: () =>  LandingView()),
-      GetPage(name: MenuKey.root.key, page: () =>  RootView(), transition: Transition.fadeIn),
-      GetPage(name: MenuKey.notification.key, page: () =>  NotificationView()),
-      GetPage(name: MenuKey.drawer.key, page: () =>  DrawerView(), transition: Transition.rightToLeft),
-      GetPage(name: MenuKey.detail.key, page: () =>  EventDetailView(ktCardItem: null, currentChip: '', index: 0,), transition: Transition.fadeIn),
-
+      GetPage(name: MenuKey.splash.key, page: () => SplashView()),
+      GetPage(
+          name: MenuKey.login.key,
+          page: () => LoginView(),
+          transition: Transition.fadeIn),
+      GetPage(
+          name: MenuKey.signUp.key,
+          page: () => SignUpView(),
+          transition: Transition.fadeIn),
+      GetPage(name: MenuKey.landing.key, page: () => LandingView()),
+      GetPage(
+          name: MenuKey.root.key,
+          page: () => RootView(),
+          transition: Transition.fadeIn),
+      GetPage(name: MenuKey.notification.key, page: () => NotificationView()),
+      GetPage(
+          name: MenuKey.drawer.key,
+          page: () => DrawerView(),
+          transition: Transition.rightToLeft),
+      GetPage(
+          name: MenuKey.detail.key,
+          page: () => EventDetailView(
+                ktCardItem: null,
+                currentChip: '',
+                index: 0,
+              ),
+          transition: Transition.fadeIn),
     ];
   }
 

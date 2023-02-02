@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nft_call/core/components/alert_list_item.dart';
+import 'package:nft_call/view/event_detail/event_detail.dart';
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
@@ -17,38 +19,49 @@ class NotificationView
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Container(
+        child: Scaffold(
+      body: RefreshIndicator(
+        onRefresh: () async {viewModel.getEventList;},
+        child: Container(
           width: double.infinity,
+          height: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: [
-                  ColorConstants.colorPlateList[7 % (ColorConstants.colorPlateList.length)].startColor,
-                  ColorConstants.colorPlateList[7 % (ColorConstants.colorPlateList.length)].endColor,
+                  ColorConstants
+                      .colorPlateList[7 % (ColorConstants.colorPlateList.length)]
+                      .startColor,
+                  ColorConstants
+                      .colorPlateList[7 % (ColorConstants.colorPlateList.length)]
+                      .endColor,
                 ],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
                 stops: const [0.0, 1.2],
                 tileMode: TileMode.clamp),
           ),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  AlertListItem(),
-                  AlertListItem(),
-                  AlertListItem(),
-                  AlertListItem(),
-                  AlertListItem(),
-                  AlertListItem(),
-                ],
-              ),
-            ),
+          child: Obx(
+            () => viewModel.pageItemsList.isNotEmpty
+                ? getListView(context)
+                : const Center(
+                    child: Text("Add Alert to get notificate"),
+                  ),
           ),
         ),
       ),
+    ));
+  }
+
+  Widget getListView(BuildContext context) {
+    return Obx(
+      () => ListView.builder(
+          itemCount: viewModel.pageItemsList.length,
+          itemBuilder: (BuildContext context, index) {
+            return AlertListItem(
+              ktCardItem: viewModel.pageItemsList[index],
+              onPress: () => Get.to(() => EventDetailView(currentChip: "currentChip", index: index)),
+            );
+          })
     );
   }
 

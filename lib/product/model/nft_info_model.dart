@@ -1,4 +1,3 @@
-
 class KTCardItem {
   String? collectionName;
   String? mintDate;
@@ -47,9 +46,9 @@ class KTCardItem {
     List<String>? favs = [];
     List<String>? alerts = [];
 
-      for (var i in data["isFavorite"]) {
-        favs.add(i);
-      }
+    for (var i in data["isFavorite"]) {
+      favs.add(i);
+    }
     for (var i in data["isAlertsOn"]) {
       favs.add(i);
     }
