@@ -50,7 +50,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                       callback: (idx) => {
                             viewModel.choiceChipApiCall(idx),
                           })),
-              Expanded(child: getListView(context, viewModel.chip)),
+              Expanded(child: Obx(()=> getListView(context, viewModel.chip),),),
             ],
           ),
         ),
@@ -77,7 +77,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                   index, viewModel.getCurrentUser()),
               ktCardItem: viewModel.pageItemsList[index],
               onFavChanged: () {
-                viewModel.onFavoriteChanged(chip, index);
+                viewModel.onFavoriteChanged(viewModel.pageItemsList[index].collectionName ?? "",index);
               },
             );
           },

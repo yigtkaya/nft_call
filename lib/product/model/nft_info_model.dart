@@ -9,8 +9,8 @@ class KTCardItem {
   String? twitter;
   String? imageUrl;
   String? marketplace;
-  List? isFavorite;
-  List? isAlertsOn;
+  List? tags;
+  List? favUidList;
 
   KTCardItem({
     this.collectionName,
@@ -22,9 +22,9 @@ class KTCardItem {
     this.imageUrl,
     this.description,
     this.twitter,
+    this.tags,
     this.marketplace,
-    this.isFavorite,
-    this.isAlertsOn,
+    this.favUidList,
   });
 
   factory KTCardItem.fromRTDB(Map<String, dynamic> data) {
@@ -39,18 +39,17 @@ class KTCardItem {
         description: data['description'],
         twitter: data['twitter'],
         marketplace: data['marketplace'],
-        isFavorite: data['isFavorite'],
-        isAlertsOn: data['isAlertsOn']);
+        favUidList: data['favUidList']);
   }
   factory KTCardItem.fromList(Map<dynamic, dynamic> data) {
     List<String>? favs = [];
-    List<String>? alerts = [];
+    List<String>? tags = [];
 
-    for (var i in data["isFavorite"]) {
+    for (var i in data["favUidList"]) {
       favs.add(i);
     }
-    for (var i in data["isAlertsOn"]) {
-      favs.add(i);
+    for (var i in data["tags"]) {
+      tags.add(i);
     }
     return KTCardItem(
         collectionName: data['collectionName'],
@@ -63,11 +62,7 @@ class KTCardItem {
         description: data['description'],
         twitter: data['twitter'],
         marketplace: data['marketplace'],
-        isFavorite: favs ?? [],
-        isAlertsOn: alerts ?? []);
+        favUidList: favs,
+        tags: tags);
   }
-
-  String get getSafeDescription => description ?? "";
-  List get getSafeIsFavorite => isFavorite ?? [];
-  List get getSafeIsAlertsOn => isFavorite ?? [];
 }

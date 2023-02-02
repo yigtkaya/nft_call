@@ -7,33 +7,29 @@ import '../../core/base/view/base_view_model.dart';
 
 class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _isSelected = false.obs;
-  final _chip = "today".obs;
-  final List<KTCardItem> cardList = <KTCardItem>[].obs;
-  final _database = FirebaseDatabase.instance.ref();
+  final _chip = "Today".obs;
+  final _baseList = <KTCardItem>[].obs;
+  final _filteredList = <KTCardItem>[].obs;
   final AuthController _auth = AuthController();
 
   @override
   void onReady() {
-    choiceChipApiCall("today");
+    choiceChipApiCall(_chip.value);
     super.onReady();
   }
 
-  Future<void> choiceChipApiCall(String callName) async {
-    cardList.clear();
-    _database
-        .child("nft_calendar/${callName.toLowerCase()}/eventDetail")
-        .onValue
-        .listen((event) {
+  Future<void> choiceChipApiCall(String tag) async {
+    _baseList.clear();
+    _chip.value = tag;
+    _database.child("nft_calendar/events").onValue.listen((event) {
       final data = event.snapshot.value as List;
       for (var element in data) {
-        cardList.add(KTCardItem.fromList(element));
+        KTCardItem item = KTCardItem.fromList(element);
+        if(item.tags!.contains(tag)){
+          _baseList.add(item);
+        }
       }
-      //final item = Map<String, dynamic>.from(data[2] as Map);
-      // final ktCardItem = KTCardItem.fromRTDB(data);
-      // ktCardItem = KTCardItem.fromRTDB(item);
     });
-    //print(ktCardItem?.twitter);
-    _chip.value = callName.toLowerCase();
   }
 
   void signOut() {
@@ -45,7 +41,7 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   }
 
   bool isFavoritedByUser(int index, String? uid) {
-    List? uidList = cardList[index].isFavorite;
+    List? uidList = _baseList[index].favUidList;
     if (uidList != null) {
       return uidList.contains(uid);
     } else {
@@ -53,31 +49,21 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
     }
   }
 
-  Future<void> onFavoriteChanged(String callName, int index) async {
-    try {
-      _isSelected.value = !_isSelected.value;
-      List? uidList = cardList[index].isFavorite;
-      final String? uid = getCurrentUser();
-      if (uidList!.contains(getCurrentUser()) && uid != null) {
-        await _database
-            .child(
-                "nft_calendar/${callName.toLowerCase()}/eventDetail/$index/isFavorite/${uidList.indexOf(uid)}")
-            .remove();
-        uidList.remove(uid);
-      } else {
-        print(uidList);
-        await _database
-            .child("nft_calendar/${callName.toLowerCase()}/eventDetail/$index/")
-            .update({"isFavorite/${uidList.length - 1}": uid});
-      }
-
-      choiceChipApiCall(callName);
-    } catch (e) {
-      print(e.toString());
+  Future<void> onFavoriteChanged(String collectionName, int index) async {
+    _isSelected.value = !_isSelected.value;
+    List? uidList = _baseList[index].favUidList;
+    final String? uid = getCurrentUser();
+    if (uidList!.contains(uid)) {
+      await _database
+          .child(
+          "nft_calendar/events/$index/favUidList/$uid")
+          .remove();
+      uidList.remove(uid);
     }
   }
 
   String get chip => _chip.value;
-  List<KTCardItem> get pageItemsList => cardList;
+  List<KTCardItem> get pageItemsList => _baseList;
+  List<KTCardItem> get  base => _filteredList;
   bool get isSelected => _isSelected.value;
 }
