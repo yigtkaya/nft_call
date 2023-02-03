@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:nft_call/product/model/nft_info_model.dart';
 import '../../auth/auth.dart';
 import '../../core/base/view/base_view_model.dart';
+import '../nft_card/nft_view.dart';
 
 class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _isSelected = false.obs;
@@ -22,11 +23,35 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
     super.onReady();
   }
 
+  Widget getListView(BuildContext context, String chip) {
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection("events").snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        // filter the list by choice of tag
+        return PageView.builder(
+          controller: PageController(keepPage: true),
+          scrollDirection: Axis.vertical,
+          itemCount: _baseList.length,
+          itemBuilder: (BuildContext context, index) {
+            return NFTCardView(
+              index: index,
+              isFavorite:
+                  isFavoritedByUser(_baseList[index].eventId ?? "", index),
+              ktCardItem: _baseList[index],
+              onFavChanged: () {
+                onFavoriteChanged(_baseList[index].eventId ?? "", index);
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
   Future<void> getEventList(String tag) async {
     _baseList.clear();
     _tag.value = tag;
     List tags = [];
-
     FirebaseFirestore.instance
         .collection('events')
         .get()
@@ -44,19 +69,18 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   void signOut() {
     _auth.signOut();
   }
+
   String? getCurrentUser() {
     return _auth.getCurrentUserId();
   }
 
   bool isFavoritedByUser(String eventId, int index) {
-
     List? uidList = _baseList[index].favUidList;
     String? uid = getCurrentUser();
 
     if (uidList != null) {
       return uidList.contains(uid);
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -66,24 +90,18 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
     String? uid = getCurrentUser();
     print(uid);
     try {
-      if(favList.contains(uid)){
+      if (favList.contains(uid)) {
         favList.remove(uid);
-        events.doc(eventId).update({
-          "favList" : favList
-        });
+        events.doc(eventId).update({"favList": favList});
         _isSelected.value = false;
       } else {
         favList.add(uid);
-        events.doc(eventId).update({
-          "favList" : favList
-        });
+        events.doc(eventId).update({"favList": favList});
         _isSelected.value = true;
       }
     } catch (e) {
-
       showToastMessage(e.toString());
     }
-
   }
 
   void showToastMessage(String message) {

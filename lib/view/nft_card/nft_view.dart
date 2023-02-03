@@ -18,7 +18,6 @@ import '../event_detail/event_detail.dart';
 class NFTCardView extends StatefulWidget {
   final void Function() onFavChanged;
   final KTCardItem ktCardItem;
-  final String currentChip;
   final int index;
   bool isFavorite;
 
@@ -27,7 +26,6 @@ class NFTCardView extends StatefulWidget {
       required this.onFavChanged,
       required this.ktCardItem,
       required this.isFavorite,
-      required this.currentChip,
       required this.index})
       : super(key: key);
 
@@ -189,7 +187,7 @@ class NFTCardViewState extends State<NFTCardView> {
                                     style: TextStyle(color: Colors.white, fontSize: 14),
                                   ),
                                   onPress: () {
-                                    Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, currentChip: widget.currentChip, index: widget.index));
+                                    Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, currentChip: "", index: widget.index));
                                   }),
                               const HorizontalSpace(
                                 spaceAmount: 15,
