@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:nft_call/core/base/view/base_view.dart';
+import 'package:nft_call/product/model/nft_info_model.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/choice_chip.dart';
 import '../nft_card/nft_view.dart';
@@ -50,7 +52,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                       callback: (idx) => {
                             viewModel.getEventList(idx),
                           })),
-              Expanded(child: Obx(()=> getListView(context, viewModel.chip),),),
+              Expanded(child: getListView(context, viewModel.chip),),
             ],
           ),
         ),
@@ -65,22 +67,26 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
   }
 
   Widget getListView(BuildContext context, String chip) {
-    return Obx(() => PageView.builder(
+
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection("events").snapshots(),
+      builder:(BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        return PageView.builder(
           controller: PageController(keepPage: true),
           scrollDirection: Axis.vertical,
-          itemCount: viewModel.pageItemsList.length,
+          itemCount: snapshot.data?.docs.length,
           itemBuilder: (BuildContext context, index) {
             return NFTCardView(
               currentChip: viewModel.chip,
               index: index,
-              isFavorite: viewModel.isFavoritedByUser(
-                  index, viewModel.getCurrentUser()),
-              ktCardItem: viewModel.pageItemsList[index],
+              isFavorite: viewModel.isFavoritedByUser(viewModel.pageItemsList[index].eventId ?? "",index),
+              ktCardItem: KTCardItem.fromMap(snapshot.data?.docs.elementAt(index).data() as Map),
               onFavChanged: () {
-                viewModel.onFavoriteChanged(viewModel.pageItemsList[index].collectionName ?? "",index);
+                viewModel.onFavoriteChanged(viewModel.pageItemsList[index].eventId ?? "",index);
               },
             );
           },
-        ));
+        );
+      },);
   }
 }

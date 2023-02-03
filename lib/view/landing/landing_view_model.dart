@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/product/model/nft_info_model.dart';
 import '../../auth/auth.dart';
@@ -12,9 +13,8 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _baseList = <KTCardItem>[].obs;
   final _filteredList = <KTCardItem>[].obs;
   final AuthController _auth = AuthController();
-  final _database = FirebaseDatabase.instance.ref();
-
   CollectionReference events = FirebaseFirestore.instance.collection("events");
+  Stream stream = FirebaseFirestore.instance.collection("events").snapshots();
 
   @override
   void onReady() {
@@ -47,17 +47,54 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   String? getCurrentUser() {
     return _auth.getCurrentUserId();
   }
-  bool isFavoritedByUser(int index, String? uid) {
+
+  bool isFavoritedByUser(String eventId, int index) {
+
     List? uidList = _baseList[index].favUidList;
+    String? uid = getCurrentUser();
+
     if (uidList != null) {
       return uidList.contains(uid);
-    } else {
+    }
+    else {
       return false;
     }
   }
 
-  Future<void> onFavoriteChanged(String collectionName, int index) async {
+  Future<void> onFavoriteChanged(String eventId, int index) async {
+    List? favList = _baseList[index].favUidList ?? [];
+    String? uid = getCurrentUser();
+    print(uid);
+    try {
+      if(favList.contains(uid)){
+        favList.remove(uid);
+        events.doc(eventId).update({
+          "favList" : favList
+        });
+        _isSelected.value = false;
+      } else {
+        favList.add(uid);
+        events.doc(eventId).update({
+          "favList" : favList
+        });
+        _isSelected.value = true;
+      }
+    } catch (e) {
 
+      showToastMessage(e.toString());
+    }
+
+  }
+
+  void showToastMessage(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.blueGrey,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 
   String get chip => _tag.value;
