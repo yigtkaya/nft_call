@@ -105,50 +105,8 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                       ],
                     ),
                   ),
-                  const Opacity(
-                    opacity: 0.4,
-                    child: Divider(
-                      color: Colors.grey,
-                      thickness: 1.5,
-                    ),
-                  ),
                   const VerticalSpace(
                     spaceAmount: 5,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: DTText(
-                          label:
-                              'If you want to receive notifications from this collection tap the bell!',
-                          style: context.semiBold14,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const HorizontalSpace(
-                        spaceAmount: 10,
-                      ),
-                      // bildirim add kısmı ekelencek
-                      Obx(
-                        () => ITIcon(
-                          iconName: viewModel.isAlertOn
-                              ? AssetConstants.icons.added_alarm
-                              : AssetConstants.icons.add_alarm,
-                          width: 50,
-                          height: 50,
-                          onPress: () => {
-                              viewModel.onAlertChanged(currentChip, index)
-                          },
-                        ),
-                      ),
-                      const HorizontalSpace(
-                        spaceAmount: 10,
-                      ),
-                    ],
-                  ),
-                  const VerticalSpace(
-                    spaceAmount: 10,
                   ),
                   const Opacity(
                     opacity: 0.4,
