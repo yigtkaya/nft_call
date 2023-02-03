@@ -28,18 +28,34 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
       stream: FirebaseFirestore.instance.collection("events").snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         // filter the list by choice of tag
+        if(snapshot.hasError){
+          showToastMessage("There is an error");
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+
+        List<KTCardItem> collectionList = [];
+        List tags = [];
+        for(var document in snapshot.data!.docs){
+          Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+          tags = data["tags"];
+          if (tags.contains(chip)) {
+            collectionList.add(KTCardItem.fromMap(data));
+          }
+        }
         return PageView.builder(
           controller: PageController(keepPage: true),
           scrollDirection: Axis.vertical,
-          itemCount: _baseList.length,
+          itemCount: collectionList.length,
           itemBuilder: (BuildContext context, index) {
             return NFTCardView(
               index: index,
               isFavorite:
-                  isFavoritedByUser(_baseList[index].eventId ?? "", index),
-              ktCardItem: _baseList[index],
+                  isFavoritedByUser(collectionList[index].eventId ?? "", index),
+              ktCardItem: collectionList[index],
               onFavChanged: () {
-                onFavoriteChanged(_baseList[index].eventId ?? "", index);
+                onFavoriteChanged(collectionList[index].eventId ?? "", index);
               },
             );
           },

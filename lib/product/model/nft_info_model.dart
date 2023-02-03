@@ -72,4 +72,6 @@ class KTCardItem {
     marketplace = snapshot['marketplace'];
     favUidList = snapshot["favList"];
   }
+
+  String get getSafecCollectionName => collectionName ?? "";
 }
