@@ -48,7 +48,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                   padding: const EdgeInsets.only(top: 10),
                   child: ChoiceChipWidget(
                       callback: (idx) => {
-                            viewModel.choiceChipApiCall(idx),
+                            viewModel.getEventList(idx),
                           })),
               Expanded(child: Obx(()=> getListView(context, viewModel.chip),),),
             ],

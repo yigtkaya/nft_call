@@ -40,6 +40,7 @@ dependencies:
   firebase_crashlytics: ^3.0.7
   firebase_analytics: ^10.0.7
   firebase_messaging: ^14.1.4
+  cloud_firestore:
   firebase_database:
   firebase_auth:
   google_sign_in: ^5.4.3

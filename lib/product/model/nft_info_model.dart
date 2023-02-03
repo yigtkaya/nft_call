@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class KTCardItem {
   String? collectionName;
-  int? eventId;
+  String? eventId;
   String? mintDate;
   String? mintPrice;
   String? blockchain;
@@ -29,11 +31,11 @@ class KTCardItem {
     this.favUidList,
   });
 
-  factory KTCardItem.fromList(Map<dynamic, dynamic> data) {
+  factory KTCardItem.fromMap(Map<dynamic, dynamic> data) {
     List<String>? favs = [];
     List<String>? tags = [];
 
-    for (var i in data["favUidList"]) {
+    for (var i in data["favList"]) {
       favs.add(i);
     }
     for (var i in data["tags"]) {
@@ -51,7 +53,23 @@ class KTCardItem {
         description: data['description'],
         twitter: data['twitter'],
         marketplace: data['marketplace'],
-        favUidList: favs,
-        tags: tags);
+        favUidList: data["favList"],
+        tags: data["tags"]);
+  }
+
+  KTCardItem.fromDocumentSnapshot({required DocumentSnapshot snapshot}){
+    eventId = snapshot.id;
+    collectionName = snapshot["collectionName"];
+    eventId =  snapshot['eventId'];
+    mintDate =  snapshot['mintDate'];
+    mintPrice =  snapshot['mintPrice'];
+    blockchain = snapshot['blockchain'];
+    website = snapshot['website'];
+    discord = snapshot['discord'];
+    imageUrl = snapshot['imageUrl'];
+    description = snapshot['description'];
+    twitter = snapshot['twitter'];
+    marketplace = snapshot['marketplace'];
+    favUidList = snapshot["favList"];
   }
 }

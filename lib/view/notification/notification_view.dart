@@ -21,7 +21,7 @@ class NotificationView
     return SafeArea(
         child: Scaffold(
       body: RefreshIndicator(
-        onRefresh: () async {viewModel.getEventList;},
+        onRefresh: () async {viewModel.getEventIdList;},
         child: Container(
           width: double.infinity,
           height: double.infinity,
@@ -43,8 +43,10 @@ class NotificationView
           child: Obx(
             () => viewModel.pageItemsList.isNotEmpty
                 ? getListView(context)
-                : const Center(
-                    child: Text("Add Alert to get notificate"),
+                : Center(
+                    child: TextButton(child: Text("Add Alert to get notificate"), onPressed: () {
+                      viewModel.getEventIdList();
+                    },),
                   ),
           ),
         ),

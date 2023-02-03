@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/product/model/nft_info_model.dart';
@@ -7,28 +8,34 @@ import '../../core/base/view/base_view_model.dart';
 
 class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _isSelected = false.obs;
-  final _chip = "Today".obs;
+  final _tag = "Today".obs;
   final _baseList = <KTCardItem>[].obs;
   final _filteredList = <KTCardItem>[].obs;
   final AuthController _auth = AuthController();
   final _database = FirebaseDatabase.instance.ref();
 
+  CollectionReference events = FirebaseFirestore.instance.collection("events");
 
   @override
   void onReady() {
-    choiceChipApiCall(_chip.value);
+    getEventList(_tag.value);
     super.onReady();
   }
 
-  Future<void> choiceChipApiCall(String tag) async {
+  Future<void> getEventList(String tag) async {
     _baseList.clear();
-    _chip.value = tag;
-    _database.child("nft_calendar/events").onValue.listen((event) {
-      final data = event.snapshot.value as List;
-      for (var element in data) {
-        KTCardItem item = KTCardItem.fromList(element);
-        if(item.tags!.contains(tag)){
-          _baseList.add(item);
+    _tag.value = tag;
+    List tags = [];
+
+    FirebaseFirestore.instance
+        .collection('events')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      for (var doc in querySnapshot.docs) {
+        Map map = doc.data() as Map;
+        tags = map["tags"];
+        if (tags.contains(tag)) {
+          _baseList.add(KTCardItem.fromMap(map));
         }
       }
     });
@@ -37,11 +44,9 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   void signOut() {
     _auth.signOut();
   }
-
   String? getCurrentUser() {
     return _auth.getCurrentUserId();
   }
-
   bool isFavoritedByUser(int index, String? uid) {
     List? uidList = _baseList[index].favUidList;
     if (uidList != null) {
@@ -52,20 +57,11 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   }
 
   Future<void> onFavoriteChanged(String collectionName, int index) async {
-    _isSelected.value = !_isSelected.value;
-    List? uidList = _baseList[index].favUidList;
-    final String? uid = getCurrentUser();
-    if (uidList!.contains(uid)) {
-      await _database
-          .child(
-          "nft_calendar/events/$index/favUidList/$uid")
-          .remove();
-      uidList.remove(uid);
-    }
+
   }
 
-  String get chip => _chip.value;
+  String get chip => _tag.value;
   List<KTCardItem> get pageItemsList => _baseList;
-  List<KTCardItem> get  base => _filteredList;
+  List<KTCardItem> get base => _filteredList;
   bool get isSelected => _isSelected.value;
 }
