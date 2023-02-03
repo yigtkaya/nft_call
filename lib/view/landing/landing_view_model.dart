@@ -15,53 +15,58 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _filteredList = <KTCardItem>[].obs;
   final AuthController _auth = AuthController();
   CollectionReference events = FirebaseFirestore.instance.collection("events");
-  Stream stream = FirebaseFirestore.instance.collection("events").snapshots();
+  late var stream;
 
   @override
   void onReady() {
     getEventList(_tag.value);
+    stream = FirebaseFirestore.instance.collection("events").snapshots();
     super.onReady();
   }
 
   Widget getListView(BuildContext context, String chip) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection("events").snapshots(),
+      stream: stream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasData) {
+          List<KTCardItem> collectionList = filterByTag(snapshot.data!.docs);
+          return PageView.builder(
+            controller: PageController(keepPage: true),
+            scrollDirection: Axis.vertical,
+            itemCount: collectionList.length,
+            itemBuilder: (BuildContext context, index) {
+              Future.delayed(const Duration(seconds: 3));
+              return NFTCardView(
+                index: index,
+                isFavorite: isFavoritedByUser(index),
+                ktCardItem: collectionList[index],
+                onFavChanged: () {
+                  onFavoriteChanged(collectionList[index].eventId ?? "", index);
+                },
+              );
+            },
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
         // filter the list by choice of tag
-        if(snapshot.hasError){
-          showToastMessage("There is an error");
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        }
-
-        List<KTCardItem> collectionList = [];
-        List tags = [];
-        for(var document in snapshot.data!.docs){
-          Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-          tags = data["tags"];
-          if (tags.contains(chip)) {
-            collectionList.add(KTCardItem.fromMap(data));
-          }
-        }
-        return PageView.builder(
-          controller: PageController(keepPage: true),
-          scrollDirection: Axis.vertical,
-          itemCount: collectionList.length,
-          itemBuilder: (BuildContext context, index) {
-            return NFTCardView(
-              index: index,
-              isFavorite:
-                  isFavoritedByUser(collectionList[index].eventId ?? "", index),
-              ktCardItem: collectionList[index],
-              onFavChanged: () {
-                onFavoriteChanged(collectionList[index].eventId ?? "", index);
-              },
-            );
-          },
-        );
       },
     );
+  }
+
+  List<KTCardItem> filterByTag(List<QueryDocumentSnapshot> snapshot) {
+    List<KTCardItem> collectionList = [];
+    for (var document in snapshot) {
+      Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+      if (data["tags"].contains(_tag.value)) {
+        collectionList.add(KTCardItem.fromMap(data));
+      }
+    }
+    return collectionList;
   }
 
   Future<void> getEventList(String tag) async {
@@ -90,7 +95,7 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
     return _auth.getCurrentUserId();
   }
 
-  bool isFavoritedByUser(String eventId, int index) {
+  bool isFavoritedByUser(int index) {
     List? uidList = _baseList[index].favUidList;
     String? uid = getCurrentUser();
 
