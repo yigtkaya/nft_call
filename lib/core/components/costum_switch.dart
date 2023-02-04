@@ -28,6 +28,7 @@ class _KTCustomViewSwitchState extends State<KTCustomViewSwitch> {
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             DTText(label: "Add Alert", style: TextStyle(color: widget.isViewSelected ? Colors.amber : Colors.blueGrey,),),
             const HorizontalSpace(),

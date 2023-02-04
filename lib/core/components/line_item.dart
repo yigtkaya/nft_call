@@ -10,14 +10,10 @@ class KTLineItem extends StatelessWidget {
   KTLineItem({
     Key? key,
     this.onCallback,
-    required this.name,
     required this.description,
-    required this.subDescription,
   }) : super(key: key);
   final VoidCallback? onCallback;
-  final String name;
   final String? description;
-  final String subDescription;
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +32,14 @@ class KTLineItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                DTText(label: name, style: context.semiBold14),
                 const VerticalSpace(spaceAmount: DimenConstant.SMALL),
                 DTText(
                   label: description ?? "",
-                  style: context.regular12,
+                  style: context.regular16,
                   maxLines: 2,
                 ),
                 const VerticalSpace(spaceAmount: DimenConstant.SMALL),
-                DTText(
-                  label: subDescription,
-                  style: context.regular12,
-                  color: ThemeManager.instance?.getCurrentTheme.colorTheme.menuItemGradientStart ?? Colors.white,
-                )
+
               ],
             ),
           )),

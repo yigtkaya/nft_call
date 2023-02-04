@@ -15,7 +15,8 @@ enum ScreenName {
   landing("Ana Ekran"),
   notification("bildirim ekrani"),
   smsotp("Sms Otp"),
-  detay("Detaylara ulaşın sayfasi");
+  detay("Detaylara ulaşın sayfasi"),
+  arama("liste içinde armaa yapın");
 
   final String name;
   const ScreenName(this.name);

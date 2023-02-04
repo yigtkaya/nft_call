@@ -19,6 +19,7 @@ enum MenuKey {
   mobildenizSub3("/mobildenizSub2"),
   notification("/notificaiton"),
   smsotp("/smsotp"),
+  search("/search"),
 
   test("/testKey"),
   environment_selection("/environmentSelectionKey"),
