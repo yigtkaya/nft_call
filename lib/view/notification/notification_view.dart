@@ -54,7 +54,7 @@ class NotificationView
               ],
             ),
             Obx(() => Expanded(
-                child: viewModel.isListViewSelected
+                child: viewModel.isViewSelected
                     ? addAlertView(context)
                     : getListView(context)))
           ],

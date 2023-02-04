@@ -23,13 +23,17 @@ class KTCustomViewSwitch extends StatefulWidget {
 class _KTCustomViewSwitchState extends State<KTCustomViewSwitch> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Row(
-        children: [
-          TextButton(onPressed: () {changeState();}, child: Text("Add Alert", style:TextStyle(color: widget.isViewSelected ? Colors.amber : Colors.blueGrey,),),),
-          const HorizontalSpace(),
-          TextButton(onPressed: () {changeState();}, child: Text("My Alert", style:TextStyle(color: widget.isViewSelected ? Colors.blueGrey : Colors.amber,),),)            ],
+    return GestureDetector(
+      onTap: () => {changeState()},
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          children: [
+            DTText(label: "Add Alert", style: TextStyle(color: widget.isViewSelected ? Colors.amber : Colors.blueGrey,),),
+            const HorizontalSpace(),
+            DTText(label:"My Alert", style:TextStyle(color: widget.isViewSelected ? Colors.blueGrey : Colors.amber,),),
+          ],
+        ),
       ),
     );
   }

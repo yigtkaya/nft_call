@@ -9,7 +9,7 @@ import '../../product/model/nft_info_model.dart';
 class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
   final TextEditingController nameController = TextEditingController(text: "");
   final _isAddButtonEnable = false.obs;
-  final _isSelected = false.obs;
+  final _isSelected = true.obs;
   final _collectionList = <KTCardItem>[].obs;
   final _filteredList = <KTCardItem>[].obs;
   final AuthController _auth = AuthController();
@@ -71,6 +71,6 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
 
   List<KTCardItem> get pageItemsList => _collectionList;
   List<KTCardItem> get filteredCollection => _collectionList;
-  bool get isListViewSelected => _isSelected.value;
+  bool get isViewSelected => _isSelected.value;
   bool get isAddButtonEnable => _isAddButtonEnable.value;
 }

@@ -15,7 +15,8 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _filteredList = <KTCardItem>[].obs;
   final AuthController _auth = AuthController();
   CollectionReference events = FirebaseFirestore.instance.collection("events");
-  late var stream;
+  late Stream<QuerySnapshot> stream;
+
 
   @override
   void onReady() {
