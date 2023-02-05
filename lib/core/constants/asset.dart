@@ -47,6 +47,7 @@ class KIcons {
   final String marketplace = AssetConstants.toIcon("marketplace");
   final String add_alarm = AssetConstants.toIcon("add_alarm");
   final String added_alarm = AssetConstants.toIcon("added_alarm");
+  final String check_icon = AssetConstants.toIcon("check_icon");
 
 
 }

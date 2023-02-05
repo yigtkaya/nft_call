@@ -22,7 +22,6 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     });
     getEventList();
   }
-
   /// fill filter list item every user interactions
   void fillFilterList() {
     _filteredList.value =
@@ -40,7 +39,6 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     }
     return filterList;
   }
-
   void getEventList() async {
     var snapshot = await FirebaseFirestore.instance.collection('events').get();
     if (snapshot.docs.isNotEmpty) {
@@ -49,22 +47,18 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
         _collectionList.add(KTCardItem.fromMap(data));
       }
       fillFilterList();
-      print(_collectionList);
     }
   }
-
   void setView(bool isSelected) {
     _isSelected.value = isSelected;
   }
   String? getCurrentUser() {
     return _auth.getCurrentUserId();
   }
-
   void navigateToRoot() {
     /// load users details from hive and go to the root.
     navigation?.popAndNavigateToPage(MenuKey.root);
   }
-
   bool get isViewSelected => _isSelected.value;
   bool get isAddButtonEnable => _isAddButtonEnable.value;
   List<KTCardItem> get filteredList => _filteredList.value;

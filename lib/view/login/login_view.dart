@@ -73,7 +73,10 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                     textController: viewModel.emailController,
                     title: "Email",
                   ),
-              Obx(() => DTText(label: viewModel.errorMessage ?? "", style: context.regular12, color: Colors.red)),
+                  Obx(() => DTText(
+                      label: viewModel.errorMessage ?? "",
+                      style: context.regular12,
+                      color: Colors.red)),
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
@@ -82,7 +85,10 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                     textController: viewModel.passwordController,
                     title: "Password",
                   ),
-                  Obx(() => DTText(label: viewModel.pwErrorMessage ?? "", style: context.regular12, color: Colors.red)),
+                  Obx(() => DTText(
+                      label: viewModel.pwErrorMessage ?? "",
+                      style: context.regular12,
+                      color: Colors.red)),
                   Container(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -93,10 +99,9 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                         Get.to(() => ResetPasswordView());
                       },
                       child:
-                      const Text('Forgot Password ?', style: KTLabelStyle),
+                          const Text('Forgot Password ?', style: KTLabelStyle),
                     ),
                   ),
-
                   const VerticalSpace(),
                   SizedBox(
                     width: double.infinity,

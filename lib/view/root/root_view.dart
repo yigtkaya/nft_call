@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/core/base/view/base_view.dart';
 import 'package:nft_call/view/login/login_view.dart';
-import 'package:nft_call/view/login/reset_password_view.dart';
 import 'package:nft_call/view/notification/notification_view.dart';
 import 'package:nft_call/view/root/root_view_model.dart';
 import '../../core/base/view/view_info.dart';
@@ -21,7 +20,7 @@ class RootView extends BaseView<RootView, RootViewModel> {
     return SafeArea(
         top: false,
         child: Scaffold(
-          backgroundColor:const Color(0xff16161f),
+          backgroundColor: const Color(0xff16161f),
           resizeToAvoidBottomInset: false,
           body: Column(
             children: [
@@ -32,7 +31,6 @@ class RootView extends BaseView<RootView, RootViewModel> {
                 children: [
                   /// Home View
                   LandingView(),
-
 
                   /// Stats View
                   NotificationView(),

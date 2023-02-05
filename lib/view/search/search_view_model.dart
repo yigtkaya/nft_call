@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
 import '../../core/base/view/base_view_model.dart';
+import '../../product/menu/menu_key.dart';
 import '../../product/model/nft_info_model.dart';
 
 class SearchViewModel extends BaseViewModel<SearchViewModel> {
   final TextEditingController nameController = TextEditingController();
+  final _chosenItem = 0.obs;
   final _filteredList = <KTCardItem>[].obs;
   final _collectionList = <KTCardItem>[].obs;
 
@@ -16,6 +17,10 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
     getEventList();
     setListeners();
   }
+  void setChosenItem(int index) {
+    _chosenItem.value = index;
+    print(index);
+  }
   void setListeners() {
     nameController.addListener(() {
       fillFilterList();
@@ -23,7 +28,6 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
   }
   /// fill filter list item every user interactions
   void fillFilterList() {
-    print("object");
     _filteredList.value =
         filterMenuItemsByText(_collectionList, nameController.text);
   }
@@ -51,7 +55,10 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
       print(_collectionList);
     }
   }
-
+  void navigateToDrawer() {
+    navigation?.navigateToPage(MenuKey.root);
+  }
   List<KTCardItem> get collectionList => _collectionList.value;
   List<KTCardItem> get filteredCollectionList => _filteredList.value;
+  int get chosenItem => _chosenItem.value;
 }

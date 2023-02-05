@@ -45,7 +45,9 @@ class NotificationView
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const VerticalSpace(spaceAmount: 50,),
+            const VerticalSpace(
+              spaceAmount: 50,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -57,13 +59,16 @@ class NotificationView
             Obx(() => Expanded(
                 child: viewModel.isViewSelected
                     ? addAlertView(context)
-                    : const Center(child: Text("data"),)))
+                    : const Center(
+                        child: Text("data"),
+                      )))
           ],
         ),
       ),
     ));
   }
-Widget searchView(BuildContext context) {
+
+  Widget searchView(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -89,24 +94,24 @@ Widget searchView(BuildContext context) {
         ),
       ),
       body: Obx(
-            () => Container(
+        () => Container(
           color: Colors.grey.shade500,
           child: viewModel.filteredList.isNotEmpty
               ? ListView.builder(
-            itemCount: viewModel.filteredList.length,
-            itemBuilder: (context, index) {
-              return KTLineItem(
-                description: viewModel
-                    .filteredList[index].collectionName,
-              );
-            },
-          )
-              : const Center(
-              child: CircularProgressIndicator()),
+                  itemCount: viewModel.filteredList.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                          viewModel.filteredList[index].collectionName ?? ""),
+                    );
+                  },
+                )
+              : const Center(child: CircularProgressIndicator()),
         ),
       ),
     );
-} 
+  }
+
   Widget addAlertView(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -118,47 +123,60 @@ Widget searchView(BuildContext context) {
             color: Colors.white,
           ),
         ),
-        const VerticalSpace(spaceAmount: 50,),
+        const VerticalSpace(
+          spaceAmount: 50,
+        ),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
-              side: const BorderSide(width: 1, color: Colors.blue),
+                side: const BorderSide(width: 1, color: Colors.blue),
                 foregroundColor: const Color(0xff364d64),
                 backgroundColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 )),
-            onPressed: (){Get.to(
-                    () => SearchView());  },
+            onPressed: () async {
+              final result = await Navigator.push(context, MaterialPageRoute(
+                builder: (BuildContext context) => SearchView(),));
+              print(result);
+            },
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                 DTText(
+                DTText(
                   label: "Search NFT Collection",
                   color: Colors.blueGrey,
                   style: context.regular16,
                 ),
                 const HorizontalSpace(),
-                const Icon(Icons.arrow_drop_down, color: Colors.white,),
+                const Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.white,
+                ),
               ],
             )),
-        const VerticalSpace(spaceAmount: 50,),
+        const VerticalSpace(
+          spaceAmount: 50,
+        ),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xff364d64),
-              disabledBackgroundColor: const Color(0xff0f1418),
-              foregroundColor: const Color(0xff0f1418),
+                backgroundColor: const Color(0xff364d64),
+                disabledBackgroundColor: const Color(0xff0f1418),
+                foregroundColor: const Color(0xff0f1418),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 )),
-            onPressed: true ? (){} : null,
+            onPressed: true ? () {} : null,
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Obx(() => DTText(
-                label: "Create",
-                color: viewModel.isAddButtonEnable ? Colors.white : Colors.blueGrey,
-                style: context.regular16,
-              ),
-            ))),
+                padding: const EdgeInsets.all(15.0),
+                child: Obx(
+                  () => DTText(
+                    label: "Create",
+                    color: viewModel.isAddButtonEnable
+                        ? Colors.white
+                        : Colors.blueGrey,
+                    style: context.regular16,
+                  ),
+                ))),
       ],
     );
   }
