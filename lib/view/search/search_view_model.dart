@@ -7,7 +7,9 @@ import '../../product/model/nft_info_model.dart';
 
 class SearchViewModel extends BaseViewModel<SearchViewModel> {
   final TextEditingController nameController = TextEditingController();
-  final _chosenItem = 0.obs;
+  final _chosenItemIndex = 0.obs;
+  final _chosenItem = "".obs;
+  final _chosenItemId = "".obs;
   final _filteredList = <KTCardItem>[].obs;
   final _collectionList = <KTCardItem>[].obs;
 
@@ -18,7 +20,12 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
     setListeners();
   }
   void setChosenItem(int index) {
-    _chosenItem.value = index;
+    _chosenItemIndex.value = index;
+    _chosenItem.value = filteredCollectionList[index].collectionName ?? "";
+    _chosenItemId.value = filteredCollectionList[index].eventId ?? "";
+  }
+  void getChosenItem(int index) {
+    _chosenItemIndex.value = index;
     print(index);
   }
   void setListeners() {
@@ -60,5 +67,7 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
   }
   List<KTCardItem> get collectionList => _collectionList.value;
   List<KTCardItem> get filteredCollectionList => _filteredList.value;
-  int get chosenItem => _chosenItem.value;
+  int get chosenItem => _chosenItemIndex.value;
+  String get chosenItemName => _chosenItem.value;
+  String get chosenItemId => _chosenItemId.value;
 }

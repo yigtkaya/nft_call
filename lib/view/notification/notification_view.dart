@@ -67,51 +67,6 @@ class NotificationView
       ),
     ));
   }
-
-  Widget searchView(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        backgroundColor: Colors.grey.shade900,
-        title: SizedBox(
-          height: 38,
-          child: TextField(
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[850],
-                contentPadding: const EdgeInsets.all(0),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.grey.shade500,
-                ),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide.none),
-                hintStyle: TextStyle(fontSize: 14, color: Colors.grey.shade500),
-                hintText: "Search NFT Collection"),
-          ),
-        ),
-      ),
-      body: Obx(
-        () => Container(
-          color: Colors.grey.shade500,
-          child: viewModel.filteredList.isNotEmpty
-              ? ListView.builder(
-                  itemCount: viewModel.filteredList.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(
-                          viewModel.filteredList[index].collectionName ?? ""),
-                    );
-                  },
-                )
-              : const Center(child: CircularProgressIndicator()),
-        ),
-      ),
-    );
-  }
-
   Widget addAlertView(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -135,15 +90,13 @@ class NotificationView
                   borderRadius: BorderRadius.circular(10),
                 )),
             onPressed: () async {
-              final result = await Navigator.push(context, MaterialPageRoute(
-                builder: (BuildContext context) => SearchView(),));
-              print(result);
+              viewModel.navigateToSearch();
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 DTText(
-                  label: "Search NFT Collection",
+                  label: viewModel.resultName !="" ? viewModel.resultName : "Search NFT Collection",
                   color: Colors.blueGrey,
                   style: context.regular16,
                 ),

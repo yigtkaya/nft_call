@@ -21,9 +21,8 @@ import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
 
 class SearchView extends BaseView<SearchView, SearchViewModel> {
-  String? chosenCollection;
 
-  SearchView({this.chosenCollection, Key? key}) : super(key: key) {
+  SearchView({Key? key}) : super(key: key) {
     initViewModel(SearchViewModel());
   }
   @override
@@ -55,7 +54,7 @@ class SearchView extends BaseView<SearchView, SearchViewModel> {
               children: [
                 Padding(
                   padding:
-                      const EdgeInsets.only(top: 10.0, left: 10, right: 10),
+                      const EdgeInsets.only(top: 15.0, left: 15, right: 15),
                   child: TextField(
                     controller: viewModel.nameController,
                     onChanged: (value) => viewModel.fillFilterList(),
@@ -75,7 +74,7 @@ class SearchView extends BaseView<SearchView, SearchViewModel> {
                             borderSide: BorderSide.none),
                         hintStyle: TextStyle(
                             fontSize: 14, color: Colors.grey.shade500),
-                        hintText: chosenCollection ?? "Search NFT Collection"),
+                        hintText: "Search NFT Collection"),
                   ),
                 ),
                 Expanded(child: getListView(context)),
@@ -124,8 +123,7 @@ class SearchView extends BaseView<SearchView, SearchViewModel> {
                                 borderRadius: BorderRadius.circular(50),
                               )),
                           onPressed: () {
-                              viewModel.navigateToDrawer();
-                          },
+                              Get.back(result: {"name": viewModel.chosenItemName, "eventId" : viewModel.chosenItemId});},
                           child: DTText(
                             label: "Accept",
                             color: Colors.white,
