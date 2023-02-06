@@ -93,7 +93,7 @@ class SearchView extends BaseView<SearchView, SearchViewModel> {
                               )),
                           onPressed: () {
                             viewModel.setSelected();
-                            Get.back(result: {"name": ""});
+                            Get.back();
                           },
                           child: Row(
                             children: [
@@ -125,7 +125,7 @@ class SearchView extends BaseView<SearchView, SearchViewModel> {
                           onPressed: () {
                             Get.back(result: {
                               "name": viewModel.chosenItemName,
-                              "event": viewModel.ktCardItem
+                              "id": viewModel.chosenItemId
                             });
                           },
                           child: DTText(

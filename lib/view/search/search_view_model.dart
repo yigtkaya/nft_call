@@ -9,7 +9,6 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
   final _chosenItemIndex = (-1).obs;
   final _chosenItem = "".obs;
   final _chosenItemId = "".obs;
-  late KTCardItem ktCardItem;
   final _filteredList = <KTCardItem>[].obs;
   final _collectionList = <KTCardItem>[].obs;
 
@@ -28,11 +27,8 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
     _chosenItemIndex.value = index;
     _chosenItem.value = filteredCollectionList[index].collectionName ?? "";
     _chosenItemId.value = filteredCollectionList[index].eventId ?? "";
-    ktCardItem = filteredCollectionList[index];
   }
-  void getChosenItem(int index) {
-    _chosenItemIndex.value = index;
-  }
+
   void setListeners() {
     nameController.addListener(() {
       fillFilterList();

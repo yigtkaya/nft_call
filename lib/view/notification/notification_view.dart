@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nft_call/core/components/alert_list_item.dart';
 import 'package:nft_call/core/components/costum_switch.dart';
 import 'package:nft_call/core/components/line_item.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
@@ -59,14 +60,15 @@ class NotificationView
             Obx(() => Expanded(
                 child: viewModel.isViewSelected
                     ? addAlertView(context)
-                    : const Center(
-                        child: Text("data"),
+                    :  Center(
+                        child: viewModel.getUsersAlerts(),
                       )))
           ],
         ),
       ),
     ));
   }
+
   Widget addAlertView(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +98,9 @@ class NotificationView
               mainAxisSize: MainAxisSize.min,
               children: [
                 DTText(
-                  label: viewModel.resultName !="" ? viewModel.resultName : "Search NFT Collection",
+                  label: viewModel.resultName != ""
+                      ? viewModel.resultName
+                      : "Search NFT Collection",
                   color: Colors.blueGrey,
                   style: context.regular16,
                 ),
@@ -118,7 +122,11 @@ class NotificationView
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 )),
-            onPressed: viewModel.isAddButtonEnable ? () {} : null,
+            onPressed: viewModel.isAddButtonEnable
+                ? () {
+                    viewModel.createAlert();
+                  }
+                : null,
             child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Obx(

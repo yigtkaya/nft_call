@@ -10,12 +10,12 @@ import 'package:nft_call/product/model/nft_info_model.dart';
 class AlertListItem extends StatefulWidget {
   final KTCardItem ktCardItem;
   final VoidCallback? onPress;
-  final VoidCallback? onDelete;
+  final VoidCallback onDelete;
 
   const AlertListItem(
       {Key? key,
       required this.ktCardItem,
-        this.onDelete,
+        required this.onDelete,
       this.onPress})
       : super(key: key);
 
@@ -36,6 +36,7 @@ class _AlertListItemState extends State<AlertListItem> {
             SlidableAction(
               onPressed: (context) {
                 // delete item from the list
+                widget.onDelete();
               },
               backgroundColor: Colors.red[900] ?? Colors.red,
               icon: Icons.delete,
