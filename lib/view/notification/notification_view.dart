@@ -118,7 +118,7 @@ class NotificationView
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 )),
-            onPressed: true ? () {} : null,
+            onPressed: viewModel.isAddButtonEnable ? () {} : null,
             child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Obx(
