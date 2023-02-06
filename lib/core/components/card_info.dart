@@ -15,12 +15,12 @@ import '../constants/dt_text.dart';
 class CardInfo extends StatefulWidget {
   final KTCardItem? ktCardItem;
   final String currentChip;
-  final int index;
+  final int favCount;
   const CardInfo({
     Key? key,
     required this.ktCardItem,
     required this.currentChip,
-    required this.index,
+    required this.favCount,
   }) : super(key: key);
 
   @override
@@ -104,7 +104,7 @@ class _CardInfoState extends State<CardInfo> {
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     onPress: () {
-                      Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, currentChip: widget.currentChip, index: widget.index));
+                      Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, currentChip: widget.currentChip, index: widget.favCount));
                     }),
                 const HorizontalSpace(
                   spaceAmount: 15,

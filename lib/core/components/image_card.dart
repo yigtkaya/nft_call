@@ -9,13 +9,13 @@ import 'kt_icon.dart';
 
 class ImageNFT extends StatefulWidget {
 
-  bool isSelected = false;
+  bool isSelected;
   final void Function(bool) onFavChanged;
   final String url;
   ImageNFT({
     Key? key,
     required this.url,
-    this.isSelected = false,
+    required this.isSelected,
     required this.onFavChanged,
   }) : super(key: key);
 

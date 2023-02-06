@@ -18,7 +18,7 @@ import '../event_detail/event_detail.dart';
 class NFTCardView extends StatefulWidget {
   final void Function() onFavChanged;
   final KTCardItem ktCardItem;
-  final int index;
+  int favCount;
   bool isFavorite;
 
   NFTCardView(
@@ -26,7 +26,7 @@ class NFTCardView extends StatefulWidget {
       required this.onFavChanged,
       required this.ktCardItem,
       required this.isFavorite,
-      required this.index})
+      required this.favCount})
       : super(key: key);
 
   @override
@@ -98,7 +98,7 @@ class NFTCardViewState extends State<NFTCardView> {
                               ),
                               const HorizontalSpace(),
                               DTText(
-                                label: "1.2 M",
+                                label: "${widget.favCount}",
                                 style: context.regular12,
                                 color: Colors.white,
                               )
@@ -187,7 +187,7 @@ class NFTCardViewState extends State<NFTCardView> {
                                     style: TextStyle(color: Colors.white, fontSize: 14),
                                   ),
                                   onPress: () {
-                                    Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, currentChip: "", index: widget.index));
+                                    Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, currentChip: "", index: widget.favCount,));
                                   }),
                               const HorizontalSpace(
                                 spaceAmount: 15,

@@ -51,7 +51,7 @@ class MenuFactory extends IMenuFactory {
           page: () => EventDetailView(
                 ktCardItem: null,
                 currentChip: '',
-                index: 0,
+            index: 0,
               ),
           transition: Transition.fadeIn),
     ];

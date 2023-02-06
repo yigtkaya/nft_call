@@ -73,8 +73,12 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                       top: Radius.circular(10),
                     ),
                     child: ImageNFT(
+                        isSelected: ktCardItem?.favUidList?.contains(viewModel.getCurrentUser()) ?? viewModel.isSelected,
                         url: ktCardItem?.imageUrl ?? "",
-                        onFavChanged: (isSelected) => {}),
+                        onFavChanged: (isSelected) => {
+                              viewModel.onAlertChanged(
+                                  ktCardItem?.eventId ?? "")
+                            }),
                   ),
                   const VerticalSpace(
                     spaceAmount: 20,
