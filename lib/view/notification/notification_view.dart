@@ -52,13 +52,16 @@ class NotificationView
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                KTCustomViewSwitch(callback: (isSelected) => viewModel.setView(isSelected))
+                KTCustomViewSwitch(
+                  callback: (isSelected) => viewModel.setView(isSelected),
+                  isViewSelected: viewModel.isViewSelected,
+                )
               ],
             ),
             Obx(() => Expanded(
                 child: viewModel.isViewSelected
                     ? addAlertView(context)
-                    :  Center(
+                    : Center(
                         child: viewModel.getUsersAlerts(),
                       )))
           ],

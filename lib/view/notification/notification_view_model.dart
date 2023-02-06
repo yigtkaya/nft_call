@@ -126,15 +126,20 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     }
   }
 
-  void createAlert() {
+  void createAlert() async{
     try {
-      final data = users.doc(getCurrentUser()).get();
-      print(data.runtimeType);
-      users.doc(getCurrentUser()).update({
-        "alertedId": FieldValue.arrayUnion([_resultId.value])
-      });
-      _resultName.value = "";
-      _isAddButtonEnable.value = false;
+      final data = await users.doc(getCurrentUser()).get();
+      Map<dynamic, dynamic> map = data.data() as Map;
+      List list = map["alertedId"];
+      if(list.length <= 5){
+        users.doc(getCurrentUser()).update({
+          "alertedId": FieldValue.arrayUnion([_resultId.value])
+        });
+        _resultName.value = "";
+        _isAddButtonEnable.value = false;
+      }else {
+        showToastMessage("You already have 5 alerts on!");
+      }
     } catch (e) {
       showToastMessage(e.toString());
     }

@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nft_call/core/components/kt_text_button.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
-import 'package:nft_call/core/constants/extension.dart';
-import 'package:nft_call/core/constants/theme/styles.dart';
-
-import '../constants/asset.dart';
 import '../constants/horizontal_space.dart';
-import 'kt_icon.dart';
 
 class KTCustomViewSwitch extends StatefulWidget {
-  KTCustomViewSwitch({Key? key, this.onPress, this.isViewSelected = true, required this.callback})
+  KTCustomViewSwitch({Key? key, this.onPress, required this.isViewSelected, required this.callback})
       : super(key: key);
 
   final VoidCallback? onPress;
