@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../core/base/view/base_view_model.dart';
-import '../../product/menu/menu_key.dart';
 import '../../product/model/nft_info_model.dart';
 
 class SearchViewModel extends BaseViewModel<SearchViewModel> {
   final TextEditingController nameController = TextEditingController();
-  final _chosenItemIndex = 0.obs;
+  final _chosenItemIndex = (-1).obs;
   final _chosenItem = "".obs;
   final _chosenItemId = "".obs;
+  late KTCardItem ktCardItem;
   final _filteredList = <KTCardItem>[].obs;
   final _collectionList = <KTCardItem>[].obs;
 
@@ -19,14 +19,19 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
     getEventList();
     setListeners();
   }
+  @override
+  void dispose(){
+    super.dispose();
+    nameController.dispose();
+  }
   void setChosenItem(int index) {
     _chosenItemIndex.value = index;
     _chosenItem.value = filteredCollectionList[index].collectionName ?? "";
     _chosenItemId.value = filteredCollectionList[index].eventId ?? "";
+    ktCardItem = filteredCollectionList[index];
   }
   void getChosenItem(int index) {
     _chosenItemIndex.value = index;
-    print(index);
   }
   void setListeners() {
     nameController.addListener(() {
@@ -47,7 +52,6 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
         filterList.add(element);
       }
     }
-    print(filterList);
     return filterList;
   }
 
@@ -59,12 +63,12 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
         _collectionList.add(KTCardItem.fromMap(data));
       }
       fillFilterList();
-      print(_collectionList);
     }
   }
-  void navigateToDrawer() {
-    navigation?.navigateToPage(MenuKey.root);
+  void setSelected() {
+    _chosenItemIndex.value = (-1);
   }
+
   List<KTCardItem> get collectionList => _collectionList.value;
   List<KTCardItem> get filteredCollectionList => _filteredList.value;
   int get chosenItem => _chosenItemIndex.value;

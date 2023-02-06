@@ -61,7 +61,6 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
    Map<String, dynamic> map = await Get.to(SearchView());
 
    _resultName.value = map["name"];
-   _resultId.value = map["eventId"];
 
    if(_resultName.value !=""){
      _isAddButtonEnable.value = true;

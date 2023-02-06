@@ -21,7 +21,6 @@ import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
 
 class SearchView extends BaseView<SearchView, SearchViewModel> {
-
   SearchView({Key? key}) : super(key: key) {
     initViewModel(SearchViewModel());
   }
@@ -93,7 +92,8 @@ class SearchView extends BaseView<SearchView, SearchViewModel> {
                                 borderRadius: BorderRadius.circular(50),
                               )),
                           onPressed: () {
-                            Get.back();
+                            viewModel.setSelected();
+                            Get.back(result: {"name": ""});
                           },
                           child: Row(
                             children: [
@@ -123,7 +123,11 @@ class SearchView extends BaseView<SearchView, SearchViewModel> {
                                 borderRadius: BorderRadius.circular(50),
                               )),
                           onPressed: () {
-                              Get.back(result: {"name": viewModel.chosenItemName, "eventId" : viewModel.chosenItemId});},
+                            Get.back(result: {
+                              "name": viewModel.chosenItemName,
+                              "event": viewModel.ktCardItem
+                            });
+                          },
                           child: DTText(
                             label: "Accept",
                             color: Colors.white,
