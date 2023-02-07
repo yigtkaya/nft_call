@@ -187,7 +187,7 @@ class NFTCardViewState extends State<NFTCardView> {
                                     style: TextStyle(color: Colors.white, fontSize: 14),
                                   ),
                                   onPress: () {
-                                    Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, currentChip: "", index: widget.favCount,));
+                                    Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, favCount: widget.favCount,));
                                   }),
                               const HorizontalSpace(
                                 spaceAmount: 15,

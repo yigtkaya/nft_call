@@ -12,9 +12,11 @@ class ImageNFT extends StatefulWidget {
   bool isSelected;
   final void Function(bool) onFavChanged;
   final String url;
+  final int? favCount;
   ImageNFT({
     Key? key,
     required this.url,
+    required this.favCount,
     required this.isSelected,
     required this.onFavChanged,
   }) : super(key: key);
@@ -56,7 +58,7 @@ class _ImageNFTState extends State<ImageNFT> {
                     ),
                     const HorizontalSpace(),
                     DTText(
-                      label: "1.2 M",
+                      label: "${widget.favCount}",
                       style: context.regular12,
                       color: Colors.white,
                     )

@@ -105,7 +105,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
                   return AlertListItem(
                       ktCardItem: list[index],
                       onDelete: () => deleteAlert(list[index].eventId ?? ""),
-                  onPress: () => Get.to(() => EventDetailView(currentChip: "currentChip", index: 0, ktCardItem: list[index],)),);
+                  onPress: () => Get.to(() => EventDetailView(favCount: 0, ktCardItem: list[index],)),);
                 });
           } else {
             return const Center(

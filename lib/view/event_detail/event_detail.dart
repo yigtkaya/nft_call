@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,14 +21,12 @@ import 'event_detail_model.dart';
 
 class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   late KTCardItem? ktCardItem;
-  final String currentChip;
-  final int index;
+  final int favCount;
 
   EventDetailView({
     Key? key,
     this.ktCardItem,
-    required this.currentChip,
-    required this.index,
+    required this.favCount,
   }) : super(key: key) {
     initViewModel(EventDetailViewModel());
   }
@@ -68,17 +67,65 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
-                  ClipRRect(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(10),
+                  Obx(
+                    () => ClipRRect(
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(10),
+                      ),
+                      child: Stack(
+                        children: [
+                          CachedNetworkImage(
+                            imageUrl: ktCardItem?.imageUrl ?? "",
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(
+                              color: Colors.white,
+                            )),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 5, right: 15, top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.black.withOpacity(0)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      ITIcon(
+                                        iconName: viewModel.isSelected
+                                            ? AssetConstants
+                                                .icons.favorite_menu_selected
+                                            : AssetConstants.icons
+                                                .favorite_menu_un_selected,
+                                        width: 28,
+                                        height: 28,
+                                        onPress: () => {
+                                          viewModel.onAlertChanged(
+                                              ktCardItem?.eventId ?? ""),
+                                        },
+                                      ),
+                                      const HorizontalSpace(),
+                                      DTText(
+                                        label: viewModel.favCount != 0
+                                            ? "${viewModel.favCount}"
+                                            : "$favCount",
+                                        style: context.regular12,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: ImageNFT(
-                        isSelected: ktCardItem?.favUidList?.contains(viewModel.getCurrentUser()) ?? viewModel.isSelected,
-                        url: ktCardItem?.imageUrl ?? "",
-                        onFavChanged: (isSelected) => {
-                              viewModel.onAlertChanged(
-                                  ktCardItem?.eventId ?? "")
-                            }),
                   ),
                   const VerticalSpace(
                     spaceAmount: 20,

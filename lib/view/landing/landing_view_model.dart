@@ -19,11 +19,10 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
 
 
   @override
-  void onReady() {
-    super.onReady();
+  void onInit() {
+    super.onInit();
     getEventList(_tag.value);
     stream = FirebaseFirestore.instance.collection("events").snapshots();
-
   }
 
   Widget getListView(BuildContext context, String chip) {

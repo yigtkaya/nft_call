@@ -50,8 +50,7 @@ class MenuFactory extends IMenuFactory {
           name: MenuKey.detail.key,
           page: () => EventDetailView(
                 ktCardItem: null,
-                currentChip: '',
-            index: 0,
+            favCount: 0,
               ),
           transition: Transition.fadeIn),
     ];

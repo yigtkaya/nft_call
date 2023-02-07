@@ -104,7 +104,7 @@ class _CardInfoState extends State<CardInfo> {
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     onPress: () {
-                      Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, currentChip: widget.currentChip, index: widget.favCount));
+                      Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, favCount: widget.favCount));
                     }),
                 const HorizontalSpace(
                   spaceAmount: 15,

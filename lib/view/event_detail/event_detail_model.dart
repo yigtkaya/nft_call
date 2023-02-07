@@ -15,7 +15,6 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
   final _eventId = "".obs;
   final _favCount = 0.obs;
 
-
   @override
   void onReady() {
     super.onReady();
@@ -45,6 +44,7 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
             .doc(eventId)
             .update({"favList": favList});
         _isSelected.value = false;
+        _favCount.value = favList.length;
       } else {
         favList.add(uid);
         FirebaseFirestore.instance
@@ -52,6 +52,7 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
             .doc(eventId)
             .update({"favList": favList});
         _isSelected.value = true;
+        _favCount.value = favList.length;
       }
     } catch (e) {
       showToastMessage(e.toString());
