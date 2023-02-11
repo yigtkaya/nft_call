@@ -13,7 +13,6 @@ import '../../core/base/view/view_info.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
-import '../search/search_view.dart';
 import 'notification_view_model.dart';
 
 class NotificationView

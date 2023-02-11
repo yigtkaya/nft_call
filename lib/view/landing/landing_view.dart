@@ -10,6 +10,8 @@ import '../../core/components/choice_chip.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
+import '../../product/model/nft_info_model.dart';
+import '../nft_card/nft_view.dart';
 import 'landing_view_model.dart';
 
 class LandingView extends BaseView<LandingView, LandingViewModel> {
@@ -51,14 +53,48 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                       callback: (idx) => {
                             viewModel.getEventList(idx),
                           })),
-              Obx(() => Expanded(child: viewModel.getListView(context, viewModel.chip),)),
+              Obx(() => Expanded(child: viewModel.pageItemsList.isEmpty ? const Center(child: CircularProgressIndicator(),): getListView(context, viewModel.chip),)),
             ],
           ),
         ),
       ),
     ));
   }
+  Widget getListView(BuildContext context, String chip) {
+    final stream = FirebaseFirestore.instance.collection("events").snapshots();
 
+    return StreamBuilder(
+      stream: stream,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasData) {
+          List<KTCardItem> collectionList = viewModel.filterByTag(snapshot.data!.docs);
+          return PageView.builder(
+            controller: PageController(keepPage: true),
+            scrollDirection: Axis.vertical,
+            itemCount: collectionList.length,
+            itemBuilder: (BuildContext context, index) {
+              Future.delayed(const Duration(seconds: 3));
+              return NFTCardView(
+                favCount: collectionList[index].favUidList?.length ?? 0,
+                isFavorite: viewModel.isFavoritedByUser(index),
+                ktCardItem: collectionList[index],
+                onFavChanged: () {
+                  viewModel.onFavoriteChanged(collectionList[index].eventId ?? "", index);
+                },
+              );
+            },
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+        // filter the list by choice of tag
+      },
+    );
+  }
   @override
   void setViewInfo() {
     viewInfo =

@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:nft_call/product/model/nft_info_model.dart';
 import '../../auth/auth.dart';
 import '../../core/base/view/base_view_model.dart';
-import '../nft_card/nft_view.dart';
 
 class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _isSelected = false.obs;
@@ -15,49 +14,14 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _filteredList = <KTCardItem>[].obs;
   final AuthController _auth = AuthController();
   CollectionReference events = FirebaseFirestore.instance.collection("events");
-  late Stream<QuerySnapshot> stream;
 
 
   @override
   void onInit() {
     super.onInit();
     getEventList(_tag.value);
-    stream = FirebaseFirestore.instance.collection("events").snapshots();
   }
 
-  Widget getListView(BuildContext context, String chip) {
-    return StreamBuilder(
-      stream: stream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (snapshot.hasData) {
-          List<KTCardItem> collectionList = filterByTag(snapshot.data!.docs);
-          return PageView.builder(
-            controller: PageController(keepPage: true),
-            scrollDirection: Axis.vertical,
-            itemCount: collectionList.length,
-            itemBuilder: (BuildContext context, index) {
-              Future.delayed(const Duration(seconds: 3));
-              return NFTCardView(
-                favCount: collectionList[index].favUidList?.length ?? 0,
-                isFavorite: isFavoritedByUser(index),
-                ktCardItem: collectionList[index],
-                onFavChanged: () {
-                  onFavoriteChanged(collectionList[index].eventId ?? "", index);
-                },
-              );
-            },
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-        // filter the list by choice of tag
-      },
-    );
-  }
 
   List<KTCardItem> filterByTag(List<QueryDocumentSnapshot> snapshot) {
     List<KTCardItem> collectionList = [];
@@ -71,7 +35,6 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   }
 
   Future<void> getEventList(String tag) async {
-    _baseList.clear();
     _tag.value = tag;
     List tags = [];
     FirebaseFirestore.instance
