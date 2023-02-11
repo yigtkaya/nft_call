@@ -59,8 +59,8 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
     return _auth.getCurrentUserId();
   }
 
-  bool isFavoritedByUser(int index) {
-    List? uidList = _baseList[index].favUidList;
+  bool isFavoritedByUser(List<KTCardItem> list, int index) {
+    List? uidList = list[index].favUidList;
     String? uid = getCurrentUser();
 
     if (uidList != null) {

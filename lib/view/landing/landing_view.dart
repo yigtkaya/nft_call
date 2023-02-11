@@ -80,7 +80,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
               Future.delayed(const Duration(seconds: 3));
               return NFTCardView(
                 favCount: collectionList[index].favUidList?.length ?? 0,
-                isFavorite: viewModel.isFavoritedByUser(index),
+                isFavorite: viewModel.isFavoritedByUser(collectionList, index),
                 ktCardItem: collectionList[index],
                 onFavChanged: () {
                   viewModel.onFavoriteChanged(collectionList[index].eventId ?? "", index);
