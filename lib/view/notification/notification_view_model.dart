@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/core/components/alert_list_item.dart';
+import 'package:nft_call/core/components/card_info.dart';
 import 'package:nft_call/view/event_detail/event_detail.dart';
 import 'package:nft_call/view/search/search_view.dart';
 import '../../auth/auth.dart';
@@ -105,7 +106,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
                   return AlertListItem(
                       ktCardItem: list[index],
                       onDelete: () => deleteAlert(list[index].eventId ?? ""),
-                  onPress: () => Get.to(() => EventDetailView(favCount: 0, ktCardItem: list[index],)),);
+                  onPress: () => Get.to(() => EventDetailView(favCount: 0, ktCardItem: list[index], isFavorite: list[index].favUidList?.contains(getCurrentUser()),)),);
                 });
           } else {
             return const Center(

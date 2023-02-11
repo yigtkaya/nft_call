@@ -104,7 +104,7 @@ class _CardInfoState extends State<CardInfo> {
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     onPress: () {
-                      Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, favCount: widget.favCount));
+                      Get.to(() => EventDetailView(ktCardItem: widget.ktCardItem, favCount: widget.favCount, isFavorite: widget.ktCardItem?.favUidList?.contains(getUid())));
                     }),
                 const HorizontalSpace(
                   spaceAmount: 15,
@@ -116,4 +116,8 @@ class _CardInfoState extends State<CardInfo> {
       ),
     );
   }
+}
+String? getUid() {
+  final AuthController _auth = AuthController();
+  return _auth.getCurrentUserId();
 }

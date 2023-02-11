@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -11,15 +8,19 @@ import '../../product/menu/menu_key.dart';
 
 class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
   final _isSelected = false.obs;
+  var _fromView;
   final AuthController _auth = AuthController();
-  final _eventId = "".obs;
   final _favCount = 0.obs;
-
+  EventDetailViewModel(this._fromView);
   @override
   void onReady() {
     super.onReady();
+    _isSelected.value = _fromView;
   }
-  void getFavCount(String eventId)async {
+  void isFavorite() {
+    _isSelected.value = !_isSelected.value;
+  }
+  void getFavCount(String eventId) async {
     final item = await FirebaseFirestore.instance
         .collection("events")
         .doc(eventId)
@@ -28,6 +29,7 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
     List favList = map["favList"];
     _favCount.value = favList.length;
   }
+
   Future<void> onAlertChanged(String eventId) async {
     final uid = getCurrentUser();
     final item = await FirebaseFirestore.instance

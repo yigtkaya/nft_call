@@ -22,17 +22,20 @@ import 'event_detail_model.dart';
 class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   late KTCardItem? ktCardItem;
   final int favCount;
+  final bool? isFavorite;
 
   EventDetailView({
     Key? key,
     this.ktCardItem,
     required this.favCount,
+    required this.isFavorite,
   }) : super(key: key) {
-    initViewModel(EventDetailViewModel());
+    initViewModel(EventDetailViewModel(isFavorite));
   }
 
   @override
   Widget build(BuildContext context) {
+    final uid = viewModel.getCurrentUser();
     // TODO: implement build
     return SafeArea(
         child: Scaffold(
@@ -208,8 +211,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                     spaceAmount: 20,
                   ),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ITIcon(
                         iconName: AssetConstants.icons.discord,
@@ -238,10 +240,10 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                         color: Colors.white,
                         onPress: () => {launchURL(ktCardItem?.website ?? "")},
                       ),
-                      const VerticalSpace(
-                        spaceAmount: 30,
-                      ),
                     ],
+                  ),
+                  const VerticalSpace(
+                    spaceAmount: 10,
                   ),
                 ]),
           ),
