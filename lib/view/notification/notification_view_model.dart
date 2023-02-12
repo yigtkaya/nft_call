@@ -27,7 +27,8 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
   @override
   void onInit() {
     String? uid = getCurrentUser();
-    stream = FirebaseFirestore.instance.collection("users").doc(uid).snapshots();
+    stream =
+        FirebaseFirestore.instance.collection("users").doc(uid).snapshots();
     nameController.addListener(() {
       fillFilterList();
     });
@@ -104,9 +105,16 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
                 itemCount: list.length,
                 itemBuilder: (BuildContext context, index) {
                   return AlertListItem(
-                      ktCardItem: list[index],
-                      onDelete: () => deleteAlert(list[index].eventId ?? ""),
-                  onPress: () => Get.to(() => EventDetailView(favCount: 0, ktCardItem: list[index], isFavorite: list[index].favUidList?.contains(getCurrentUser()),)),);
+                    ktCardItem: list[index],
+                    onDelete: () => deleteAlert(list[index].eventId ?? ""),
+                    onPress: () => Get.to(() => EventDetailView(
+                          favCount: list[index].favUidList?.length,
+                          ktCardItem: list[index],
+                          isFavorite: list[index]
+                              .favUidList
+                              ?.contains(getCurrentUser()),
+                        )),
+                  );
                 });
           } else {
             return const Center(
@@ -117,34 +125,42 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
   }
 
   void navigateToSearch() async {
-    Map<String, dynamic>? map = await Get.to(SearchView());
+    Map<String, dynamic>? map = await Get.to(() => SearchView());
+    if (map != null) {
+      _resultName.value = map!["name"];
+      _resultId.value = map["id"];
 
-    _resultName.value = map!["name"];
-    _resultId.value = map["id"];
-
-    if (_resultName.value != "") {
-      _isAddButtonEnable.value = true;
+      if (_resultName.value != "") {
+        _isAddButtonEnable.value = true;
+      } else {
+        _isAddButtonEnable.value = false;
+      }
     } else {
+      _resultName.value = "";
       _isAddButtonEnable.value = false;
     }
   }
 
-  void createAlert() async{
+  void createAlert() async {
     try {
       final data = await users.doc(getCurrentUser()).get();
       Map<dynamic, dynamic> map = data.data() as Map;
       List list = map["alertedId"];
-      if(list.length <= 5){
+      if (list.length <= 5) {
         users.doc(getCurrentUser()).update({
           "alertedId": FieldValue.arrayUnion([_resultId.value])
         });
         _resultName.value = "";
         _isAddButtonEnable.value = false;
-      }else {
+      } else {
         showToastMessage("You already have 5 alerts on!");
+        _resultName.value = "";
+        _isAddButtonEnable.value = false;
       }
     } catch (e) {
       showToastMessage(e.toString());
+      _resultName.value = "";
+      _isAddButtonEnable.value = false;
     }
   }
 

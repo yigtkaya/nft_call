@@ -27,7 +27,7 @@ class _AlertListItemState extends State<AlertListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, bottom: 10, top: 20, right: 20),
+      padding: const EdgeInsets.only(top: 20),
       child: Slidable(
         endActionPane: ActionPane(
           motion: const BehindMotion(),

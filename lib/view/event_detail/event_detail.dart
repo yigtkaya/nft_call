@@ -21,7 +21,7 @@ import 'event_detail_model.dart';
 
 class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   late KTCardItem? ktCardItem;
-  final int favCount;
+  final int? favCount;
   final bool? isFavorite;
 
   EventDetailView({
@@ -35,7 +35,6 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    final uid = viewModel.getCurrentUser();
     // TODO: implement build
     return SafeArea(
         child: Scaffold(
@@ -46,7 +45,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
           padding: const EdgeInsets.all(DimenConstant.LARGE),
           child: SingleChildScrollView(
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -241,9 +240,6 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                         onPress: () => {launchURL(ktCardItem?.website ?? "")},
                       ),
                     ],
-                  ),
-                  const VerticalSpace(
-                    spaceAmount: 10,
                   ),
                 ]),
           ),

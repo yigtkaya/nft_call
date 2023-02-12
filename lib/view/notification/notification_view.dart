@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nft_call/core/components/alert_list_item.dart';
 import 'package:nft_call/core/components/costum_switch.dart';
-import 'package:nft_call/core/components/line_item.dart';
+import 'package:nft_call/core/components/kt_icon.dart';
+import 'package:nft_call/core/constants/asset.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/horizontal_space.dart';
 import 'package:nft_call/core/constants/vertical_space.dart';
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
+import '../../core/constants/dimen.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
@@ -37,33 +38,60 @@ class NotificationView
                     .colorPlateList[7 % (ColorConstants.colorPlateList.length)]
                     .endColor,
               ],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+              begin: Alignment.bottomRight,
+              end: Alignment.topCenter,
               stops: const [0.0, 1.2],
               tileMode: TileMode.clamp),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const VerticalSpace(
-              spaceAmount: 50,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                KTCustomViewSwitch(
-                  callback: (isSelected) => viewModel.setView(isSelected),
-                  isViewSelected: viewModel.isViewSelected,
-                )
-              ],
-            ),
-            Obx(() => Expanded(
-                child: viewModel.isViewSelected
-                    ? addAlertView(context)
-                    : Center(
-                        child: viewModel.getUsersAlerts(),
-                      )))
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(DimenConstant.LARGE),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              DTText(
+                label: 'Alerts',
+                style: context.bold20,
+                color: Colors.white,
+              ),
+              const VerticalSpace(
+                spaceAmount: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  KTCustomViewSwitch(
+                    callback: (isSelected) => viewModel.setView(isSelected),
+                    isViewSelected: viewModel.isViewSelected,
+                  )
+                ],
+              ),
+              const VerticalSpace(
+                spaceAmount: 20,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color(0xff364d64),
+                ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
+                  child: DTText(
+                    label: "Only 5 alerts can be turned on during beta phase.",
+                    style: context.regular16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Obx(() => Expanded(
+                  child: viewModel.isViewSelected
+                      ? addAlertView(context)
+                      : Center(
+                          child: viewModel.getUsersAlerts(),
+                        )))
+            ],
+          ),
         ),
       ),
     ));
@@ -72,17 +100,9 @@ class NotificationView
   Widget addAlertView(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Flexible(
-          child: DTText(
-            label: "Only 5 alert can be turned on during beta phase.",
-            style: context.regular14,
-            color: Colors.white,
-          ),
-        ),
-        const VerticalSpace(
-          spaceAmount: 50,
-        ),
+        const Spacer(),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
                 side: const BorderSide(width: 1, color: Colors.blue),
@@ -100,7 +120,7 @@ class NotificationView
                 DTText(
                   label: viewModel.resultName != ""
                       ? viewModel.resultName
-                      : "Search NFT Collection",
+                      : "Search for NFT Collection",
                   color: Colors.blueGrey,
                   style: context.regular16,
                 ),
@@ -138,6 +158,31 @@ class NotificationView
                     style: context.regular16,
                   ),
                 ))),
+        const Spacer(),
+        Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: const Color(0xff364d64),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text.rich(
+                TextSpan(
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                    children: [
+                      WidgetSpan(
+                          child: ITIcon(
+                        iconName: AssetConstants.icons.info_icon,
+                        color: Colors.white,
+                        width: 16,
+                        height: 16,
+                      )),
+                      const TextSpan(
+                          text:
+                              " Notifications for the beta version will be sent on a daily and hourly basis. In future releases, we will provide the option for the user to specify the frequency of notifications.")
+                    ]),
+              ),
+            )),
       ],
     );
   }
