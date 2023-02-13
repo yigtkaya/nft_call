@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:nft_call/core/constants/extension.dart';
+import 'package:nft_call/core/constants/horizontal_space.dart';
 import 'package:nft_call/view/login/login_view.dart';
 import 'package:nft_call/view/login/sign_up_view_model.dart';
 import '../../core/base/view/base_view.dart';
@@ -124,10 +125,10 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                                 viewModel.passwordController.text.trim());
                           }
                         },
-                        child: const DTText(
+                        child: DTText(
                           label: "SIGN UP",
                           color: Colors.blue,
-                          style: KTLabelStyle,
+                          style: context.semiBold16,
                         )),
                   ),
                   const VerticalSpace(
@@ -139,9 +140,8 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                   const VerticalSpace(
                     spaceAmount: 30,
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 40, left: 50, right: 50),
+                  Align(
+                    alignment: Alignment.center,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             foregroundColor: const Color(0xFF4989D7),
@@ -168,7 +168,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                                 shape: BoxShape.circle,
                               ),
                             ),
-                            const Spacer(),
+                            const HorizontalSpace(),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 5),
                               child: DTText(

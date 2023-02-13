@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:nft_call/core/components/kt_text_field.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
+import 'package:nft_call/core/constants/horizontal_space.dart';
 import 'package:nft_call/core/constants/theme/theme_manager.dart';
 import 'package:nft_call/core/constants/vertical_space.dart';
 import 'package:nft_call/view/login/login_view_model.dart';
@@ -103,32 +104,34 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                     ),
                   ),
                   const VerticalSpace(),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            foregroundColor: const Color(0xff364d64),
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            )),
-                        onPressed: () {
-                          viewModel.validateEmail();
-                          viewModel.validatePassword();
-                          if (viewModel.errorMessage == "" &&
-                              viewModel.pwErrorMessage == "") {
-                            viewModel.signIn(
-                                viewModel.emailController.text.trim(),
-                                viewModel.passwordController.text.trim());
-                          }
-                        },
-                        child: const DTText(
-                          label: "LOGIN",
-                          color: Colors.black,
-                          style: KTLabelStyle,
-                        )),
+                  Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              foregroundColor: const Color(0xff364d64),
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              )),
+                          onPressed: () {
+                            viewModel.validateEmail();
+                            viewModel.validatePassword();
+                            if (viewModel.errorMessage == "" &&
+                                viewModel.pwErrorMessage == "") {
+                              viewModel.signIn(
+                                  viewModel.emailController.text.trim(),
+                                  viewModel.passwordController.text.trim());
+                            }
+                          },
+                          child: DTText(
+                            label: "LOGIN",
+                            color: Colors.black,
+                            style: context.semiBold16,
+                          )),
+                    ),
                   ),
                   const VerticalSpace(
                     spaceAmount: 50,
@@ -139,9 +142,8 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                   const VerticalSpace(
                     spaceAmount: 30,
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 40, left: 50, right: 50),
+                  Align(
+                    alignment: Alignment.center,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             foregroundColor: const Color(0xFF4989D7),
@@ -155,6 +157,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                           viewModel.googleSignIn();
                         },
                         child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
@@ -168,7 +171,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                                 shape: BoxShape.circle,
                               ),
                             ),
-                            const Spacer(),
+                            const HorizontalSpace(),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 5),
                               child: DTText(
