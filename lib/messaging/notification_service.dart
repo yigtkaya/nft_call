@@ -45,7 +45,7 @@ class NotificationController extends GetxController{
 
    void _handleMessage(RemoteMessage message) {
       if (message.data['type'] == 'chat') {
-         Get.to(EventDetailView(favCount: 0, isFavorite: false));
+         Get.to(EventDetailView(isFavorite: false));
 
       }
    }

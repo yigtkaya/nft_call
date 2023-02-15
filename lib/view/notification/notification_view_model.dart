@@ -108,7 +108,6 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
                     ktCardItem: list[index],
                     onDelete: () => deleteAlert(list[index].eventId ?? ""),
                     onPress: () => Get.to(() => EventDetailView(
-                          favCount: list[index].favUidList?.length,
                           isFavorite: list[index]
                               .favUidList
                               ?.contains(getCurrentUser()),

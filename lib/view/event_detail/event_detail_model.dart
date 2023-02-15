@@ -17,17 +17,16 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
   EventDetailViewModel(this._eventId);
   @override
   void onInit() {
-    getEvent(_eventId);
+    getEvent();
     super.onInit();
   }
-  void getEvent(String eventId) async {
-   final data = await FirebaseFirestore.instance.collection("events").doc(eventId).get();
+  Future<void> getEvent() async {
+   final data = await FirebaseFirestore.instance.collection("events").doc(_eventId).get();
    Map map = data.data() as Map;
    _ktCardItem.value = KTCardItem.fromMap(map);
    _favCount.value = _ktCardItem.value.favUidList!.length;
    _isSelected.value = _ktCardItem.value.favUidList!.contains(getCurrentUser());
    _ktCardItem.refresh();
-    print(_ktCardItem.value.favUidList);
   }
 
   void isFavorite() {
