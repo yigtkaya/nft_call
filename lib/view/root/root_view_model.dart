@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:nft_call/auth/auth.dart';
 
 import '../../core/base/view/base_view_model.dart';
+import '../../messaging/notification_service.dart';
 import '../../product/menu/menu_key.dart';
 
 class RootViewModel extends BaseViewModel<RootViewModel> {
   final _message = "Main Page".obs;
   late PageController pageController;
   final _currentPage = 0.obs;
+  final fcm  = NotificationController();
 
   final AuthController _auth = AuthController();
 
@@ -16,6 +18,7 @@ class RootViewModel extends BaseViewModel<RootViewModel> {
   void onInit() {
     pageController = PageController(keepPage: true);
     _currentPage.value = 0;
+    fcm.getToken();
     super.onInit();
   }
   int getInitialPage(int index){

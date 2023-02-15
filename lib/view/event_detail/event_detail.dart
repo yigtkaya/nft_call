@@ -23,14 +23,16 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   late KTCardItem? ktCardItem;
   final int? favCount;
   final bool? isFavorite;
+  final String? eventId;
 
   EventDetailView({
     Key? key,
     this.ktCardItem,
+    this.eventId,
     required this.favCount,
     required this.isFavorite,
   }) : super(key: key) {
-    initViewModel(EventDetailViewModel(isFavorite));
+    initViewModel(EventDetailViewModel(eventId));
   }
 
   @override
@@ -107,7 +109,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                                         width: 28,
                                         height: 28,
                                         onPress: () => {
-                                          viewModel.onAlertChanged(
+                                          viewModel.onFavoriteChanged(
                                               ktCardItem?.eventId ?? ""),
                                         },
                                       ),

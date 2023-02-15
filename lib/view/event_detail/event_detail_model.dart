@@ -5,32 +5,37 @@ import 'package:get/get.dart';
 import '../../auth/auth.dart';
 import '../../core/base/view/base_view_model.dart';
 import '../../product/menu/menu_key.dart';
+import '../../product/model/nft_info_model.dart';
 
 class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
   final _isSelected = false.obs;
-  var _fromView;
+  var _eventId;
   final AuthController _auth = AuthController();
   final _favCount = 0.obs;
-  EventDetailViewModel(this._fromView);
+  final _ktCardItem = KTCardItem().obs;
+
+  EventDetailViewModel(this._eventId);
   @override
-  void onReady() {
-    super.onReady();
-    _isSelected.value = _fromView;
+  void onInit() {
+    getEvent(_eventId);
+    super.onInit();
   }
+  void getEvent(String eventId) async {
+   final data = await FirebaseFirestore.instance.collection("events").doc(eventId).get();
+   Map map = data.data() as Map;
+   _ktCardItem.value = KTCardItem.fromMap(map);
+   _favCount.value = _ktCardItem.value.favUidList!.length;
+   _isSelected.value = _ktCardItem.value.favUidList!.contains(getCurrentUser());
+   _ktCardItem.refresh();
+    print(_ktCardItem.value.favUidList);
+  }
+
   void isFavorite() {
     _isSelected.value = !_isSelected.value;
   }
-  void getFavCount(String eventId) async {
-    final item = await FirebaseFirestore.instance
-        .collection("events")
-        .doc(eventId)
-        .get();
-    Map<dynamic, dynamic> map = item.data() as Map;
-    List favList = map["favList"];
-    _favCount.value = favList.length;
-  }
 
-  Future<void> onAlertChanged(String eventId) async {
+  /// future builder ile dinlenmesini  sağlayabilir miyiz ?
+  Future<void> onFavoriteChanged(String eventId) async {
     final uid = getCurrentUser();
     final item = await FirebaseFirestore.instance
         .collection("events")
@@ -66,8 +71,8 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
     navigation?.navigateToReset(MenuKey.root);
   }
 
-  String? getCurrentUser() {
-    return _auth.getCurrentUserId();
+  String getCurrentUser() {
+    return _auth.getCurrentUserId() ?? "";
   }
 
   void showToastMessage(String message) {
@@ -83,4 +88,5 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
 
   bool get isSelected => _isSelected.value;
   int get favCount => _favCount.value;
+  KTCardItem get ktCardItem => _ktCardItem.value;
 }
