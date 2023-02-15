@@ -20,11 +20,11 @@ import 'event_detail_model.dart';
 
 class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   final bool? isFavorite;
-  final String? eventId;
+  final String eventId;
 
   EventDetailView({
     Key? key,
-    this.eventId,
+    required this.eventId,
     required this.isFavorite,
   }) : super(key: key) {
     initViewModel(EventDetailViewModel(eventId));

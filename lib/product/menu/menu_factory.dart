@@ -49,6 +49,7 @@ class MenuFactory extends IMenuFactory {
       GetPage(
           name: MenuKey.detail.key,
           page: () => EventDetailView(
+            eventId: "",
             isFavorite: false,
               ),
           transition: Transition.fadeIn),
