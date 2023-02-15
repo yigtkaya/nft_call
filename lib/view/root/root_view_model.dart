@@ -18,7 +18,6 @@ class RootViewModel extends BaseViewModel<RootViewModel> {
   void onInit() {
     pageController = PageController(keepPage: true);
     _currentPage.value = 0;
-    fcm.getToken();
     super.onInit();
   }
   int getInitialPage(int index){

@@ -48,7 +48,7 @@ dependencies:
 
   fluttertoast:
   cached_network_image: ^3.2.3
-
+  flutter_local_notifications:
   email_validator: '^2.1.16'
   #Permission
   permission_handler: ^10.0.0
