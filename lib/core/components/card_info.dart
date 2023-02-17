@@ -104,7 +104,7 @@ class _CardInfoState extends State<CardInfo> {
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     onPress: () {
-                      Get.to(() => EventDetailView(eventId: widget.ktCardItem?.eventId ?? "", isFavorite: widget.ktCardItem?.favUidList?.contains(getUid())));
+                      Get.to(() => EventDetailView(item:widget.ktCardItem!,eventId: widget.ktCardItem?.eventId ?? "", isFavorite: widget.ktCardItem?.favUidList?.contains(getUid())));
                     }),
                 const HorizontalSpace(
                   spaceAmount: 15,

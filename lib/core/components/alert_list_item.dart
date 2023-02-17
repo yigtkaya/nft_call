@@ -85,7 +85,13 @@ class _AlertListItemState extends State<AlertListItem> {
                         const VerticalSpace(
                           spaceAmount: 24,
                         ),
-                        const Spacer(),
+                        DTText(
+                            label: widget.ktCardItem.mintPrice ?? "Mint Price",
+                            style: context.regular16,
+                            color: Colors.white),
+                        const VerticalSpace(
+                          spaceAmount: 24,
+                        ),
                         DTText(
                             label: widget.ktCardItem.mintDate ?? "Mint Date",
                             style: context.regular16,

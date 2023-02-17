@@ -109,6 +109,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
                     onDelete: () => deleteAlert(list[index].eventId ?? ""),
                     onPress: () => Get.to(() => EventDetailView(
                       eventId: list[index].eventId ?? "",
+                          item: list[index],
                           isFavorite: list[index]
                               .favUidList
                               ?.contains(getCurrentUser()),

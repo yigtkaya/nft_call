@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:nft_call/product/model/nft_info_model.dart';
 import 'package:nft_call/view/drawer/drawer_view.dart';
 import 'package:nft_call/view/login/login_view.dart';
 
@@ -49,6 +50,7 @@ class MenuFactory extends IMenuFactory {
       GetPage(
           name: MenuKey.detail.key,
           page: () => EventDetailView(
+            item: KTCardItem(),
             eventId: "",
             isFavorite: false,
               ),

@@ -16,9 +16,11 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
 
   EventDetailViewModel(this._eventId);
   @override
-  void onInit() {
+
+  void onReady() {
     getEvent();
-    super.onInit();
+    print(_eventId);
+    super.onReady();
   }
   Future<void> getEvent() async {
    final data = await FirebaseFirestore.instance.collection("events").doc(_eventId).get();

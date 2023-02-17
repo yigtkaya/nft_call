@@ -21,9 +21,11 @@ import 'event_detail_model.dart';
 class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   final bool? isFavorite;
   final String eventId;
+  final KTCardItem item;
 
   EventDetailView({
     Key? key,
+    required this.item,
     required this.eventId,
     required this.isFavorite,
   }) : super(key: key) {
@@ -77,7 +79,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                         child: Stack(
                           children: [
                             CachedNetworkImage(
-                              imageUrl: viewModel.ktCardItem.imageUrl ?? "",
+                              imageUrl: item.imageUrl ?? "",
                               fit: BoxFit.cover,
                               placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator(
@@ -113,10 +115,11 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                                           },
                                         ),
                                         const HorizontalSpace(),
-                                        DTText(
-                                          label: "${viewModel.favCount}",
-                                          style: context.regular12,
-                                          color: Colors.white,
+                                        Obx(() => DTText(
+                                            label: "${viewModel.favCount}",
+                                            style: context.regular12,
+                                            color: Colors.white,
+                                          ),
                                         )
                                       ],
                                     ),
@@ -132,7 +135,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                       spaceAmount: 20,
                     ),
                     DTText(
-                      label: viewModel.ktCardItem.collectionName ??
+                      label: item.collectionName ??
                           "NFT Collection Name",
                       style: context.semiBold20,
                       color: Colors.white,
@@ -151,7 +154,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                               color: Colors.white),
                           const HorizontalSpace(),
                           DTText(
-                            label: viewModel.ktCardItem.mintPrice ?? "00.5 ETH",
+                            label: item.mintPrice ?? "00.5 ETH",
                             style: context.regular20,
                             color: Colors.blue,
                           ),
@@ -172,7 +175,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                       spaceAmount: 25,
                     ),
                     DTText(
-                      label: viewModel.ktCardItem.description ?? "empty desc",
+                      label: item.description ?? "empty desc",
                       style: context.regular16,
                       color: Colors.white,
                     ),
@@ -189,7 +192,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                               style: context.semiBold20,
                               color: Colors.white),
                           DTText(
-                            label: viewModel.ktCardItem.mintDate ?? "00:00:00",
+                            label: item.mintDate ?? "00:00:00",
                             style: context.regular20,
                             color: Colors.blue,
                           )
@@ -217,14 +220,14 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                           height: 30,
                           width: 30,
                           onPress: () =>
-                              {launchURL(viewModel.ktCardItem.discord ?? "")},
+                              {launchURL(item.discord ?? "")},
                         ),
                         ITIcon(
                           iconName: AssetConstants.icons.twitter,
                           height: 30,
                           width: 30,
                           onPress: () =>
-                              {launchURL(viewModel.ktCardItem.twitter ?? "")},
+                              {launchURL(item.twitter ?? "")},
                         ),
                         ITIcon(
                           iconName: AssetConstants.icons.marketplace,
@@ -232,7 +235,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                           width: 30,
                           color: Colors.white,
                           onPress: () => {
-                            launchURL(viewModel.ktCardItem.marketplace ?? "")
+                            launchURL(item.marketplace ?? "")
                           },
                         ),
                         ITIcon(
@@ -241,7 +244,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                           width: 30,
                           color: Colors.white,
                           onPress: () =>
-                              {launchURL(viewModel.ktCardItem.website ?? "")},
+                              {launchURL(item.website ?? "")},
                         ),
                       ],
                     ),
