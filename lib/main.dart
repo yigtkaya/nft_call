@@ -21,13 +21,7 @@ Future<void> _messageHandler(RemoteMessage message) async {
   print('background message ${message.notification!.body}');
 }
 
-const AndroidNotificationChannel channel = AndroidNotificationChannel(
-  //for notificaiton initialization
-  'high_importance_channel', // id
-  'High Importance Notifications', // title
-  importance: Importance.high,
-  playSound: true,
-);
+final channel =  AndroidNotificationChannel("high_importance_channel","High_importance_channel", playSound: true, importance: Importance.high);
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
@@ -56,11 +50,12 @@ Future<void> main() async {
             message.notification.hashCode,
             message.notification!.title,
             message.notification!.body,
-            NotificationDetails(
-                android: AndroidNotificationDetails(channel.id, channel.name,
+            const NotificationDetails(
+                android: AndroidNotificationDetails("high_importance_channel", "High Importance Notifications",
                     color: Colors.blue,
+                    priority: Priority.high,
+                    importance: Importance.high,
                     playSound: true,
-                    channelDescription: channel.description,
                     icon: "@mipmap/ic_launcher")));
       }
     });
