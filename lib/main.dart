@@ -5,10 +5,13 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nft_call/product/menu/menu_factory.dart';
 import 'package:nft_call/product/navigation/navigation_handler.dart';
+import 'package:nft_call/view/root/root_view.dart';
 import 'package:nft_call/view/splash/splash_view.dart';
 import 'core/base/binding/binding.dart';
 import 'core/constants/theme/app_theme.dart';
@@ -17,6 +20,7 @@ import 'core/constants/theme/theme_manager.dart';
 Future<void> _messageHandler(RemoteMessage message) async {
   print('background message ${message.notification!.body}');
 }
+
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   //for notificaiton initialization
   'high_importance_channel', // id
@@ -24,7 +28,8 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
   importance: Importance.high,
   playSound: true,
 );
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   await Hive.initFlutter();
@@ -33,17 +38,43 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
     FirebaseMessaging.onBackgroundMessage(_messageHandler);
+
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
+
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      if (message.notification != null) {
+        flutterLocalNotificationsPlugin.show(
+            message.notification.hashCode,
+            message.notification!.title,
+            message.notification!.body,
+            NotificationDetails(
+                android: AndroidNotificationDetails(channel.id, channel.name,
+                    color: Colors.blue,
+                    playSound: true,
+                    channelDescription: channel.description,
+                    icon: "@mipmap/ic_launcher")));
+      }
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      if (message.notification != null) {
+        Get.to(RootView());
+      }
+    });
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    /// Get any initial dynamic links
-    ///final PendingDynamicLinkData? initialLink = await FirebaseDynamicLinks.instance.getInitialLink();
+
     runApp(const MyApp());
   }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
-
 }
 
 class MyApp extends StatelessWidget {
