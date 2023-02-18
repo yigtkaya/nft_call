@@ -1,0 +1,74 @@
+{
+  "nft_calendar": {
+    "events": [
+      {
+        "eventId": "0",
+        "collectionName" : "Football Ape Fan Club",
+        "blockchain": "Ethereum",
+        "mintDate": "December 16, 2022",
+        "mintPrice": "0.04 ETH",
+        "website": "https://footballapefanclub.com/",
+        "discord": "https://discord.com/invite/JNkSPf2Ktm",
+        "twitter": "https://twitter.com/FootballApeFC",
+        "marketplace": "https://opensea.com",
+        "tags": ["Today", "Popular"],
+        "imageUrl" :  "https://nftcalendar.io/storage/uploads/events/2022/12/1v6jVJUOdSJgvV2ExCpXzOkktGOOmseW6WOmhfN5.webp",
+        "description": "FAFC | Football Apes in Web 3.0 | Don’t miss Football Ape Fan Club  Football is not just a game, but an emotion for billions of people!  “The Football World Cup” is one of the most anticipated sporting events in the world, and we are incredibly excited to announce the launch of the Football Ape Fan Club. We are launching a collection consisting of 7,910 NFTs. Our collection is inspired by our legendary footballers of all time.  Check these 7,910 Unique Football Inspired NFTs on Ethereum Blockchain.  Every FAFC holder will be able to Claim a Mutant Football Ape and Baby Football Ape NFT for free. Only gas fees will be charged. Example -: If you hold 1 FAFC you can claim 1 Mutant and 1 BFAFC NFT for free. If you hold 50 FAFC you can claim 50 Mutants and 50 BFAFC NFT for free. (Only Gas Fees will be Charged)  Discover our Unique Football Inspired NFTs | A private group of 7,910 dedicated NFT collectors and artists | Membership to the collective and all of the benefits come from holding the FAFC NFT | Holders of Football Ape Fan Club NFTs will have numerous long-term benefits.  Contest: Tag us on Twitter @FootballApeFC! Some Lucky people will get a chance to win the FAFC NFTs giveaway.  For more details, visit our Discord.",
+        "favUidList" : [
+          "0vlB9N1C1wTKsdeQT6IN7r2I4jF2"
+        ]
+      },
+      {
+        "eventId": 1,
+        "collectionName" : "Soccer Ape Fan Club",
+        "blockchain": "Ethereum",
+        "mintDate": "December 16, 2022",
+        "mintPrice": "0.04 ETH",
+        "website": "https://footballapefanclub.com/",
+        "discord": "https://discord.com/invite/JNkSPf2Ktm",
+        "twitter": "https://twitter.com/FootballApeFC",
+        "marketplace": "https://opensea.com",
+        "tags": ["Today", "Ongoing"],
+        "imageUrl" :  "https://nftcalendar.io/storage/uploads/events/2022/12/1v6jVJUOdSJgvV2ExCpXzOkktGOOmseW6WOmhfN5.webp",
+        "description": "FAFC | Football Apes in Web 3.0 | You Missed Bored Ape Yacht Club (BAYC)? Don’t miss Football Ape Fan Club  Football is not just a game, but an emotion for billions of people!  “The Football World Cup” is one of the most anticipated sporting events in the world, and we are incredibly excited to announce the launch of the Football Ape Fan Club. We are launching a collection consisting of 7,910 NFTs. Our collection is inspired by our legendary footballers of all time.  Check these 7,910 Unique Football Inspired NFTs on Ethereum Blockchain.  Every FAFC holder will be able to Claim a Mutant Football Ape and Baby Football Ape NFT for free. Only gas fees will be charged. Example -: If you hold 1 FAFC you can claim 1 Mutant and 1 BFAFC NFT for free. If you hold 50 FAFC you can claim 50 Mutants and 50 BFAFC NFT for free. (Only Gas Fees will be Charged)  Discover our Unique Football Inspired NFTs | A private group of 7,910 dedicated NFT collectors and artists | Membership to the collective and all of the benefits come from holding the FAFC NFT | Holders of Football Ape Fan Club NFTs will have numerous long-term benefits.  Contest: Tag us on Twitter @FootballApeFC! Some Lucky people will get a chance to win the FAFC NFTs giveaway.  For more details, visit our Discord.",
+        "favUidList" : [
+          "0vlB9N1C1wTKsdeQT6IN7r2I4jF2"
+        ]
+      },
+      {
+        "eventId": 2,
+        "collectionName" : "Basketball Ape Fan Club",
+        "blockchain": "Ethereum",
+        "mintDate": "December 16, 2022",
+        "mintPrice": "0.04 ETH",
+        "website": "https://footballapefanclub.com/",
+        "discord": "https://discord.com/invite/JNkSPf2Ktm",
+        "twitter": "https://twitter.com/FootballApeFC",
+        "marketplace": "https://opensea.com",
+        "tags": ["Today", "Upcoming"],
+        "imageUrl" :  "https://nftcalendar.io/storage/uploads/events/2022/12/1v6jVJUOdSJgvV2ExCpXzOkktGOOmseW6WOmhfN5.webp",
+        "description": "FAFC | Football Apes in Web 3.0 | You Missed Bored Ape Yacht Club (BAYC)? Don’t miss Football Ape Fan Club  Football is not just a game, but an emotion for billions of people!  “The Football World Cup” is one of the most anticipated sporting events in the world, and we are incredibly excited to announce the launch of the Football Ape Fan Club. We are launching a collection consisting of 7,910 NFTs. Our collection is inspired by our legendary footballers of all time.  Check these 7,910 Unique Football Inspired NFTs on Ethereum Blockchain.  Every FAFC holder will be able to Claim a Mutant Football Ape and Baby Football Ape NFT for free. Only gas fees will be charged. Example -: If you hold 1 FAFC you can claim 1 Mutant and 1 BFAFC NFT for free. If you hold 50 FAFC you can claim 50 Mutants and 50 BFAFC NFT for free. (Only Gas Fees will be Charged)  Discover our Unique Football Inspired NFTs | A private group of 7,910 dedicated NFT collectors and artists | Membership to the collective and all of the benefits come from holding the FAFC NFT | Holders of Football Ape Fan Club NFTs will have numerous long-term benefits.  Contest: Tag us on Twitter @FootballApeFC! Some Lucky people will get a chance to win the FAFC NFTs giveaway.  For more details, visit our Discord.",
+        "favUidList" : [
+          "0vlB9N1C1wTKsdeQT6IN7r2I4jF2"
+        ]
+      }
+    ],
+    "users" : [
+      {
+        "0vlB9N1C1wTKsdeQT6IN7r2I4jF2": {
+          "alertList" : [
+            "0"
+          ]
+        }
+      },
+      {
+        "TFF78KhIayMACek8Vo0Np5WcvTQ2": {
+          "alertList" : [
+            "2",
+            "1"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "327903857793",
+    "firebase_url": "https://nftcalender-4530b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "nftcalender-4530b",
+    "storage_bucket": "nftcalender-4530b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327903857793:android:d304214f70b7d801ea1180",
+        "android_client_info": {
+          "package_name": "com.example.nft_call"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "327903857793-2na00to1ceekds1n62vabmag4m52ahn2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6na_WQDYgf4ErKReCWBxagmlIFcA1jk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327903857793-2na00to1ceekds1n62vabmag4m52ahn2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "327903857793-hd2df8se1ulj2elen68l972bpvee1i2o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.nftCall"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

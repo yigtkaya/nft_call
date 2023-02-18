@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/core/base/view/base_view.dart';
-import 'package:nft_call/core/components/kt_icon.dart';
-import 'package:nft_call/core/constants/asset.dart';
-import 'package:nft_call/core/constants/dt_text.dart';
-import 'package:nft_call/core/constants/extension.dart';
-import 'package:nft_call/core/constants/theme/theme_manager.dart';
+import 'package:nft_call/view/login/login_view.dart';
+import 'package:nft_call/view/notification/notification_view.dart';
 import 'package:nft_call/view/root/root_view_model.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/bottom_navigation.dart';
 import '../../product/menu/menu_key.dart';
 import '../../product/menu/screen_name.dart';
-import '../favorite/favorite_view.dart';
 import '../landing/landing_view.dart';
 
 class RootView extends BaseView<RootView, RootViewModel> {
@@ -24,31 +20,7 @@ class RootView extends BaseView<RootView, RootViewModel> {
     return SafeArea(
         top: false,
         child: Scaffold(
-          backgroundColor: ThemeManager.instance?.getCurrentTheme.colorTheme.primaryScaffoldBackground,
-          appBar: AppBar(
-            backgroundColor: ThemeManager.instance?.getCurrentTheme.colorTheme
-                .bottomNavigationBackground,
-            title: Row(children: [
-              InkWell(
-                onTap: () => {viewModel.navigateToDrawer()},
-                child: ITIcon(
-                  iconName: AssetConstants.icons.drawer_menu,
-                  color:
-                      ThemeManager.instance?.getCurrentTheme.colorTheme.textColor,
-                ),
-              ),
-              Expanded(
-                  child: Center(
-                child: DTText(
-                  label: "NFT Calendar",
-                  style: context.semiBold20,
-                  color: ThemeManager
-                      .instance?.getCurrentTheme.colorTheme.textColor,
-                ),
-              ))
-            ]),
-            automaticallyImplyLeading: false,
-          ),
+          backgroundColor: const Color(0xff16161f),
           resizeToAvoidBottomInset: false,
           body: Column(
             children: [
@@ -60,11 +32,10 @@ class RootView extends BaseView<RootView, RootViewModel> {
                   /// Home View
                   LandingView(),
 
-                  /// Favorite View
-                  FavoriteView(),
-
                   /// Stats View
-                  //StatsView()
+                  NotificationView(),
+
+                  LoginView(),
                 ],
               )),
 

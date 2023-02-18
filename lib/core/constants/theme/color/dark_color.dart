@@ -76,8 +76,8 @@ class DarkColor implements IColorTheme {
     menuItemGradientEnd = colors.paleSlate;
     bottomNavigationBackground = colors.darkPurple;
     disableButtonColor = colors.fiord;
-    secondaryScaffoldBackground = colors.black;
     darkTextColor = colors.outerSpace;
+    primaryScaffoldBackground = colors.lightPurple;
   }
 
   @override

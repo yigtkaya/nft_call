@@ -1,6 +1,8 @@
 
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
 import '../../core/base/view/base_view_model.dart';
-import '../../product/menu/menu_key.dart';
 
 class DrawerViewModel extends BaseViewModel<DrawerViewModel> {
 
@@ -12,7 +14,7 @@ class DrawerViewModel extends BaseViewModel<DrawerViewModel> {
 
   /// Navigate to Notification page
   void navigateToRoot() {
-    navigation?.navigateToReset(MenuKey.root);
+    Get.back();
   }
 
 }

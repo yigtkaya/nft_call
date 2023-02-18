@@ -41,6 +41,14 @@ class KIcons {
   final String twitter = AssetConstants.toIcon("twitter");
   final String gmail = AssetConstants.toIcon("gmail");
   final String discord = AssetConstants.toIcon("discord");
+  final String website = AssetConstants.toIcon("website");
+  final String link = AssetConstants.toIcon("link");
+  final String notification_on = AssetConstants.toIcon("notification_on");
+  final String marketplace = AssetConstants.toIcon("marketplace");
+  final String add_alarm = AssetConstants.toIcon("add_alarm");
+  final String added_alarm = AssetConstants.toIcon("added_alarm");
+  final String check_icon = AssetConstants.toIcon("check_icon");
+  final String info_icon = AssetConstants.toIcon("info_icon");
 
 
 }
