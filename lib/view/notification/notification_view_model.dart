@@ -127,7 +127,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
   void navigateToSearch() async {
     Map<String, dynamic>? map = await Get.to(() => SearchView());
     if (map != null) {
-      _resultName.value = map!["name"];
+      _resultName.value = map["name"];
       _resultId.value = map["id"];
 
       if (_resultName.value != "") {
@@ -146,14 +146,14 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
       final data = await users.doc(getCurrentUser()).get();
       Map<dynamic, dynamic> map = data.data() as Map;
       List list = map["alertedId"];
-      if (list.length <= 5) {
+      if (list.length <= 3) {
         users.doc(getCurrentUser()).update({
           "alertedId": FieldValue.arrayUnion([_resultId.value])
         });
         _resultName.value = "";
         _isAddButtonEnable.value = false;
       } else {
-        showToastMessage("You already have 5 alerts on!");
+        showToastMessage("You already have 3 alerts on!");
         _resultName.value = "";
         _isAddButtonEnable.value = false;
       }

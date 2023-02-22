@@ -36,13 +36,11 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    final dateString =
-        "${item.mintDate?.year}/${item.mintDate?.month}/${item.mintDate?.day} - ${item.mintDate?.hour}:${item.mintDate?.minute}";
     return SafeArea(
         child: Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xf5263848),
-      body: RefreshIndicator(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: const Color(0xf5263848),
+          body: RefreshIndicator(
         onRefresh: viewModel.getEvent,
         color: Colors.white,
         child: Center(
@@ -120,7 +118,8 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                                         const HorizontalSpace(),
                                         Obx(
                                           () => DTText(
-                                            label: "${viewModel.favCount}",
+                                            label: viewModel.favCount == 0 ? "${item.favUidList!.length}"
+                                                : "${viewModel.favCount}",
                                             style: context.regular12,
                                             color: Colors.white,
                                           ),

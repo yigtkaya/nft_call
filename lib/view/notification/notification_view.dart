@@ -78,7 +78,7 @@ class NotificationView
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
                   child: DTText(
-                    label: "Only 5 alerts can be turned on during beta phase.",
+                    label: "Only 3 alerts can be turned on during beta phase.",
                     style: context.regular16,
                     color: Colors.white,
                   ),
