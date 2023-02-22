@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class KTCardItem {
   String? collectionName;
   String? eventId;
-  String? mintDate;
+  DateTime? mintDate;
   String? mintPrice;
   String? blockchain;
   String? description;
@@ -44,7 +44,7 @@ class KTCardItem {
     return KTCardItem(
         collectionName: data['collectionName'],
         eventId: data['eventId'],
-        mintDate: data['mintDate'],
+        mintDate: data['mintDate'].toDate(),
         mintPrice: data['mintPrice'],
         blockchain: data['blockchain'],
         website: data['website'],

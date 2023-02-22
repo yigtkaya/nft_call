@@ -93,7 +93,7 @@ class _AlertListItemState extends State<AlertListItem> {
                           spaceAmount: 24,
                         ),
                         DTText(
-                            label: widget.ktCardItem.mintDate ?? "Mint Date",
+                            label: widget.ktCardItem.mintDate.toString() ?? "Mint Date",
                             style: context.regular16,
                             color: Colors.white),
                       ],

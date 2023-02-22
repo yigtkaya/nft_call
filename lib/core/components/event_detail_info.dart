@@ -135,7 +135,7 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
                   style: context.semiBold20,
                   color: Colors.white),
               DTText(
-                label: widget.ktCardItem?.mintDate ?? "18:53:13",
+                label: widget.ktCardItem?.mintDate.toString() ?? "18:53:13",
                 style: context.regular20,
                 color: Colors.blue,
               )

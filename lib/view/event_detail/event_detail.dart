@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:date_count_down/date_count_down.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,6 +36,8 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    final dateString =
+        "${item.mintDate?.year}/${item.mintDate?.month}/${item.mintDate?.day} - ${item.mintDate?.hour}:${item.mintDate?.minute}";
     return SafeArea(
         child: Scaffold(
       resizeToAvoidBottomInset: false,
@@ -115,7 +118,8 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                                           },
                                         ),
                                         const HorizontalSpace(),
-                                        Obx(() => DTText(
+                                        Obx(
+                                          () => DTText(
                                             label: "${viewModel.favCount}",
                                             style: context.regular12,
                                             color: Colors.white,
@@ -135,8 +139,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                       spaceAmount: 20,
                     ),
                     DTText(
-                      label: item.collectionName ??
-                          "NFT Collection Name",
+                      label: item.collectionName ?? "NFT Collection Name",
                       style: context.semiBold20,
                       color: Colors.white,
                     ),
@@ -188,14 +191,20 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           DTText(
-                              label: "Mint Date",
-                              style: context.semiBold20,
+                              label: "Remaining Time to Mint Date",
+                              style: context.semiBold16,
                               color: Colors.white),
-                          DTText(
-                            label: item.mintDate ?? "00:00:00",
-                            style: context.regular20,
-                            color: Colors.blue,
-                          )
+                          CountDownText(
+                            due: item.mintDate,
+                            finishedText: "Minting",
+                            showLabel: true,
+                            longDateName: true,
+                            daysTextLong: "D: ",
+                            hoursTextLong: "H: ",
+                            minutesTextLong: "M: ",
+                            secondsTextLong: "S",
+                            style: const TextStyle(color: Colors.blue),
+                          ),
                         ],
                       ),
                     ),
@@ -219,32 +228,27 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                           iconName: AssetConstants.icons.discord,
                           height: 30,
                           width: 30,
-                          onPress: () =>
-                              {launchURL(item.discord ?? "")},
+                          onPress: () => {launchURL(item.discord ?? "")},
                         ),
                         ITIcon(
                           iconName: AssetConstants.icons.twitter,
                           height: 30,
                           width: 30,
-                          onPress: () =>
-                              {launchURL(item.twitter ?? "")},
+                          onPress: () => {launchURL(item.twitter ?? "")},
                         ),
                         ITIcon(
                           iconName: AssetConstants.icons.marketplace,
                           height: 30,
                           width: 30,
                           color: Colors.white,
-                          onPress: () => {
-                            launchURL(item.marketplace ?? "")
-                          },
+                          onPress: () => {launchURL(item.marketplace ?? "")},
                         ),
                         ITIcon(
                           iconName: AssetConstants.icons.website,
                           height: 30,
                           width: 30,
                           color: Colors.white,
-                          onPress: () =>
-                              {launchURL(item.website ?? "")},
+                          onPress: () => {launchURL(item.website ?? "")},
                         ),
                       ],
                     ),
