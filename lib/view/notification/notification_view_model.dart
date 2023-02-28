@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/core/components/alert_list_item.dart';
-import 'package:nft_call/core/components/card_info.dart';
 import 'package:nft_call/view/event_detail/event_detail.dart';
 import 'package:nft_call/view/search/search_view.dart';
 import '../../auth/auth.dart';
@@ -108,7 +108,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
                     ktCardItem: list[index],
                     onDelete: () => deleteAlert(list[index].eventId ?? ""),
                     onPress: () => Get.to(() => EventDetailView(
-                      eventId: list[index].eventId ?? "",
+                          eventId: list[index].eventId ?? "",
                           item: list[index],
                           isFavorite: list[index]
                               .favUidList
@@ -150,6 +150,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
         users.doc(getCurrentUser()).update({
           "alertedId": FieldValue.arrayUnion([_resultId.value])
         });
+        FirebaseMessaging.instance.subscribeToTopic(_resultId.value);
         _resultName.value = "";
         _isAddButtonEnable.value = false;
       } else {
@@ -169,6 +170,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
       users.doc(getCurrentUser()).update({
         "alertedId": FieldValue.arrayRemove([eventId])
       });
+      FirebaseMessaging.instance.unsubscribeFromTopic(_resultId.value);
     } catch (e) {
       showToastMessage(e.toString());
     }
