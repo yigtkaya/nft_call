@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
-import '../constants/horizontal_space.dart';
-import '../constants/theme/color/gradient_colors.dart';
 
 class KTCustomViewSwitch extends StatefulWidget {
   KTCustomViewSwitch({Key? key, this.onPress, required this.isViewSelected, required this.callback})

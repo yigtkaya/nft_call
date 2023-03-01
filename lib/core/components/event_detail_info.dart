@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nft_call/core/constants/extension.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../product/model/nft_info_model.dart';
 import '../constants/asset.dart';
 import '../constants/dt_text.dart';

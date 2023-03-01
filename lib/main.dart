@@ -21,7 +21,9 @@ Future<void> _messageHandler(RemoteMessage message) async {
   print('background message ${message.notification!.body}');
 }
 
-final channel =  AndroidNotificationChannel("high_importance_channel","High_importance_channel", playSound: true, importance: Importance.high);
+const channel = AndroidNotificationChannel(
+    "high_importance_channel", "High_importance_channel",
+    playSound: true, importance: Importance.high);
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
@@ -51,7 +53,8 @@ Future<void> main() async {
             message.notification!.title,
             message.notification!.body,
             const NotificationDetails(
-                android: AndroidNotificationDetails("high_importance_channel", "High Importance Notifications",
+                android: AndroidNotificationDetails(
+                    "high_importance_channel", "High Importance Notifications",
                     color: Colors.blue,
                     priority: Priority.high,
                     importance: Importance.high,

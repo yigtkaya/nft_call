@@ -10,7 +10,6 @@ import 'package:nft_call/product/model/nft_info_model.dart';
 import '../../core/components/kt_text_button.dart';
 import '../../core/constants/dt_text.dart';
 import '../../core/constants/horizontal_space.dart';
-import '../../core/components/card_info.dart';
 import '../../core/components/kt_icon.dart';
 import '../../core/constants/vertical_space.dart';
 import '../event_detail/event_detail.dart';

@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:nft_call/messaging/notification_service.dart';
 import 'package:nft_call/product/model/nft_info_model.dart';
 import '../../auth/auth.dart';
 import '../../core/base/view/base_view_model.dart';

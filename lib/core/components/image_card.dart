@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nft_call/core/constants/asset.dart';
 import 'package:nft_call/core/constants/extension.dart';
-
 import '../constants/dt_text.dart';
 import '../constants/horizontal_space.dart';
 import 'kt_icon.dart';
