@@ -110,9 +110,6 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
                     onPress: () => Get.to(() => EventDetailView(
                           eventId: list[index].eventId ?? "",
                           item: list[index],
-                          isFavorite: list[index]
-                              .favUidList
-                              ?.contains(getCurrentUser()),
                         )),
                   );
                 });

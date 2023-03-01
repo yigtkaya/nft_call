@@ -20,7 +20,6 @@ import '../../product/model/nft_info_model.dart';
 import 'event_detail_model.dart';
 
 class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
-  final bool? isFavorite;
   final String eventId;
   final KTCardItem item;
 
@@ -28,7 +27,6 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
     Key? key,
     required this.item,
     required this.eventId,
-    required this.isFavorite,
   }) : super(key: key) {
     initViewModel(EventDetailViewModel(eventId));
   }
