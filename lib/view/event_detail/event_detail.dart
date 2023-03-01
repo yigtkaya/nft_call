@@ -1,13 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:date_count_down/date_count_down.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:nft_call/core/components/kt_icon.dart';
 import 'package:nft_call/core/constants/dimen.dart';
 import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
+import 'package:nft_call/view/drawer/drawer_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
@@ -191,6 +190,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                               label: "Remaining Time to Mint Date",
                               style: context.semiBold16,
                               color: Colors.white),
+
                           CountDownText(
                             due: item.mintDate,
                             finishedText: "Minting",

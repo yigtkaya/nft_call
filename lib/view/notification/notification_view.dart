@@ -8,6 +8,7 @@ import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/horizontal_space.dart';
 import 'package:nft_call/core/constants/vertical_space.dart';
+import 'package:nft_call/view/drawer/drawer_view.dart';
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/constants/dimen.dart';
@@ -49,10 +50,24 @@ class NotificationView
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              DTText(
-                label: 'Alerts',
-                style: context.bold20,
-                color: Colors.white,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: DTText(
+                        label: 'Alerts',
+                        style: context.bold20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  ITIcon(
+                    iconName: AssetConstants.icons.drawer_menu, color: Colors.white,
+                    onPress: () => {Get.to(() => DrawerView(), transition: Transition.rightToLeftWithFade)},
+                  ),
+                ],
               ),
               const VerticalSpace(
                 spaceAmount: 20,
