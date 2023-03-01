@@ -86,8 +86,8 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
             // bildirim add kısmı ekelencek
             ITIcon(
               iconName: widget.isAlertIconOn
-                  ? AssetConstants.icons.added_alarm
-                  : AssetConstants.icons.add_alarm,
+                  ? AssetConstants.icons.favorite_menu_un_selected
+                  : AssetConstants.icons.favorite_menu_un_selected,
               width: 50,
               height: 50,
               onPress: () => {
@@ -192,6 +192,6 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
 
 
   String get getAlertIcon => widget.isAlertIconOn
-      ? AssetConstants.icons.added_alarm
-      : AssetConstants.icons.add_alarm;
+      ? AssetConstants.icons.favorite_menu_selected
+      : AssetConstants.icons.favorite_menu_un_selected;
 }
