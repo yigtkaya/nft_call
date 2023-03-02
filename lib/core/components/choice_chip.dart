@@ -12,7 +12,7 @@ class ChoiceChipWidget extends StatefulWidget {
 }
 
 class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
-  List<String> options = ["Today", "Ongoing", "Upcoming", "Popular", "Favorites"];
+  List<String> options = ["Today", "Ongoing", "Upcoming", "Popular"];
   var _value = 0;
   @override
   Widget build(BuildContext context) {

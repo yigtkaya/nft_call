@@ -46,6 +46,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                   padding: const EdgeInsets.only(top: 10),
@@ -53,13 +54,20 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                       callback: (idx) => {
                             viewModel.getEventList(idx),
                           })),
-              Obx(() => Expanded(child: viewModel.pageItemsList.isEmpty ? const Center(child: CircularProgressIndicator(),): getListView(context, viewModel.chip),)),
+              Obx(() => Expanded(
+                    child: viewModel.pageItemsList.isEmpty
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : getListView(context, viewModel.chip),
+                  )),
             ],
           ),
         ),
       ),
     ));
   }
+
   Widget getListView(BuildContext context, String chip) {
     final stream = FirebaseFirestore.instance.collection("events").snapshots();
 
@@ -71,7 +79,8 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasData) {
-          List<KTCardItem> collectionList = viewModel.filterByTag(snapshot.data!.docs);
+          List<KTCardItem> collectionList =
+              viewModel.filterByTag(snapshot.data!.docs);
           return PageView.builder(
             controller: PageController(keepPage: true),
             scrollDirection: Axis.vertical,
@@ -83,7 +92,8 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                 isFavorite: viewModel.isFavoritedByUser(collectionList, index),
                 ktCardItem: collectionList[index],
                 onFavChanged: () {
-                  viewModel.onFavoriteChanged(collectionList[index].eventId ?? "", index);
+                  viewModel.onFavoriteChanged(
+                      collectionList[index].eventId ?? "", index);
                 },
               );
             },
@@ -95,10 +105,10 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
       },
     );
   }
+
   @override
   void setViewInfo() {
     viewInfo =
         ViewInfoModel(menuKey: MenuKey.landing, screenName: ScreenName.landing);
   }
-
 }

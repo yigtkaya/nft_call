@@ -54,7 +54,7 @@ class _AlertListItemState extends State<AlertListItem> {
               borderRadius: BorderRadius.circular(10),
               color: const Color(0xf5365470),
             ),
-            height: 150,
+            height: 120,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -72,11 +72,9 @@ class _AlertListItemState extends State<AlertListItem> {
                   spaceAmount: 15,
                 ),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
+                  child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         DTText(
                             label: widget.ktCardItem.collectionName ?? "NFT Collection Name",
@@ -87,13 +85,6 @@ class _AlertListItemState extends State<AlertListItem> {
                         ),
                         DTText(
                             label: widget.ktCardItem.mintPrice ?? "Mint Price",
-                            style: context.regular16,
-                            color: Colors.white),
-                        const VerticalSpace(
-                          spaceAmount: 24,
-                        ),
-                        DTText(
-                            label: widget.ktCardItem.mintDate.toString() ?? "Mint Date",
                             style: context.regular16,
                             color: Colors.white),
                       ],
