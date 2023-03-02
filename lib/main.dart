@@ -82,6 +82,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Neo Flutter Base',
       theme: AppThemeBuilder.createTheme(LightAppTheme()),
       themeMode:
