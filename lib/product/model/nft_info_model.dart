@@ -11,6 +11,7 @@ class KTCardItem {
   String? twitter;
   String? imageUrl;
   String? marketplace;
+  int? favCount;
   List? tags;
   List? favUidList;
 
@@ -21,6 +22,7 @@ class KTCardItem {
     this.mintPrice,
     this.blockchain,
     this.website,
+    this.favCount,
     this.discord,
     this.imageUrl,
     this.description,
@@ -38,6 +40,7 @@ class KTCardItem {
     return KTCardItem(
         collectionName: data['collectionName'],
         eventId: data['eventId'],
+        favCount: data['favCount'],
         mintDate: data['mintDate'].toDate(),
         mintPrice: data['mintPrice'].toString().trim(),
         blockchain: data['blockchain'],

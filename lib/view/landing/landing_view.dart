@@ -52,14 +52,15 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                   padding: const EdgeInsets.only(top: 10),
                   child: ChoiceChipWidget(
                       callback: (idx) => {
-                            viewModel.getEventList(idx),
+                            viewModel.checkData(idx),
+                        viewModel.filter(idx),
                           })),
               Obx(() => Expanded(
-                    child: viewModel.pageItemsList.isEmpty
-                        ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : getListView(context, viewModel.chip),
+                    child: viewModel.isDataAvailable
+                        ? getListView(context, viewModel.chip):
+                    const Center(
+                      child: CircularProgressIndicator(color: Colors.red,),
+                    ),
                   )),
             ],
           ),
@@ -69,42 +70,41 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
   }
 
   Widget getListView(BuildContext context, String chip) {
-    final stream = FirebaseFirestore.instance.collection("events").snapshots();
 
-    return StreamBuilder(
-      stream: stream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          print(snapshot.error);
+    return  StreamBuilder(
+        stream: viewModel.stream ?? FirebaseFirestore.instance.collection("events").where("mintDate", isGreaterThanOrEqualTo: DateTime.now(),).where("mintDate", isLessThanOrEqualTo: DateTime.now().add(Duration(days: 1))).snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            print(snapshot.error);
 
-          return const Center(
-            child: CircularProgressIndicator(color: Colors.white),
-          );
-        } else if (snapshot.hasData) {
-          List<KTCardItem> collectionList =
-              viewModel.filterByTag(snapshot.data!.docs);
-          return PageView.builder(
-            controller: PageController(keepPage: true),
-            scrollDirection: Axis.vertical,
-            itemCount: collectionList.length,
-            itemBuilder: (BuildContext context, index) {
-              Future.delayed(const Duration(seconds: 3));
-              return NFTCardView(
-                favCount: collectionList[index].favUidList?.length ?? 0,
-                isFavorite: viewModel.isFavoritedByUser(collectionList, index),
-                ktCardItem: collectionList[index],
-                onFavChanged: () {
-                  viewModel.onFavoriteChanged(
-                      collectionList[index].eventId ?? "", index);
-                },
-              );
-            },
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-        // filter the list by choice of tag
-      },
+            return const Center(
+              child: CircularProgressIndicator(color: Colors.white),
+            );
+          } else if (snapshot.hasData) {
+            List<KTCardItem> collectionList =
+                viewModel.filterByTag(snapshot.data!.docs);
+            return PageView.builder(
+              controller: PageController(keepPage: true),
+              scrollDirection: Axis.vertical,
+              itemCount: collectionList.length,
+              itemBuilder: (BuildContext context, index) {
+                Future.delayed(const Duration(seconds: 3));
+                return NFTCardView(
+                  favCount: collectionList[index].favCount ?? 0,
+                  isFavorite: viewModel.isFavoritedByUser(collectionList, index),
+                  ktCardItem: collectionList[index],
+                  onFavChanged: () {
+                    viewModel.onFavoriteChanged(collectionList[index],
+                        collectionList[index].eventId ?? "", index);
+                  },
+                );
+              },
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator(color: Colors.white,));
+          }
+          // filter the list by choice of tag
+        },
     );
   }
 

@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,44 +11,53 @@ import '../../core/base/view/base_view_model.dart';
 class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final _isSelected = false.obs;
   final _tag = "Today".obs;
-  final _baseList = <KTCardItem>[].obs;
+  final _isDataAvailable = false.obs;
   final _filteredList = <KTCardItem>[].obs;
   final AuthController _auth = AuthController();
   CollectionReference events = FirebaseFirestore.instance.collection("events");
+  final _stream = FirebaseFirestore.instance.collection("events").where("mintDate", isGreaterThanOrEqualTo: DateTime.now(),).where("mintDate", isLessThanOrEqualTo: DateTime.now().add(const Duration(days: 1))).snapshots().obs;
 
 
   @override
   void onInit() {
     super.onInit();
-    getEventList(_tag.value);
+    checkData(_tag.value);
   }
 
+  filter(String tag) {
+    if(tag == "Today"){
+        _stream.value = FirebaseFirestore.instance.collection("events").where("mintDate", isGreaterThanOrEqualTo: DateTime.now(),).where("mintDate", isLessThanOrEqualTo: DateTime.now().add(const Duration(days: 1))).snapshots();
+    }
+    else if(tag == "Ongoing"){
+      _stream.value = FirebaseFirestore.instance.collection("events").where("mintDate", isLessThanOrEqualTo: DateTime.now()).snapshots();
+    }
+    else if (tag == "Upcoming"){
+      _stream.value = FirebaseFirestore.instance.collection("events").where("mintDate", isGreaterThan: DateTime.now().add(const Duration(days: 1))).snapshots();
+    }
+    else if(tag == "Popular"){
+      _stream.value = FirebaseFirestore.instance.collection("events").orderBy("favCount",descending: false).snapshots();
+    }
+  }
 
   List<KTCardItem> filterByTag(List<QueryDocumentSnapshot> snapshot) {
     List<KTCardItem> collectionList = [];
     for (var document in snapshot) {
       Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
       collectionList.add(KTCardItem.fromMap(data));
-
     }
     return collectionList;
   }
 
-  Future<void> getEventList(String tag) async {
+  Future<void> checkData(String tag) async {
     _tag.value = tag;
-    List tags = [];
-    FirebaseFirestore.instance
-        .collection('events')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      for (var doc in querySnapshot.docs) {
-        Map map = doc.data() as Map;
-        tags = map["tags"];
-        if (tags.contains(tag)) {
-          _baseList.add(KTCardItem.fromMap(map));
-        }
-      }
-    });
+    final data = await FirebaseFirestore.instance
+        .collection('events').limit(1).get();
+
+    if (data.docs.isEmpty){
+      _isDataAvailable.value = false;
+    }else {
+      _isDataAvailable.value = true;
+    }
   }
 
   void signOut() {
@@ -69,17 +79,18 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
     }
   }
 
-  Future<void> onFavoriteChanged(String eventId, int index) async {
-    List? favList = _baseList[index].favUidList ?? [];
+  Future<void> onFavoriteChanged(KTCardItem item,String eventId, int index) async {
+
+    List? favList = item.favUidList ?? [];
     String? uid = getCurrentUser();
     try {
       if (favList.contains(uid)) {
         favList.remove(uid);
-        events.doc(eventId).update({"favList": favList});
+        events.doc(eventId).update({"favList": favList, "favCount": FieldValue.increment(-1)});
         _isSelected.value = false;
       } else {
         favList.add(uid);
-        events.doc(eventId).update({"favList": favList});
+        events.doc(eventId).update({"favList": favList, "favCount": FieldValue.increment(1)});
         _isSelected.value = true;
       }
     } catch (e) {
@@ -99,7 +110,8 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   }
 
   String get chip => _tag.value;
-  List<KTCardItem> get pageItemsList => _baseList;
+  bool get isDataAvailable => _isDataAvailable.value;
   List<KTCardItem> get base => _filteredList;
   bool get isSelected => _isSelected.value;
+  Stream<QuerySnapshot> get stream => _stream.value;
 }
