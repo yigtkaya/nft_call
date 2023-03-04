@@ -27,9 +27,8 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
     List<KTCardItem> collectionList = [];
     for (var document in snapshot) {
       Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-      if (data["tags"].contains(_tag.value)) {
-        collectionList.add(KTCardItem.fromMap(data));
-      }
+      collectionList.add(KTCardItem.fromMap(data));
+
     }
     return collectionList;
   }

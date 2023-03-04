@@ -188,17 +188,22 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                             label: "Remaining Time to Mint Date",
                             style: context.semiBold16,
                             color: Colors.white),
-                        CountDownText(
-                          due: item.mintDate,
-                          finishedText: "Minting",
-                          showLabel: true,
-                          longDateName: true,
-                          daysTextLong: "D: ",
-                          hoursTextLong: "H: ",
-                          minutesTextLong: "M: ",
-                          secondsTextLong: "S",
-                          style: const TextStyle(color: Colors.blue),
-                        ),
+                        item.mintDate == DateTime(2025, 4, 4)
+                            ? DTText(
+                                label: "TBA",
+                                style: context.regular16,
+                                color: Colors.blue)
+                            : CountDownText(
+                                due: item.mintDate,
+                                finishedText: "Minting",
+                                showLabel: true,
+                                longDateName: true,
+                                daysTextLong: "D: ",
+                                hoursTextLong: "H: ",
+                                minutesTextLong: "M: ",
+                                secondsTextLong: "S",
+                                style: const TextStyle(color: Colors.blue),
+                              ),
                       ],
                     ),
                   ),

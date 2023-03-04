@@ -75,8 +75,10 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
       stream: stream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
+          print(snapshot.error);
+
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color: Colors.white),
           );
         } else if (snapshot.hasData) {
           List<KTCardItem> collectionList =
