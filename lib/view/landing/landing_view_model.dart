@@ -35,7 +35,7 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
       _stream.value = FirebaseFirestore.instance.collection("events").where("mintDate", isGreaterThan: DateTime.now().add(const Duration(days: 1))).snapshots();
     }
     else if(tag == "Popular"){
-      _stream.value = FirebaseFirestore.instance.collection("events").orderBy("favCount",descending: false).snapshots();
+      _stream.value = FirebaseFirestore.instance.collection("events").orderBy("favCount",descending: true).snapshots();
     }
   }
 

@@ -59,7 +59,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                     child: viewModel.isDataAvailable
                         ? getListView(context, viewModel.chip):
                     const Center(
-                      child: CircularProgressIndicator(color: Colors.red,),
+                      child: CircularProgressIndicator(color: Colors.white,),
                     ),
                   )),
             ],
