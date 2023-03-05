@@ -5,6 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:nft_call/core/base/view/base_view.dart';
+import 'package:nft_call/core/constants/dt_text.dart';
+import 'package:nft_call/core/constants/extension.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/choice_chip.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
@@ -53,14 +55,18 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                   child: ChoiceChipWidget(
                       callback: (idx) => {
                             viewModel.checkData(idx),
-                        viewModel.filter(idx),
+                            viewModel.filter(idx),
                           })),
               Obx(() => Expanded(
                     child: viewModel.isDataAvailable
-                        ? getListView(context, viewModel.chip):
-                    const Center(
-                      child: CircularProgressIndicator(color: Colors.white,),
-                    ),
+                        ? getListView(context, viewModel.chip)
+                        : Center(
+                            child: DTText(
+                              label: "There is no event",
+                              style: context.regular16,
+                              color: Colors.white.withOpacity(0.7),
+                            ),
+                          ),
                   )),
             ],
           ),
@@ -70,41 +76,43 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
   }
 
   Widget getListView(BuildContext context, String chip) {
+    return StreamBuilder(
+      stream: viewModel.stream,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          print(snapshot.error);
 
-    return  StreamBuilder(
-        stream: viewModel.stream ?? FirebaseFirestore.instance.collection("events").where("mintDate", isGreaterThanOrEqualTo: DateTime.now(),).where("mintDate", isLessThanOrEqualTo: DateTime.now().add(Duration(days: 1))).snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            print(snapshot.error);
-
-            return const Center(
-              child: CircularProgressIndicator(color: Colors.white),
-            );
-          } else if (snapshot.hasData) {
-            List<KTCardItem> collectionList =
-                viewModel.filterByTag(snapshot.data!.docs);
-            return PageView.builder(
-              controller: PageController(keepPage: true),
-              scrollDirection: Axis.vertical,
-              itemCount: collectionList.length,
-              itemBuilder: (BuildContext context, index) {
-                Future.delayed(const Duration(seconds: 3));
-                return NFTCardView(
-                  favCount: collectionList[index].favCount ?? 0,
-                  isFavorite: viewModel.isFavoritedByUser(collectionList, index),
-                  ktCardItem: collectionList[index],
-                  onFavChanged: () {
-                    viewModel.onFavoriteChanged(collectionList[index],
-                        collectionList[index].eventId ?? "", index);
-                  },
-                );
-              },
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator(color: Colors.white,));
-          }
-          // filter the list by choice of tag
-        },
+          return const Center(
+            child: CircularProgressIndicator(color: Colors.white),
+          );
+        } else if (snapshot.hasData) {
+          List<KTCardItem> collectionList =
+              viewModel.filterByTag(snapshot.data!.docs);
+          return PageView.builder(
+            controller: PageController(keepPage: true),
+            scrollDirection: Axis.vertical,
+            itemCount: collectionList.length,
+            itemBuilder: (BuildContext context, index) {
+              Future.delayed(const Duration(seconds: 3));
+              return NFTCardView(
+                favCount: collectionList[index].favCount ?? 0,
+                isFavorite: viewModel.isFavoritedByUser(collectionList, index),
+                ktCardItem: collectionList[index],
+                onFavChanged: () {
+                  viewModel.onFavoriteChanged(collectionList[index],
+                      collectionList[index].eventId ?? "", index);
+                },
+              );
+            },
+          );
+        } else {
+          return const Center(
+              child: CircularProgressIndicator(
+            color: Colors.white,
+          ));
+        }
+        // filter the list by choice of tag
+      },
     );
   }
 

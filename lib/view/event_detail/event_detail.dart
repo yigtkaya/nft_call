@@ -76,7 +76,9 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                         children: [
                           CachedNetworkImage(
                             imageUrl: item.imageUrl ?? "",
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
+                            height: 400,
+                            width: double.infinity,
                             placeholder: (context, url) => const Center(
                                 child: CircularProgressIndicator(
                               color: Colors.white,
@@ -188,12 +190,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                             label: "Remaining Time to Mint Date",
                             style: context.semiBold16,
                             color: Colors.white),
-                        item.mintDate == DateTime(2025, 4, 4)
-                            ? DTText(
-                                label: "TBA",
-                                style: context.regular16,
-                                color: Colors.blue)
-                            : CountDownText(
+                       CountDownText(
                                 due: item.mintDate,
                                 finishedText: "Minting",
                                 showLabel: true,

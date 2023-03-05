@@ -1,4 +1,3 @@
-
 class KTCardItem {
   String? collectionName;
   String? eventId;
