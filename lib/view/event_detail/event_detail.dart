@@ -149,7 +149,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                       children: [
                         DTText(
                             label: "Mint Price :",
-                            style: context.semiBold14,
+                            style: context.semiBold16,
                             color: Colors.white),
                         const HorizontalSpace(),
                         DTText(
@@ -190,7 +190,13 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                             label: "Remaining Time to Mint Date",
                             style: context.semiBold16,
                             color: Colors.white),
-                       CountDownText(
+                        item.mintDate == DateTime(2025, 4, 4, 3)
+                            ? DTText(
+                                label: "TBA",
+                                style: context.regular16,
+                                color: Colors.blue,
+                              )
+                            : CountDownText(
                                 due: item.mintDate,
                                 finishedText: "Minting",
                                 showLabel: true,

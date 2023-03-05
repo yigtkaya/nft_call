@@ -154,16 +154,26 @@ class NFTCardViewState extends State<NFTCardView> {
                       const VerticalSpace(
                         spaceAmount: 20,
                       ),
-                      DTText(
-                        label: widget.ktCardItem.mintDate == DateTime(2025, 4,4) ? "Mint Date: TBA": "Mint Date: ${widget.ktCardItem.mintDate?.year}/${widget.ktCardItem.mintDate?.month}/${widget.ktCardItem.mintDate?.day}",
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                      Row(
+                        children: [
+                          DTText(label: "Mint Date: ", style: context.regular16, color: Colors.white,),
+                          DTText(
+                            label: widget.ktCardItem.mintDate == DateTime(2025, 4,4,3) ? "TBA" : "${widget.ktCardItem.mintDate?.year}/${widget.ktCardItem.mintDate?.month}/${widget.ktCardItem.mintDate?.day}",
+                            style: context.regular16, color: Colors.blue,
+                          ),
+                        ],
                       ),
                       const VerticalSpace(
                         spaceAmount: 10,
                       ),
-                      DTText(
-                        label: "Mint Price: ${widget.ktCardItem.mintPrice}",
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                      Row(
+                        children: [
+                          DTText(label: "Mint Price: ", style:context.regular16, color: Colors.white,),
+                          DTText(
+                            label: "${widget.ktCardItem.mintPrice}",
+                            style: context.regular16, color: Colors.blue,
+                          ),
+                        ],
                       ),
                       const VerticalSpace(
                         spaceAmount: 20,
