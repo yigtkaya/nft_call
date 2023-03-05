@@ -33,9 +33,6 @@ class KTCardItem {
 
   factory KTCardItem.fromMap(Map<dynamic, dynamic> data) {
 
-    if (data["mintPrice"].toString().trim() == "-"){
-      data["mintPrice"] = "Free";
-    }
     return KTCardItem(
         collectionName: data['collectionName'],
         eventId: data['eventId'],

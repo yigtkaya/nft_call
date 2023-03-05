@@ -103,7 +103,7 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
             ),
             Expanded(
               child: Align(
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.center,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: TextButton(
@@ -115,6 +115,18 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                           style: context.regular20)
 
                   ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: DTText(
+                      label: "1.0.0",
+                      color: Colors.white,
+                      style: context.regular12),
                 ),
               ),
             ),

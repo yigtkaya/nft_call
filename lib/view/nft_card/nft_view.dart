@@ -133,15 +133,6 @@ class NFTCardViewState extends State<NFTCardView> {
                         children: [
                           Center(
                               child: DTText(
-                                label: widget.ktCardItem.blockchain ?? "#Chain",
-                                style: context.regular16,
-                                color: Colors.grey,
-                              )),
-                          const HorizontalSpace(
-                            spaceAmount: 5,
-                          ),
-                          Center(
-                              child: DTText(
                                 label: "#NFT Drop",
                                 style: context.regular16,
                                 color: Colors.grey,

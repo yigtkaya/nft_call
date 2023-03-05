@@ -49,6 +49,7 @@ class SearchView extends BaseView<SearchView, SearchViewModel> {
                   padding:
                       const EdgeInsets.only(top: 15.0, left: 15, right: 15),
                   child: TextField(
+                    cursorColor: Colors.white,
                     controller: viewModel.nameController,
                     onChanged: (value) => viewModel.fillFilterList(),
                     decoration: InputDecoration(
