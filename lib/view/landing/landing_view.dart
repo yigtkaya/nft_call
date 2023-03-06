@@ -56,7 +56,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                       callback: (idx) => {
                             viewModel.checkData(idx),
                             viewModel.filter(idx),
-                          })),
+                          }, index: viewModel.options.indexOf(viewModel.chip),)),
               Obx(() => Expanded(
                     child: viewModel.isDataAvailable
                         ? getListView(context, viewModel.chip)

@@ -4,8 +4,8 @@ import 'package:nft_call/core/constants/theme/theme_manager.dart';
 
 class ChoiceChipWidget extends StatefulWidget {
   final void Function(String) callback;
-
-  const ChoiceChipWidget({Key? key, required this.callback}) : super(key: key);
+  int _value;
+  ChoiceChipWidget({Key? key,required int index, required this.callback}) : _value = index, super(key: key);
 
   @override
   State<ChoiceChipWidget> createState() => _ChoiceChipWidgetState();
@@ -13,7 +13,6 @@ class ChoiceChipWidget extends StatefulWidget {
 
 class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
   List<String> options = ["Today", "Ongoing", "Upcoming", "Popular"];
-  var _value = 0;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -39,12 +38,12 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
                             color: ThemeManager.instance?.getCurrentTheme
                                 .colorTheme.textColor),
                       ),
-                      selected: _value == idx,
+                      selected: widget._value == idx,
                       selectedColor: const Color(0xff264d64),
                       onSelected: (bool selected) {
                         setState(() {
-                          _value = selected ? idx : idx;
-                          widget.callback(options[_value]);
+                          setValue(idx);
+                          widget.callback(options[widget._value]);
                         });
                       }),
                 ),
@@ -54,5 +53,10 @@ class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
         ),
       ),
     );
+  }
+  void setValue(int tag){
+    setState(() {
+      widget._value = tag;
+    });
   }
 }

@@ -16,6 +16,7 @@ class LandingViewModel extends BaseViewModel<LandingViewModel> {
   final AuthController _auth = AuthController();
   CollectionReference events = FirebaseFirestore.instance.collection("events");
   final _stream = FirebaseFirestore.instance.collection("events").where("mintDate", isGreaterThanOrEqualTo: DateTime.now(),).where("mintDate", isLessThanOrEqualTo: DateTime.now().add(const Duration(days: 1))).snapshots().obs;
+  List<String> options = ["Today", "Ongoing", "Upcoming", "Popular"];
 
 
   @override
