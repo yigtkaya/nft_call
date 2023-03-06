@@ -14,7 +14,7 @@
         </intent>
     </queries>
    <application
-        android:label="nft_call"
+        android:label="NFT Calendar"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

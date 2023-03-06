@@ -38,40 +38,35 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
       backgroundColor: const Color(0xf5263848),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ITIcon(
-                  iconName: AssetConstants.icons.discord,
-                  height: 32,
-                  width: 32,
-                  onPress: () => {launchURL(item.discord ?? "")},
-                ),
-                ITIcon(
-                  iconName: AssetConstants.icons.twitter,
-                  height: 32,
-                  width: 32,
-                  onPress: () => {launchURL(item.twitter ?? "")},
-                ),
-                ITIcon(
-                  iconName: AssetConstants.icons.marketplace,
-                  height: 32,
-                  width: 32,
-                  color: Colors.white,
-                  onPress: () => {launchURL(item.marketplace ?? "")},
-                ),
-                ITIcon(
-                  iconName: AssetConstants.icons.website,
-                  height: 32,
-                  width: 32,
-                  color: Colors.white,
-                  onPress: () => {launchURL(item.website ?? "")},
-                ),
-              ],
+            ITIcon(
+              iconName: AssetConstants.icons.discord,
+              height: 32,
+              width: 32,
+              onPress: () => {launchURL(item.discord ?? "")},
+            ),
+            ITIcon(
+              iconName: AssetConstants.icons.twitter,
+              height: 32,
+              width: 32,
+              onPress: () => {launchURL(item.twitter ?? "")},
+            ),
+            ITIcon(
+              iconName: AssetConstants.icons.marketplace,
+              height: 32,
+              width: 32,
+              color: Colors.white,
+              onPress: () => {launchURL(item.marketplace ?? "")},
+            ),
+            ITIcon(
+              iconName: AssetConstants.icons.website,
+              height: 32,
+              width: 32,
+              color: Colors.white,
+              onPress: () => {launchURL(item.website ?? "")},
             ),
           ],
         ),
