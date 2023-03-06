@@ -76,13 +76,14 @@ class NFTCardViewState extends State<NFTCardView> {
                           const Icon(Icons.error),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 15, top: 15),
+                      padding:
+                          const EdgeInsets.only(left: 5, right: 15, top: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Container(
-                            decoration:
-                                BoxDecoration(color: Colors.black.withOpacity(0)),
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -91,7 +92,8 @@ class NFTCardViewState extends State<NFTCardView> {
                                       ? AssetConstants
                                           .icons.favorite_menu_selected
                                       : AssetConstants
-                                          .icons.favorite_menu_un_selected,
+                                          .icons.favorite,
+                                  color: Colors.white,
                                   width: 28,
                                   height: 28,
                                   onPress: () => {
@@ -101,7 +103,7 @@ class NFTCardViewState extends State<NFTCardView> {
                                 const HorizontalSpace(),
                                 DTText(
                                   label: "${widget.favCount}",
-                                  style: context.regular12,
+                                  style: context.regular10,
                                   color: Colors.white,
                                 )
                               ],
@@ -114,94 +116,113 @@ class NFTCardViewState extends State<NFTCardView> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 15, left: 20, right: 5),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      DTText(
-                        label: widget.ktCardItem.collectionName ?? "NFT Collection Name",
-                        style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                        color: Colors.white,
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 5,
-                      ),
-                      Row(
-                        children: [
-                          Center(
-                              child: DTText(
-                                label: "#NFT Drop",
-                                style: context.regular16,
-                                color: Colors.grey,
-                              ))
-                        ],
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 25,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: DTText(
-                          label:
-                          widget.ktCardItem.description ?? "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder",
-                          maxLines: 2,
-                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                  padding: const EdgeInsets.only(top: 15, left: 20, right: 5),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        DTText(
+                          label: widget.ktCardItem.collectionName ??
+                              "NFT Collection Name",
+                          style: const TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                          color: Colors.white,
                         ),
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 20,
-                      ),
-                      Row(
-                        children: [
-                          DTText(label: "Mint Date: ", style: context.regular16, color: Colors.white,),
-                          DTText(
-                            label: widget.ktCardItem.mintDate == DateTime(2025, 4,4,3) ? "TBA" : "${widget.ktCardItem.mintDate?.year}/${widget.ktCardItem.mintDate?.month}/${widget.ktCardItem.mintDate?.day}",
-                            style: context.regular16, color: Colors.blue,
-                          ),
-                        ],
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 10,
-                      ),
-                      Row(
-                        children: [
-                          DTText(label: "Mint Price: ", style:context.regular16, color: Colors.white,),
-                          DTText(
-                            label: "${widget.ktCardItem.mintPrice}",
-                            style: context.regular16, color: Colors.blue,
-                          ),
-                        ],
-                      ),
-                      const VerticalSpace(
-                        spaceAmount: 20,
-                      ),
-                      Padding(
-                        padding:
-                        const EdgeInsets.only(bottom: 10, right: 10, left: 10, top: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                        const VerticalSpace(
+                          spaceAmount: 5,
+                        ),
+                        Row(
                           children: [
-                            DTTextButton(
-                                child: const Text(
-                                  "read more",
-                                  style: TextStyle(color: Colors.white, fontSize: 14),
-                                ),
-                                onPress: () {
-                                  Get.to(() => EventDetailView(item: widget.ktCardItem,eventId: widget.ktCardItem.eventId ?? ""));
-                                }),
-                            const HorizontalSpace(
-                              spaceAmount: 15,
-                            )
+                            Center(
+                                child: DTText(
+                              label: "#NFT Drop",
+                              style: context.regular16,
+                              color: Colors.grey,
+                            ))
                           ],
                         ),
-                      )
-                    ],
-                  ),
-                )
-              ),
+                        const VerticalSpace(
+                          spaceAmount: 25,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: DTText(
+                            label: widget.ktCardItem.description ??
+                                "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder",
+                            maxLines: 2,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 16),
+                          ),
+                        ),
+                        const VerticalSpace(
+                          spaceAmount: 20,
+                        ),
+                        Row(
+                          children: [
+                            DTText(
+                              label: "Mint Date: ",
+                              style: context.regular16,
+                              color: Colors.white,
+                            ),
+                            DTText(
+                              label: widget.ktCardItem.mintDate ==
+                                      DateTime(2025, 4, 4, 3)
+                                  ? "TBA"
+                                  : "${widget.ktCardItem.mintDate?.year}/${widget.ktCardItem.mintDate?.month}/${widget.ktCardItem.mintDate?.day}",
+                              style: context.regular16,
+                              color: Colors.blue,
+                            ),
+                          ],
+                        ),
+                        const VerticalSpace(
+                          spaceAmount: 10,
+                        ),
+                        Row(
+                          children: [
+                            DTText(
+                              label: "Mint Price: ",
+                              style: context.regular16,
+                              color: Colors.white,
+                            ),
+                            DTText(
+                              label: "${widget.ktCardItem.mintPrice}",
+                              style: context.regular16,
+                              color: Colors.blue,
+                            ),
+                          ],
+                        ),
+                        const VerticalSpace(
+                          spaceAmount: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 15, right: 10, left: 10, top: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              DTTextButton(
+                                  child: const Text(
+                                    "read more",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 14),
+                                  ),
+                                  onPress: () {
+                                    Get.to(() => EventDetailView(
+                                        item: widget.ktCardItem,
+                                        eventId:
+                                            widget.ktCardItem.eventId ?? ""));
+                                  }),
+                              const HorizontalSpace(
+                                spaceAmount: 15,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )),
             ],
           ),
         ),

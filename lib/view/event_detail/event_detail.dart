@@ -36,14 +36,55 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
         child: Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xf5263848),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ITIcon(
+                  iconName: AssetConstants.icons.discord,
+                  height: 32,
+                  width: 32,
+                  onPress: () => {launchURL(item.discord ?? "")},
+                ),
+                ITIcon(
+                  iconName: AssetConstants.icons.twitter,
+                  height: 32,
+                  width: 32,
+                  onPress: () => {launchURL(item.twitter ?? "")},
+                ),
+                ITIcon(
+                  iconName: AssetConstants.icons.marketplace,
+                  height: 32,
+                  width: 32,
+                  color: Colors.white,
+                  onPress: () => {launchURL(item.marketplace ?? "")},
+                ),
+                ITIcon(
+                  iconName: AssetConstants.icons.website,
+                  height: 32,
+                  width: 32,
+                  color: Colors.white,
+                  onPress: () => {launchURL(item.website ?? "")},
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
       body: RefreshIndicator(
         onRefresh: viewModel.getEvent,
-        color: Colors.white,
+        color: Colors.blueGrey,
         child: Padding(
           padding: const EdgeInsets.all(DimenConstant.LARGE),
           child: SingleChildScrollView(
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -102,10 +143,10 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                                         iconName: viewModel.isSelected
                                             ? AssetConstants
                                                 .icons.favorite_menu_selected
-                                            : AssetConstants.icons
-                                                .favorite_menu_un_selected,
+                                            : AssetConstants.icons.favorite,
                                         width: 28,
                                         height: 28,
+                                        color: Colors.white,
                                         onPress: () => {
                                           viewModel
                                               .onFavoriteChanged(eventId ?? ""),
@@ -120,7 +161,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                                           style: context.regular12,
                                           color: Colors.white,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -161,7 +202,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                     ),
                   ),
                   const VerticalSpace(
-                    spaceAmount: 5,
+                    spaceAmount: 7,
                   ),
                   const Opacity(
                     opacity: 0.4,
@@ -170,16 +211,13 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                       thickness: 1.5,
                     ),
                   ),
-                  const VerticalSpace(
-                    spaceAmount: 25,
-                  ),
-                  DTText(
-                    label: item.description ?? "empty desc",
-                    style: context.regular16,
-                    color: Colors.white,
-                  ),
-                  const VerticalSpace(
-                    spaceAmount: 35,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 32.0),
+                    child: DTText(
+                      label: item.description ?? "empty desc",
+                      style: context.regular16,
+                      color: Colors.white,
+                    ),
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -211,7 +249,7 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                     ),
                   ),
                   const VerticalSpace(
-                    spaceAmount: 20,
+                    spaceAmount: 27,
                   ),
                   const Opacity(
                     opacity: 0.4,
@@ -221,39 +259,9 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                     ),
                   ),
                   const VerticalSpace(
-                    spaceAmount: 20,
+                    spaceAmount: 22,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ITIcon(
-                        iconName: AssetConstants.icons.discord,
-                        height: 30,
-                        width: 30,
-                        onPress: () => {launchURL(item.discord ?? "")},
-                      ),
-                      ITIcon(
-                        iconName: AssetConstants.icons.twitter,
-                        height: 30,
-                        width: 30,
-                        onPress: () => {launchURL(item.twitter ?? "")},
-                      ),
-                      ITIcon(
-                        iconName: AssetConstants.icons.marketplace,
-                        height: 30,
-                        width: 30,
-                        color: Colors.white,
-                        onPress: () => {launchURL(item.marketplace ?? "")},
-                      ),
-                      ITIcon(
-                        iconName: AssetConstants.icons.website,
-                        height: 30,
-                        width: 30,
-                        color: Colors.white,
-                        onPress: () => {launchURL(item.website ?? "")},
-                      ),
-                    ],
-                  ),
+
                 ]),
           ),
         ),
@@ -268,9 +276,13 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
   }
 
   Future<void> launchURL(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      viewModel.showToastMessage("There is no URL");
+    try {
+      final Uri uri = Uri.parse(url);
+      if (!await launchUrl(uri)) {
+        viewModel.showToastMessage("There is no URL");
+      }
+    } catch (e) {
+      viewModel.showToastMessage("There is no link");
     }
   }
 }
