@@ -143,7 +143,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
       final data = await users.doc(getCurrentUser()).get();
       Map<dynamic, dynamic> map = data.data() as Map;
       List list = map["alertedId"];
-      if (list.length <= 3) {
+      if (list.length < 3) {
         users.doc(getCurrentUser()).update({
           "alertedId": FieldValue.arrayUnion([_resultId.value])
         });
