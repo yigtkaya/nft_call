@@ -104,8 +104,6 @@ flutter:
   assets:
     - assets/images/
     - assets/icon/
-    - assets/mock/
-    - assets/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

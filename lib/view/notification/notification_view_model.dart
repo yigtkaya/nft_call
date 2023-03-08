@@ -32,7 +32,6 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     nameController.addListener(() {
       fillFilterList();
     });
-    getEventList();
     super.onInit();
   }
 
@@ -61,16 +60,6 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     return filterList;
   }
 
-  void getEventList() async {
-    var snapshot = await FirebaseFirestore.instance.collection('events').get();
-    if (snapshot.docs.isNotEmpty) {
-      for (var element in snapshot.docs) {
-        Map<String, dynamic> data = element.data();
-        _collectionList.add(KTCardItem.fromMap(data));
-      }
-      fillFilterList();
-    }
-  }
 
   String? getCurrentUser() {
     return _auth.getCurrentUserId();
@@ -82,7 +71,12 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     List ids = map["alertedId"];
     for (var id in ids) {
       for (var element in _collectionList) {
-        if (element.eventId == id) {
+        if (element.mintDate!.isBefore(DateTime.now())) {
+            FirebaseFirestore.instance.collection("users").doc(getCurrentUser()).set({
+              "alertedId": FieldValue.arrayRemove(element.eventId as List)
+            });
+        }
+        else if (element.eventId == id) {
           collectionList.add(element);
         }
       }
