@@ -45,6 +45,7 @@ class _KTTextFieldState extends State<KTTextField> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextFormField(
+              cursorColor: Colors.grey,
               autovalidateMode: AutovalidateMode.onUserInteraction,
                 obscureText: widget.title == "Email" ? false : true,
                 autocorrect: false,
