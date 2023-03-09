@@ -78,7 +78,7 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () => launchURL("mailto:hasan.kays158@gmail.com?subject=<subject>&body=<body>"),
+                      onPressed: () => launchURL("mailto:yigitkaya@vivitate.com?subject=<subject>&body=<body>"),
                       child: Row(
                         children: [
                           ITIcon(

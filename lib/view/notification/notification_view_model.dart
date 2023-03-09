@@ -32,6 +32,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     nameController.addListener(() {
       fillFilterList();
     });
+    getEventList();
     super.onInit();
   }
 
@@ -60,24 +61,39 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     return filterList;
   }
 
-
   String? getCurrentUser() {
     return _auth.getCurrentUserId();
+  }
+
+  void getEventList() async {
+    var snapshot = await FirebaseFirestore.instance.collection('events').get();
+    if (snapshot.docs.isNotEmpty) {
+      for (var element in snapshot.docs) {
+        Map<String, dynamic> data = element.data();
+        _collectionList.add(KTCardItem.fromMap(data));
+      }
+      fillFilterList();
+    }
   }
 
   List<KTCardItem> filterById(DocumentSnapshot? snapshot) {
     List<KTCardItem> collectionList = [];
     Map map = snapshot?.data() as Map;
     List ids = map["alertedId"];
+
     for (var id in ids) {
       for (var element in _collectionList) {
-        if (element.mintDate!.isBefore(DateTime.now())) {
-            FirebaseFirestore.instance.collection("users").doc(getCurrentUser()).set({
-              "alertedId": FieldValue.arrayRemove(element.eventId as List)
+        if (element.eventId == id) {
+          if (element.mintDate!.isAfter(DateTime.now())) {
+            collectionList.add(element);
+          } else {
+            FirebaseFirestore.instance
+                .collection("users")
+                .doc(getCurrentUser())
+                .set({
+              "alertedId": FieldValue.arrayRemove([element.eventId])
             });
-        }
-        else if (element.eventId == id) {
-          collectionList.add(element);
+          }
         }
       }
     }
@@ -95,6 +111,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
             );
           } else if (snapshot.hasData) {
             List<KTCardItem> list = filterById(snapshot.data);
+
             return ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (BuildContext context, index) {
