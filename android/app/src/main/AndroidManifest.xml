@@ -2,6 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.aladine.nft_call">
     <!-- Provide required visibility configuration for API level 30 and above -->
+    <supports-screens android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="false"
+    android:xlargeScreens="false"/>
     <queries>
         <!-- If your app checks for SMS support -->
         <intent>
