@@ -35,10 +35,15 @@ class ResetPasswordView
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            ITIcon(
-              iconName: AssetConstants.icons.cross,
-              onPress: () => {Get.back()},
-              color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, left: 8),
+              child: ITIcon(
+                iconName: AssetConstants.icons.cross,
+                onPress: () => {Get.back()},
+                color: Colors.white,
+                height: 24,
+                width: 24,
+              ),
             ),
           ],
         ),

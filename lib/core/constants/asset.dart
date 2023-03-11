@@ -29,6 +29,7 @@ class KIcons {
   final String check_icon = AssetConstants.toIcon("check_icon");
   final String info_icon = AssetConstants.toIcon("info_icon");
   final String favorite = AssetConstants.toIcon("favorite");
+  final String nft_call = AssetConstants.toIcon("nft_call");
 
 
 }

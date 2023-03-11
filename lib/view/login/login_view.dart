@@ -134,7 +134,7 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                     ),
                   ),
                   const VerticalSpace(
-                    spaceAmount: 50,
+                    spaceAmount: 30,
                   ),
                   const Align(
                       alignment: Alignment.center,
@@ -188,21 +188,17 @@ class LoginView extends BaseView<LoginView, LoginViewModel> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: GestureDetector(
-                        onTap: () => Get.offAll(() => SignUpView()),
-                        child: RichText(
-                          text: const TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: 'Don\'t have an Account? ',
-                                  style: KTLabelStyle),
-                              TextSpan(text: 'Sign Up', style: KTLabelStyle),
-                            ],
-                          ),
-                        ),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          DTText(label: "Don't have an account?", style: context.regular16,color: Colors.white,),
+                          const HorizontalSpace(spaceAmount: 5,),
+                          GestureDetector(onTap: () => Get.offAll(() => SignUpView()),
+                              child: DTText(label: "Sign Up", style: context.regular16, color: Colors.white,)),
+                        ],
                       ),
-                    ),
+                    )
                   ),
                 ],
               ),

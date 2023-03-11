@@ -132,13 +132,13 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                         )),
                   ),
                   const VerticalSpace(
-                    spaceAmount: 50,
+                    spaceAmount: 40,
                   ),
                   const Align(
                       alignment: Alignment.center,
                       child: DTText(label: "OR", style: KTLabelStyle)),
                   const VerticalSpace(
-                    spaceAmount: 30,
+                    spaceAmount: 40,
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -183,23 +183,19 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: GestureDetector(
-                        onTap: () => Get.offAll(() => LoginView()),
-                        child: RichText(
-                          text: const TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: 'Already have account? ',
-                                  style: KTLabelStyle),
-                              TextSpan(text: 'Sign In', style: KTLabelStyle),
-                            ],
-                          ),
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            DTText(label: "Already have account?", style: context.regular16,color: Colors.white,),
+                            const HorizontalSpace(spaceAmount: 5,),
+                            GestureDetector(onTap: () => Get.offAll(() => LoginView()),
+                                child: DTText(label: "Sign In", style: context.regular16, color: Colors.white,)),
+                          ],
                         ),
-                      ),
-                    ),
+                      )
                   ),
                 ],
               ),
