@@ -88,12 +88,17 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
         } else if (snapshot.hasData) {
           List<KTCardItem> collectionList =
               viewModel.filterByTag(snapshot.data!.docs);
-          return PageView.builder(
+          return collectionList.isEmpty ? Center(
+            child: DTText(
+              label: "There is no event ${viewModel.chip.toLowerCase()}",
+              style: context.regular16,
+              color: Colors.white.withOpacity(0.7),
+            ),
+          ) : PageView.builder(
             controller: PageController(keepPage: true),
             scrollDirection: Axis.vertical,
             itemCount: collectionList.length,
             itemBuilder: (BuildContext context, index) {
-              Future.delayed(const Duration(seconds: 3));
               return NFTCardView(
                 favCount: collectionList[index].favCount ?? 0,
                 isFavorite: viewModel.isFavoritedByUser(collectionList, index),

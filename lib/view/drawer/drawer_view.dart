@@ -60,13 +60,9 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                       )),
                 ],
               ),
-              const Center(
-                child: Image(
-                  image: AssetImage("assets/images/logo_temp.png"),
-                ),
-              ),
-              const VerticalSpace(
-                spaceAmount: 50,
+            Center(
+                child: ITIcon(iconName: AssetConstants.icons.nft_call, color: const Color(
+                    0xff2f4dbd),)
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

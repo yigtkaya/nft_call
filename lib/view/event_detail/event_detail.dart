@@ -86,6 +86,8 @@ class EventDetailView extends BaseView<EventDetailView, EventDetailViewModel> {
                     children: [
                       ITIcon(
                         iconName: AssetConstants.icons.cross,
+                        width: 20,
+                        height: 20,
                         onPress: () => {Get.back()},
                       ),
                       Expanded(
