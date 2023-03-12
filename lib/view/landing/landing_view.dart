@@ -62,7 +62,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
                         ? getListView(context, viewModel.chip)
                         : Center(
                             child: DTText(
-                              label: "There is no event",
+                              label: "There is no minting ${viewModel.chip.toLowerCase()}",
                               style: context.regular16,
                               color: Colors.white.withOpacity(0.7),
                             ),

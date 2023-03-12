@@ -56,6 +56,8 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                       padding: const EdgeInsets.all(25),
                       child: ITIcon(
                         iconName: AssetConstants.icons.cross,
+                        height: 22,
+                        width: 22,
                         onPress: () => Get.back(),
                       )),
                 ],
