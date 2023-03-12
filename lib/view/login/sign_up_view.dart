@@ -65,7 +65,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
-                  const DTText(label: "Email", style: KTLabelStyle),
+                  DTText(label: "Email", style: context.semiBold14,color: Colors.white,),
                   KTTextField(
                     textController: viewModel.emailController,
                     title: "Email",
@@ -75,9 +75,9 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                       style: context.regular12,
                       color: Colors.red)),
                   const VerticalSpace(
-                    spaceAmount: 30,
+                    spaceAmount: 20,
                   ),
-                  const DTText(label: "Password", style: KTLabelStyle),
+                  DTText(label: "Password", style: context.semiBold14,color: Colors.white,),
                   KTTextField(
                     textController: viewModel.passwordController,
                     title: "Password",
@@ -89,7 +89,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
-                  const DTText(label: "Confirm Password", style: KTLabelStyle),
+                  DTText(label: "Confirm Password", style: context.semiBold14,color: Colors.white,),
                   KTTextField(
                     textController: viewModel.confirmPasswordController,
                     title: "Confirm Password",
@@ -116,7 +116,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                           viewModel.validateEmail();
                           viewModel.validatePassword();
                           viewModel.validateConfirmPassword();
-                          viewModel.sendVerification();
+
                           if (viewModel.errorMessage == "" &&
                               viewModel.pwErrorMessage == "" &&
                               viewModel.confirmPwErrorMessage == "") {

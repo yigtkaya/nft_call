@@ -65,7 +65,7 @@ class NotificationView
                   ),
                   ITIcon(
                     iconName: AssetConstants.icons.drawer_menu, color: Colors.white,
-                    onPress: () => {Get.to(() => DrawerView(), transition: Transition.rightToLeftWithFade)},
+                    onPress: () => {Get.off(() => DrawerView(), transition: Transition.rightToLeftWithFade)},
                   ),
                 ],
               ),

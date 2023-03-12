@@ -74,9 +74,7 @@ class SignUpViewModel extends BaseViewModel<SignUpViewModel> {
       }
     }
   }
-  void sendVerification () {
-      _auth.emailVerification();
-  }
+
   void validateEmail() {
     if (emailController.text.isEmpty ||
         !EmailValidator.validate(emailController.text)) {

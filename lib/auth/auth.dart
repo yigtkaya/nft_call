@@ -18,17 +18,16 @@ class AuthController extends GetxController {
   @override
   void onReady() {
     currentUser.bindStream(_auth.authStateChanges());
-    ever(currentUser, _setInitialScreen);
+    _setInitialScreen(_auth.currentUser);
     super.onReady();
   }
-
   _setInitialScreen(User? user) {
     user == null ? Get.offAll(() => LoginView()) : Get.offAll(() => RootView());
   }
-
   Future<void> signOut() async {
     await _auth.signOut();
     await _googleSignIn.signOut();
+    Get.offAll(() => LoginView());
   }
 
   Future<void> signInWithEmailAndPassword(
@@ -85,6 +84,9 @@ class AuthController extends GetxController {
 
         await _auth.signInWithCredential(credential);
 
+        if(!_auth.currentUser!.emailVerified){
+          _auth.currentUser!.sendEmailVerification();
+        }
         Get.offAll(() => RootView());
       }
     } catch (e) {
@@ -96,22 +98,6 @@ class AuthController extends GetxController {
   Future<void> resetPassword({required String email}) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException catch (e) {
-      final message = AuthExceptionHandler.generateExceptionMessage(e.code);
-      showToastMessage(message);
-    } catch (e) {
-      showToastMessage(e.toString());
-    }
-  }
-
-  Future<void> emailVerification() async {
-    try {
-      User? user = _auth.currentUser;
-      if (!(user!.emailVerified)) {
-        user!.sendEmailVerification();
-      } else {
-        showToastMessage("Already avtivated account");
-      }
     } on FirebaseAuthException catch (e) {
       final message = AuthExceptionHandler.generateExceptionMessage(e.code);
       showToastMessage(message);

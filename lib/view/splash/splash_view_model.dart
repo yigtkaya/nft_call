@@ -14,7 +14,6 @@ class SplashViewModel extends BaseViewModel<SplashViewModel> {
   }
 
   void navigateToRoot() {
-    /// load users details from hive and go to the root.
-  _auth.onReady();
+    _auth.onReady();
   }
 }
