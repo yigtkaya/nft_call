@@ -9,7 +9,7 @@ import '../../auth/auth.dart';
 import '../../core/base/view/base_view_model.dart';
 
 class LandingViewModel extends BaseViewModel<LandingViewModel> {
-  final _isSelected = true.obs;
+  final _isSelected = false.obs;
   final _tag = "Today".obs;
   final _isDataAvailable = false.obs;
   final _filteredList = <KTCardItem>[].obs;

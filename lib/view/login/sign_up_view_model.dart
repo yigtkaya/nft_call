@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -39,11 +40,9 @@ class SignUpViewModel extends BaseViewModel<SignUpViewModel> {
     confirmPasswordController.dispose();
     super.dispose();
   }
-
   void signUp(String email, String password) {
     _auth.createUserWithEmailAndPassword(email, password);
   }
-
   void googleSignIn() {
     _auth.signInWithGoogle();
   }

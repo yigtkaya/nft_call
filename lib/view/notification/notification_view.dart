@@ -64,8 +64,12 @@ class NotificationView
                     ),
                   ),
                   ITIcon(
-                    iconName: AssetConstants.icons.drawer_menu, color: Colors.white,
-                    onPress: () => {Get.off(() => DrawerView(), transition: Transition.rightToLeftWithFade)},
+                    iconName: AssetConstants.icons.drawer_menu,
+                    color: Colors.white,
+                    onPress: () => {
+                      Get.to(() => DrawerView(),
+                          transition: Transition.rightToLeftWithFade)
+                    },
                   ),
                 ],
               ),
@@ -104,7 +108,9 @@ class NotificationView
                       ? addAlertView(context)
                       : Center(
                           child: viewModel.getUsersAlerts(),
-                        )))
+                        ),
+                ),
+              )
             ],
           ),
         ),
@@ -157,7 +163,7 @@ class NotificationView
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 )),
-            onPressed: viewModel.isAddButtonEnable
+            onPressed: (viewModel.isAddButtonEnable && viewModel.isVerified)
                 ? () {
                     viewModel.createAlert();
                   }

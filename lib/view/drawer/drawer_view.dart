@@ -73,7 +73,7 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextButton(
-                        onPressed: () => launchURL("https://www.twitter.com"),
+                        onPressed: () => launchURL("https://twitter.com/nftcalendarapp"),
                         child: Row(
                           children: [
                             ITIcon(

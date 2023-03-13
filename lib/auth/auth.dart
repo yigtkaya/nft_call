@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -21,9 +22,11 @@ class AuthController extends GetxController {
     _setInitialScreen(_auth.currentUser);
     super.onReady();
   }
+
   _setInitialScreen(User? user) {
     user == null ? Get.offAll(() => LoginView()) : Get.offAll(() => RootView());
   }
+
   Future<void> signOut() async {
     await _auth.signOut();
     await _googleSignIn.signOut();
@@ -34,6 +37,7 @@ class AuthController extends GetxController {
       {required String email, required String password}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+
       Get.offAll(RootView());
     } on FirebaseAuthException catch (e) {
       final message = AuthExceptionHandler.generateExceptionMessage(e.code);
@@ -46,8 +50,11 @@ class AuthController extends GetxController {
   Future<void> createUserWithEmailAndPassword(
       String email, String password) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((authUser) => authUser.user?.sendEmailVerification())
+          .then((value) => showToastMessage(
+              "We have send you a confirmation email to verify your account"));
 
       Fluttertoast.showToast(
           msg: "You can login now",
@@ -82,16 +89,15 @@ class AuthController extends GetxController {
           accessToken: googleSignInAuthentication?.accessToken,
         );
 
-        await _auth.signInWithCredential(credential);
-
-        if(!_auth.currentUser!.emailVerified){
-          _auth.currentUser!.sendEmailVerification();
-        }
+        await _auth.signInWithCredential(credential).then((authUser) {
+          if (!authUser.user!.emailVerified) {
+            authUser.user?.sendEmailVerification();
+          }
+        });
         Get.offAll(() => RootView());
       }
     } catch (e) {
       showToastMessage(e.toString());
-      print(e.toString());
     }
   }
 

@@ -38,11 +38,11 @@ class _KTLandingBottomNavigationBarState
               Expanded(
                   flex: 1,
                   child: GestureDetector(
-                      onTap: () => {changeCurrentPage(0)}, child: ITIcon(height: 38, width: 38, iconName: getHomePageIcon, color: Colors.white,),)),
+                      onTap: () => {changeCurrentPage(0)}, child: ITIcon(height: 36, width: 36, iconName: getHomePageIcon, color: Colors.white,),)),
               Expanded(
                   flex: 1,
                   child: GestureDetector(
-                      onTap: () => {changeCurrentPage(1)}, child: ITIcon(height: 38, width: 38, iconName: getStaticsPageIcon, color: Colors.white))),
+                      onTap: () => {changeCurrentPage(1)}, child: ITIcon(height: 36, width: 36, iconName: getStaticsPageIcon, color: Colors.white))),
               ],
           ),
         ));
