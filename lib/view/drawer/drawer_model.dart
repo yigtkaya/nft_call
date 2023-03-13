@@ -18,5 +18,4 @@ class DrawerViewModel extends BaseViewModel<DrawerViewModel> {
   void signOut() {
     _auth.signOut();
   }
-
 }

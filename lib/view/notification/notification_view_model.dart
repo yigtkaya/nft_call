@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -120,7 +121,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
             );
           } else if (snapshot.hasData) {
             List<KTCardItem> list = filterById(snapshot.data);
-            return list.isEmpty ? DTText(label: "Add collection to get notified", style: context.regular16, color: Colors.blueGrey,): ListView.builder(
+            return list.isEmpty ? DTText(label: "Add a collection to get notified", style: context.regular16, color: Colors.blueGrey,): ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (BuildContext context, index) {
                   return AlertListItem(
@@ -155,6 +156,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
       _resultName.value = "";
       _isAddButtonEnable.value = false;
     }
+    checkVerifiedUser();
   }
 
   void createAlert() async {
@@ -191,10 +193,14 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
       showToastMessage(e.toString());
     }
   }
+
   void checkVerifiedUser() async {
-    final user =  _auth.currentUser();
+    _auth.currentUser()?.reload();
+    final user =  FirebaseAuth.instance.currentUser;
     _isVerified.value = user!.emailVerified;
+    print(_isVerified.value);
   }
+
   void showToastMessage(String message) {
     Fluttertoast.showToast(
         msg: message,

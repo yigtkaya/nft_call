@@ -33,7 +33,6 @@ class DarkAppTheme extends IAppTheme {
 abstract class AppThemeBuilder {
   static ThemeData createTheme(IAppTheme theme) {
     return ThemeData(
-        scaffoldBackgroundColor: theme.colorTheme.primaryScaffoldBackground,
         backgroundColor: theme.colorTheme.secondaryScaffoldBackground,
         primaryColor: theme.colorTheme.primaryColor,
         selectedRowColor: theme.colorTheme.selectedRowColor,

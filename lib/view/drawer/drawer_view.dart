@@ -30,42 +30,45 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
       child: Scaffold(
         body: Center(
             child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [
-                      ColorConstants
-                          .colorPlateList[7 % (ColorConstants.colorPlateList.length)]
-                          .startColor,
-                      ColorConstants
-                          .colorPlateList[7 % (ColorConstants.colorPlateList.length)]
-                          .endColor,
-                    ],
-                    begin: Alignment.bottomRight,
-                    end: Alignment.topCenter,
-                    stops: const [0.0, 1.2],
-                    tileMode: TileMode.clamp),
-              ),
-              child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [
+                  ColorConstants
+                      .colorPlateList[
+                          7 % (ColorConstants.colorPlateList.length)]
+                      .startColor,
+                  ColorConstants
+                      .colorPlateList[
+                          7 % (ColorConstants.colorPlateList.length)]
+                      .endColor,
+                ],
+                begin: Alignment.bottomRight,
+                end: Alignment.topCenter,
+                stops: const [0.0, 1.2],
+                tileMode: TileMode.clamp),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                      padding: const EdgeInsets.all(25),
+                      padding: const EdgeInsets.all(10),
                       child: ITIcon(
                         iconName: AssetConstants.icons.cross,
-                        height: 22,
-                        width: 22,
+                        height: 20,
+                        width: 20,
                         onPress: () => Get.back(),
                       )),
                 ],
               ),
-            Center(
-                child: ITIcon(iconName: AssetConstants.icons.nft_call, color: const Color(
-                    0xff2f4dbd),)
-              ),
+              Center(
+                  child: ITIcon(
+                iconName: AssetConstants.icons.nft_call,
+                color: const Color(0xff2f4dbd),
+              )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -73,7 +76,8 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextButton(
-                        onPressed: () => launchURL("https://twitter.com/nftcalendarapp"),
+                        onPressed: () =>
+                            launchURL("https://twitter.com/nftcalendarapp"),
                         child: Row(
                           children: [
                             ITIcon(
@@ -125,7 +129,7 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                               spaceAmount: 20,
                             ),
                             DTText(
-                                label: "To add collection",
+                                label: "To add a collection",
                                 color: Colors.white,
                                 style: context.regular20)
                           ],
@@ -145,13 +149,13 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                         child: DTText(
                             label: "Sign out",
                             color: Colors.white,
-                            style: context.regular20)),
+                            style: context.regular16)),
                   ),
                 ),
               ),
-          ],
-        ),
-            )),
+            ],
+          ),
+        )),
       ),
     );
   }

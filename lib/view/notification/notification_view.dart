@@ -155,30 +155,31 @@ class NotificationView
         const VerticalSpace(
           spaceAmount: 50,
         ),
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff364d64),
-                disabledBackgroundColor: const Color(0xff0f1418),
-                foregroundColor: const Color(0xff0f1418),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                )),
-            onPressed: (viewModel.isAddButtonEnable && viewModel.isVerified)
-                ? () {
-                    viewModel.createAlert();
-                  }
-                : null,
-            child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Obx(
-                  () => DTText(
-                    label: "Create",
-                    color: viewModel.isAddButtonEnable
-                        ? Colors.white
-                        : Colors.blueGrey,
-                    style: context.regular16,
-                  ),
-                ))),
+        Obx(() => ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xff364d64),
+                  disabledBackgroundColor: const Color(0xff0f1418),
+                  foregroundColor: const Color(0xff0f1418),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  )),
+              onPressed: (viewModel.isAddButtonEnable && viewModel.isVerified)
+                  ? () {
+                      viewModel.createAlert();
+                    }
+                  : null,
+              child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Obx(
+                    () => DTText(
+                      label: "Create",
+                      color: viewModel.isAddButtonEnable
+                          ? Colors.white
+                          : Colors.blueGrey,
+                      style: context.regular16,
+                    ),
+                  ))),
+        ),
         const Spacer(),
         Container(
             decoration: BoxDecoration(

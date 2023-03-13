@@ -110,10 +110,7 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
             },
           );
         } else {
-          return const Center(
-              child: CircularProgressIndicator(
-            color: Colors.white,
-          ));
+          return const SizedBox();
         }
         // filter the list by choice of tag
       },

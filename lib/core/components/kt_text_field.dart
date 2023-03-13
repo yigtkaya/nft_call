@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/vertical_space.dart';
 
@@ -45,8 +46,12 @@ class _KTTextFieldState extends State<KTTextField> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextFormField(
-              cursorColor: Colors.grey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                cursorColor: Colors.grey,
+                inputFormatters: [
+                  FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s")),
+                ],
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 obscureText: widget.title == "Email" ? false : true,
                 autocorrect: false,
                 enableSuggestions: false,
@@ -77,6 +82,4 @@ class _KTTextFieldState extends State<KTTextField> {
       ],
     );
   }
-
-  void changeObsecure(bool isSelected) {}
 }

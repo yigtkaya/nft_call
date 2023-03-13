@@ -35,7 +35,14 @@ class AuthController extends GetxController {
   Future<void> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password).then((authUser) {
+        authUser.user?.reload();
+
+        if (authUser.user!.emailVerified) {
+        } else {
+          authUser.user!.sendEmailVerification();
+        }
+      });
 
       Get.offAll(RootView());
     } on FirebaseAuthException catch (e) {
@@ -53,10 +60,10 @@ class AuthController extends GetxController {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((authUser) => authUser.user?.sendEmailVerification())
           .then((value) => showToastMessage(
-              "We have send you a confirmation email to verify your account"));
+              "We have send you a verification email to verify your account"));
 
       Fluttertoast.showToast(
-          msg: "You can login now",
+          msg: "Please verify your account before logging in",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -89,15 +96,12 @@ class AuthController extends GetxController {
         );
 
         await _auth.signInWithCredential(credential).then((authUser) {
+          authUser.user?.reload();
 
-            authUser.user?.reload();
-
-            if(authUser.user!.emailVerified) {
-
-            }else{
-              authUser.user!.sendEmailVerification();
-            }
-
+          if (authUser.user!.emailVerified) {
+          } else {
+            authUser.user!.sendEmailVerification();
+          }
         });
         Get.offAll(() => RootView());
       }
@@ -121,7 +125,7 @@ class AuthController extends GetxController {
     Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
+        gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.blueGrey,
         textColor: Colors.white,
