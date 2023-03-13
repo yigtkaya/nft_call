@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -12,7 +11,6 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nft_call/product/menu/menu_factory.dart';
 import 'package:nft_call/product/navigation/navigation_handler.dart';
-import 'package:nft_call/view/root/root_view.dart';
 import 'package:nft_call/view/splash/splash_view.dart';
 import 'core/base/binding/binding.dart';
 import 'core/constants/theme/app_theme.dart';
