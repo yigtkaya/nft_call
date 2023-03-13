@@ -101,35 +101,37 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                   const VerticalSpace(
                     spaceAmount: 50,
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            foregroundColor: const Color(0xFF4989D7),
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            )),
-                        onPressed: () {
-                          viewModel.validateEmail();
-                          viewModel.validatePassword();
-                          viewModel.validateConfirmPassword();
+                  Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              foregroundColor: const Color(0xFF4989D7),
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              )),
+                          onPressed: () {
+                            viewModel.validateEmail();
+                            viewModel.validatePassword();
+                            viewModel.validateConfirmPassword();
 
-                          if (viewModel.errorMessage == "" &&
-                              viewModel.pwErrorMessage == "" &&
-                              viewModel.confirmPwErrorMessage == "") {
-                            viewModel.signUp(
-                                viewModel.emailController.text.trim(),
-                                viewModel.passwordController.text.trim());
-                          }
-                        },
-                        child: DTText(
-                          label: "SIGN UP",
-                          color: Colors.blue,
-                          style: context.semiBold16,
-                        )),
+                            if (viewModel.errorMessage == "" &&
+                                viewModel.pwErrorMessage == "" &&
+                                viewModel.confirmPwErrorMessage == "") {
+                              viewModel.signUp(
+                                  viewModel.emailController.text.trim(),
+                                  viewModel.passwordController.text.trim());
+                            }
+                          },
+                          child: DTText(
+                            label: "SIGN UP",
+                            color: Colors.blue,
+                            style: context.semiBold16,
+                          )),
+                    ),
                   ),
                   const VerticalSpace(
                     spaceAmount: 40,
