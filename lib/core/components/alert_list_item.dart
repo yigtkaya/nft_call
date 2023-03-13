@@ -61,6 +61,7 @@ class _AlertListItemState extends State<AlertListItem> {
                 CachedNetworkImage(
                   imageUrl: widget.ktCardItem.imageUrl ?? "",
                   fit: BoxFit.cover,
+                  width: 150,
                   placeholder: (context, url) => const Center(
                       child: CircularProgressIndicator(
                         color: Colors.white,

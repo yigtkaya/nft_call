@@ -93,7 +93,7 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                       ),
                       TextButton(
                         onPressed: () => launchURL(
-                            "mailto:yigitkaya@vivitate.com?subject=<subject>&body=<body>"),
+                            "mailto:yigit@vivitate.com?subject=<subject>&body=<body>"),
                         child: Row(
                           children: [
                             ITIcon(
@@ -113,7 +113,7 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                       ),
                       TextButton(
                         onPressed: () => launchURL(
-                            "mailto:yigitkaya@vivitate.com?subject=Collection Apply&body=<body>"),
+                            "mailto:yigit@vivitate.com?subject=Collection Apply&body=<body>"),
                         child: Row(
                           children: [
                             ITIcon(
@@ -146,18 +146,6 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                             label: "Sign out",
                             color: Colors.white,
                             style: context.regular20)),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: DTText(
-                        label: "1.0.0",
-                        color: Colors.white,
-                        style: context.regular12),
                   ),
                 ),
               ),

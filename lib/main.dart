@@ -66,7 +66,7 @@ Future<void> main() async {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
       if (message.notification != null) {
-        Get.to(RootView());
+        Get.to(SplashView());
       }
     });
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;

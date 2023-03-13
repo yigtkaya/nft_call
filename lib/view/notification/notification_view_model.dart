@@ -98,6 +98,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
                   .set({
                 "alertedId": FieldValue.arrayRemove([element.eventId])
               });
+              FirebaseMessaging.instance.unsubscribeFromTopic(element.eventId ?? "");
             }
           }
         }
@@ -162,10 +163,10 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
       Map<dynamic, dynamic> map = data.data() as Map;
       List list = map["alertedId"];
       if (list.length < 3) {
-        users.doc(getCurrentUser()).update({
+        await users.doc(getCurrentUser()).update({
           "alertedId": FieldValue.arrayUnion([_resultId.value])
         });
-        FirebaseMessaging.instance.subscribeToTopic(_resultId.value);
+        await FirebaseMessaging.instance.subscribeToTopic(_resultId.value);
         _resultName.value = "";
         _isAddButtonEnable.value = false;
       } else {

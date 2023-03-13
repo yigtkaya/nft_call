@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/auth/auth.dart';
@@ -32,11 +33,14 @@ class RootViewModel extends BaseViewModel<RootViewModel> {
 
   createUser() async {
     final data = await FirebaseFirestore.instance.collection("users").doc(_auth.getCurrentUserId()).get();
+    String? token = await FirebaseMessaging.instance.getToken();
+
     if(!data.exists){
       FirebaseFirestore.instance.collection("users").doc(_auth.getCurrentUserId()).set(
-          {"alertedId": []});
+          {"alertedId": [], "token": token});
     }
   }
+
   void animatePage(int page) {
     pageController.animateToPage(
       page,
