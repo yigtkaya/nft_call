@@ -90,7 +90,13 @@ class AuthController extends GetxController {
 
         await _auth.signInWithCredential(credential).then((authUser) {
 
-            authUser.user?.sendEmailVerification();
+            authUser.user?.reload();
+
+            if(authUser.user!.emailVerified) {
+
+            }else{
+              authUser.user!.sendEmailVerification();
+            }
 
         });
         Get.offAll(() => RootView());

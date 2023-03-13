@@ -157,6 +157,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                           viewModel.googleSignIn();
                         },
                         child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
@@ -165,7 +166,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                               decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     image:
-                                        AssetImage('assets/images/google.png'),
+                                    AssetImage('assets/images/google.png'),
                                     fit: BoxFit.cover),
                                 shape: BoxShape.circle,
                               ),
