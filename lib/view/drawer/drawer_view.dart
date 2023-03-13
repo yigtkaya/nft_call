@@ -55,7 +55,7 @@ class DrawerView extends BaseView<DrawerView, DrawerViewModel> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(20),
                       child: ITIcon(
                         iconName: AssetConstants.icons.cross,
                         height: 20,
