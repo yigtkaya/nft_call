@@ -168,7 +168,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
         await users.doc(getCurrentUser()).update({
           "alertedId": FieldValue.arrayUnion([_resultId.value])
         });
-        await FirebaseMessaging.instance.subscribeToTopic(_resultId.value);
+        await FirebaseMessaging.instance.subscribeToTopic(_resultId.value.trim());
         _resultName.value = "";
         _isAddButtonEnable.value = false;
       } else {
