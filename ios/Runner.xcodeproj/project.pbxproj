@@ -73,6 +73,10 @@
 				2DA23DC129B5CA36007DA4AA /* FirebaseStorage in Frameworks */,
 				2DA23DBB29B5CA36007DA4AA /* FirebaseFirestore in Frameworks */,
 				ABBCEF5944C3FF59A1435E3E /* Pods_Runner.framework in Frameworks */,
+				2DAAEB5229A1716800861B1F /* FirebaseAuthCombine-Community in Frameworks */,
+				2DAAEB5629A1716800861B1F /* FirebaseDynamicLinks in Frameworks */,
+				2DAAEB5C29A1716800861B1F /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
+				2DAAEB5829A1716800861B1F /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
