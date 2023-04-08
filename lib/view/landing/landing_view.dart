@@ -5,6 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:nft_call/core/base/view/base_view.dart';
+import 'package:nft_call/core/constants/dt_text.dart';
+import 'package:nft_call/core/constants/extension.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/components/choice_chip.dart';
 import '../../core/constants/theme/color/gradient_colors.dart';
@@ -46,59 +48,78 @@ class LandingView extends BaseView<LandingView, LandingViewModel> {
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: ChoiceChipWidget(
                       callback: (idx) => {
-                            viewModel.getEventList(idx),
-                          })),
-              Obx(() => Expanded(child: viewModel.pageItemsList.isEmpty ? const Center(child: CircularProgressIndicator(),): getListView(context, viewModel.chip),)),
+                            viewModel.checkData(idx),
+                            viewModel.filter(idx),
+                          }, index: viewModel.options.indexOf(viewModel.chip),)),
+              Obx(() => Expanded(
+                    child: viewModel.isDataAvailable
+                        ? getListView(context, viewModel.chip) : Center(
+                      child: DTText(
+                        label: "There is no minting ${viewModel.chip.toLowerCase()}",
+                        style: context.regular16,
+                        color: Colors.white.withOpacity(0.7),
+                      ),
+                    )
+                  )),
             ],
           ),
         ),
       ),
     ));
   }
-  Widget getListView(BuildContext context, String chip) {
-    final stream = FirebaseFirestore.instance.collection("events").snapshots();
 
+  Widget getListView(BuildContext context, String chip) {
     return StreamBuilder(
-      stream: stream,
+      stream: viewModel.stream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
+          print(snapshot.error);
+
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color: Colors.white),
           );
         } else if (snapshot.hasData) {
-          List<KTCardItem> collectionList = viewModel.filterByTag(snapshot.data!.docs);
-          return PageView.builder(
+          List<KTCardItem> collectionList =
+              viewModel.filterByTag(snapshot.data!.docs);
+          return collectionList.isEmpty ? Center(
+            child: DTText(
+              label: "There is no minting ${viewModel.chip.toLowerCase()}",
+              style: context.regular16,
+              color: Colors.white.withOpacity(0.7),
+            ),
+          ) : PageView.builder(
             controller: PageController(keepPage: true),
             scrollDirection: Axis.vertical,
             itemCount: collectionList.length,
             itemBuilder: (BuildContext context, index) {
-              Future.delayed(const Duration(seconds: 3));
               return NFTCardView(
-                favCount: collectionList[index].favUidList?.length ?? 0,
+                favCount: collectionList[index].favCount ?? 0,
                 isFavorite: viewModel.isFavoritedByUser(collectionList, index),
                 ktCardItem: collectionList[index],
                 onFavChanged: () {
-                  viewModel.onFavoriteChanged(collectionList[index].eventId ?? "", index);
+                  viewModel.onFavoriteChanged(collectionList[index],
+                      collectionList[index].eventId ?? "", index);
                 },
               );
             },
           );
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return const SizedBox();
         }
         // filter the list by choice of tag
       },
     );
   }
+
   @override
   void setViewInfo() {
     viewInfo =
         ViewInfoModel(menuKey: MenuKey.landing, screenName: ScreenName.landing);
   }
-
 }

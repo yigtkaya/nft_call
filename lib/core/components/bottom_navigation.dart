@@ -21,7 +21,7 @@ class _KTLandingBottomNavigationBarState
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 60,
+        height: 55,
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -38,16 +38,12 @@ class _KTLandingBottomNavigationBarState
               Expanded(
                   flex: 1,
                   child: GestureDetector(
-                      onTap: () => {changeCurrentPage(0)}, child: ITIcon(height: 38, width: 38, iconName: getHomePageIcon, color: Colors.white,),)),
+                      onTap: () => {changeCurrentPage(0)}, child: ITIcon(height: 36, width: 36, iconName: getHomePageIcon, color: Colors.white,),)),
               Expanded(
                   flex: 1,
                   child: GestureDetector(
-                      onTap: () => {changeCurrentPage(1)}, child: ITIcon(height: 38, width: 38, iconName: getStaticsPageIcon, color: Colors.white))),
-              Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                      onTap: () => {changeCurrentPage(2)}, child: ITIcon(height: 38, width: 38, iconName: getThirdPageIcon, color: Colors.white,)))
-            ],
+                      onTap: () => {changeCurrentPage(1)}, child: ITIcon(height: 36, width: 36, iconName: getStaticsPageIcon, color: Colors.white))),
+              ],
           ),
         ));
   }

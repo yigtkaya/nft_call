@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class KTCardItem {
   String? collectionName;
   String? eventId;
-  String? mintDate;
+  DateTime? mintDate;
   String? mintPrice;
   String? blockchain;
   String? description;
@@ -12,6 +10,7 @@ class KTCardItem {
   String? twitter;
   String? imageUrl;
   String? marketplace;
+  int? favCount;
   List? tags;
   List? favUidList;
 
@@ -22,6 +21,7 @@ class KTCardItem {
     this.mintPrice,
     this.blockchain,
     this.website,
+    this.favCount,
     this.discord,
     this.imageUrl,
     this.description,
@@ -32,20 +32,13 @@ class KTCardItem {
   });
 
   factory KTCardItem.fromMap(Map<dynamic, dynamic> data) {
-    List<String>? favs = [];
-    List<String>? tags = [];
 
-    for (var i in data["favList"]) {
-      favs.add(i);
-    }
-    for (var i in data["tags"]) {
-      tags.add(i);
-    }
     return KTCardItem(
         collectionName: data['collectionName'],
         eventId: data['eventId'],
-        mintDate: data['mintDate'],
-        mintPrice: data['mintPrice'],
+        favCount: data['favCount'],
+        mintDate: data['mintDate'].toDate(),
+        mintPrice: data['mintPrice'].toString().trim(),
         blockchain: data['blockchain'],
         website: data['website'],
         discord: data['discord'],
@@ -57,21 +50,6 @@ class KTCardItem {
         tags: data["tags"]);
   }
 
-  KTCardItem.fromDocumentSnapshot({required DocumentSnapshot snapshot}){
-    eventId = snapshot.id;
-    collectionName = snapshot["collectionName"];
-    eventId =  snapshot['eventId'];
-    mintDate =  snapshot['mintDate'];
-    mintPrice =  snapshot['mintPrice'];
-    blockchain = snapshot['blockchain'];
-    website = snapshot['website'];
-    discord = snapshot['discord'];
-    imageUrl = snapshot['imageUrl'];
-    description = snapshot['description'];
-    twitter = snapshot['twitter'];
-    marketplace = snapshot['marketplace'];
-    favUidList = snapshot["favList"];
-  }
 
-  String get getSafecCollectionName => collectionName ?? "";
+  String get getSafeCollectionName => collectionName ?? "";
 }

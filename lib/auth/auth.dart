@@ -18,7 +18,7 @@ class AuthController extends GetxController {
   @override
   void onReady() {
     currentUser.bindStream(_auth.authStateChanges());
-    ever(currentUser, _setInitialScreen);
+    _setInitialScreen(_auth.currentUser);
     super.onReady();
   }
 
@@ -29,12 +29,21 @@ class AuthController extends GetxController {
   Future<void> signOut() async {
     await _auth.signOut();
     await _googleSignIn.signOut();
+    Get.offAll(() => LoginView());
   }
 
   Future<void> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password).then((authUser) {
+        authUser.user?.reload();
+
+        if (authUser.user!.emailVerified) {
+        } else {
+          authUser.user!.sendEmailVerification();
+        }
+      });
+
       Get.offAll(RootView());
     } on FirebaseAuthException catch (e) {
       final message = AuthExceptionHandler.generateExceptionMessage(e.code);
@@ -47,11 +56,14 @@ class AuthController extends GetxController {
   Future<void> createUserWithEmailAndPassword(
       String email, String password) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((authUser) => authUser.user?.sendEmailVerification())
+          .then((value) => showToastMessage(
+              "We have send you a verification email to verify your account"));
 
       Fluttertoast.showToast(
-          msg: "You can login now",
+          msg: "Please verify your account before logging in",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -83,13 +95,18 @@ class AuthController extends GetxController {
           accessToken: googleSignInAuthentication?.accessToken,
         );
 
-        await _auth.signInWithCredential(credential);
+        await _auth.signInWithCredential(credential).then((authUser) {
+          authUser.user?.reload();
 
+          if (authUser.user!.emailVerified) {
+          } else {
+            authUser.user!.sendEmailVerification();
+          }
+        });
         Get.offAll(() => RootView());
       }
     } catch (e) {
       showToastMessage(e.toString());
-      print(e.toString());
     }
   }
 
@@ -104,27 +121,11 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> emailVerification() async {
-    try {
-      User? user = _auth.currentUser;
-      if (!(user!.emailVerified)) {
-        user!.sendEmailVerification();
-      } else {
-        showToastMessage("Already avtivated account");
-      }
-    } on FirebaseAuthException catch (e) {
-      final message = AuthExceptionHandler.generateExceptionMessage(e.code);
-      showToastMessage(message);
-    } catch (e) {
-      showToastMessage(e.toString());
-    }
-  }
-
   void showToastMessage(String message) {
     Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
+        gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.blueGrey,
         textColor: Colors.white,

@@ -50,11 +50,14 @@ class MenuFactory extends IMenuFactory {
       GetPage(
           name: MenuKey.detail.key,
           page: () => EventDetailView(
-            item: KTCardItem(),
-            eventId: "",
-            isFavorite: false,
+                item: KTCardItem(),
+                eventId: "",
               ),
           transition: Transition.fadeIn),
+      GetPage(
+          name: MenuKey.drawer.key,
+          page: () => DrawerView(),
+          transition: Transition.leftToRight),
     ];
   }
 

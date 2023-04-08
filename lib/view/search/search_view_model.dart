@@ -56,7 +56,9 @@ class SearchViewModel extends BaseViewModel<SearchViewModel> {
     if (snapshot.docs.isNotEmpty) {
       for(var element in snapshot.docs) {
         Map<String, dynamic> data = element.data();
-        _collectionList.add(KTCardItem.fromMap(data));
+        if (data["mintDate"].toDate().isAfter(DateTime.now())){
+          _collectionList.add(KTCardItem.fromMap(data));
+        }
       }
       fillFilterList();
     }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nft_call/core/constants/extension.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../product/model/nft_info_model.dart';
 import '../constants/asset.dart';
 import '../constants/dt_text.dart';
@@ -87,8 +86,8 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
             // bildirim add kısmı ekelencek
             ITIcon(
               iconName: widget.isAlertIconOn
-                  ? AssetConstants.icons.added_alarm
-                  : AssetConstants.icons.add_alarm,
+                  ? AssetConstants.icons.favorite_menu_un_selected
+                  : AssetConstants.icons.favorite_menu_un_selected,
               width: 50,
               height: 50,
               onPress: () => {
@@ -135,7 +134,7 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
                   style: context.semiBold20,
                   color: Colors.white),
               DTText(
-                label: widget.ktCardItem?.mintDate ?? "18:53:13",
+                label: widget.ktCardItem?.mintDate.toString() ?? "18:53:13",
                 style: context.regular20,
                 color: Colors.blue,
               )
@@ -193,6 +192,6 @@ class _EventDetailInfoState extends State<EventDetailInfo> {
 
 
   String get getAlertIcon => widget.isAlertIconOn
-      ? AssetConstants.icons.added_alarm
-      : AssetConstants.icons.add_alarm;
+      ? AssetConstants.icons.favorite_menu_selected
+      : AssetConstants.icons.favorite_menu_un_selected;
 }

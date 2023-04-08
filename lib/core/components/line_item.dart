@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:nft_call/core/components/kt_icon.dart';
 import 'package:nft_call/core/constants/asset.dart';
 import 'package:nft_call/core/constants/extension.dart';

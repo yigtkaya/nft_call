@@ -8,6 +8,7 @@ import 'package:nft_call/core/constants/dt_text.dart';
 import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/core/constants/horizontal_space.dart';
 import 'package:nft_call/core/constants/vertical_space.dart';
+import 'package:nft_call/view/drawer/drawer_view.dart';
 import '../../core/base/view/base_view.dart';
 import '../../core/base/view/view_info.dart';
 import '../../core/constants/dimen.dart';
@@ -49,10 +50,28 @@ class NotificationView
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              DTText(
-                label: 'Alerts',
-                style: context.bold20,
-                color: Colors.white,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: DTText(
+                        label: 'Alerts',
+                        style: context.bold20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  ITIcon(
+                    iconName: AssetConstants.icons.drawer_menu,
+                    color: Colors.white,
+                    onPress: () => {
+                      Get.to(() => DrawerView(),
+                          transition: Transition.rightToLeftWithFade)
+                    },
+                  ),
+                ],
               ),
               const VerticalSpace(
                 spaceAmount: 20,
@@ -78,7 +97,7 @@ class NotificationView
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
                   child: DTText(
-                    label: "Only 5 alerts can be turned on during beta phase.",
+                    label: "Only 3 alerts can be turned on during beta phase.",
                     style: context.regular16,
                     color: Colors.white,
                   ),
@@ -89,7 +108,9 @@ class NotificationView
                       ? addAlertView(context)
                       : Center(
                           child: viewModel.getUsersAlerts(),
-                        )))
+                        ),
+                ),
+              )
             ],
           ),
         ),
@@ -134,30 +155,31 @@ class NotificationView
         const VerticalSpace(
           spaceAmount: 50,
         ),
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff364d64),
-                disabledBackgroundColor: const Color(0xff0f1418),
-                foregroundColor: const Color(0xff0f1418),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                )),
-            onPressed: viewModel.isAddButtonEnable
-                ? () {
-                    viewModel.createAlert();
-                  }
-                : null,
-            child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Obx(
-                  () => DTText(
-                    label: "Create",
-                    color: viewModel.isAddButtonEnable
-                        ? Colors.white
-                        : Colors.blueGrey,
-                    style: context.regular16,
-                  ),
-                ))),
+        Obx(() => ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xff364d64),
+                  disabledBackgroundColor: const Color(0xff0f1418),
+                  foregroundColor: const Color(0xff0f1418),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  )),
+              onPressed: (viewModel.isAddButtonEnable && viewModel.isVerified)
+                  ? () {
+                      viewModel.createAlert();
+                    }
+                  : null,
+              child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Obx(
+                    () => DTText(
+                      label: "Create",
+                      color: viewModel.isAddButtonEnable
+                          ? Colors.white
+                          : Colors.blueGrey,
+                      style: context.regular16,
+                    ),
+                  ))),
+        ),
         const Spacer(),
         Container(
             decoration: BoxDecoration(

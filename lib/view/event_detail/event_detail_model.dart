@@ -17,10 +17,9 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
   EventDetailViewModel(this._eventId);
   @override
 
-  void onReady() {
+  void onInit() {
     getEvent();
-    print(_eventId);
-    super.onReady();
+    super.onInit();
   }
   Future<void> getEvent() async {
    final data = await FirebaseFirestore.instance.collection("events").doc(_eventId).get();
@@ -50,7 +49,7 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
         FirebaseFirestore.instance
             .collection("events")
             .doc(eventId)
-            .update({"favList": favList});
+            .update({"favList": favList, "favCount": FieldValue.increment(-1)});
         _isSelected.value = false;
         _favCount.value = favList.length;
       } else {
@@ -58,7 +57,7 @@ class EventDetailViewModel extends BaseViewModel<EventDetailViewModel> {
         FirebaseFirestore.instance
             .collection("events")
             .doc(eventId)
-            .update({"favList": favList});
+            .update({"favList": favList, "favCount": FieldValue.increment(1)});
         _isSelected.value = true;
         _favCount.value = favList.length;
       }

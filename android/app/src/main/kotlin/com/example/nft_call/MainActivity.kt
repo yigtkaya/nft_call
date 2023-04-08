@@ -1,4 +1,4 @@
-package com.example.nft_call
+package com.aladine.nft_call
 
 import io.flutter.embedding.android.FlutterActivity
 

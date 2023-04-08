@@ -65,7 +65,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
-                  const DTText(label: "Email", style: KTLabelStyle),
+                  DTText(label: "Email", style: context.semiBold14,color: Colors.white,),
                   KTTextField(
                     textController: viewModel.emailController,
                     title: "Email",
@@ -75,9 +75,9 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                       style: context.regular12,
                       color: Colors.red)),
                   const VerticalSpace(
-                    spaceAmount: 30,
+                    spaceAmount: 20,
                   ),
-                  const DTText(label: "Password", style: KTLabelStyle),
+                  DTText(label: "Password", style: context.semiBold14,color: Colors.white,),
                   KTTextField(
                     textController: viewModel.passwordController,
                     title: "Password",
@@ -89,7 +89,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                   const VerticalSpace(
                     spaceAmount: 20,
                   ),
-                  const DTText(label: "Confirm Password", style: KTLabelStyle),
+                  DTText(label: "Confirm Password", style: context.semiBold14,color: Colors.white,),
                   KTTextField(
                     textController: viewModel.confirmPasswordController,
                     title: "Confirm Password",
@@ -101,44 +101,46 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                   const VerticalSpace(
                     spaceAmount: 50,
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            foregroundColor: const Color(0xFF4989D7),
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            )),
-                        onPressed: () {
-                          viewModel.validateEmail();
-                          viewModel.validatePassword();
-                          viewModel.validateConfirmPassword();
-                          viewModel.sendVerification();
-                          if (viewModel.errorMessage == "" &&
-                              viewModel.pwErrorMessage == "" &&
-                              viewModel.confirmPwErrorMessage == "") {
-                            viewModel.signUp(
-                                viewModel.emailController.text.trim(),
-                                viewModel.passwordController.text.trim());
-                          }
-                        },
-                        child: DTText(
-                          label: "SIGN UP",
-                          color: Colors.blue,
-                          style: context.semiBold16,
-                        )),
+                  Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              foregroundColor: const Color(0xFF4989D7),
+                              backgroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              )),
+                          onPressed: () {
+                            viewModel.validateEmail();
+                            viewModel.validatePassword();
+                            viewModel.validateConfirmPassword();
+
+                            if (viewModel.errorMessage == "" &&
+                                viewModel.pwErrorMessage == "" &&
+                                viewModel.confirmPwErrorMessage == "") {
+                              viewModel.signUp(
+                                  viewModel.emailController.text.trim(),
+                                  viewModel.passwordController.text.trim());
+                            }
+                          },
+                          child: DTText(
+                            label: "SIGN UP",
+                            color: Colors.blue,
+                            style: context.semiBold16,
+                          )),
+                    ),
                   ),
                   const VerticalSpace(
-                    spaceAmount: 50,
+                    spaceAmount: 40,
                   ),
                   const Align(
                       alignment: Alignment.center,
                       child: DTText(label: "OR", style: KTLabelStyle)),
                   const VerticalSpace(
-                    spaceAmount: 30,
+                    spaceAmount: 40,
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -155,6 +157,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                           viewModel.googleSignIn();
                         },
                         child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
@@ -163,7 +166,7 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                               decoration: const BoxDecoration(
                                 image: DecorationImage(
                                     image:
-                                        AssetImage('assets/images/google.png'),
+                                    AssetImage('assets/images/google.png'),
                                     fit: BoxFit.cover),
                                 shape: BoxShape.circle,
                               ),
@@ -183,23 +186,19 @@ class SignUpView extends BaseView<SignUpView, SignUpViewModel> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: GestureDetector(
-                        onTap: () => Get.offAll(() => LoginView()),
-                        child: RichText(
-                          text: const TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: 'Already have account? ',
-                                  style: KTLabelStyle),
-                              TextSpan(text: 'Sign In', style: KTLabelStyle),
-                            ],
-                          ),
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            DTText(label: "Already have account?", style: context.regular16,color: Colors.white,),
+                            const HorizontalSpace(spaceAmount: 5,),
+                            GestureDetector(onTap: () => Get.offAll(() => LoginView()),
+                                child: DTText(label: "Sign In", style: context.regular16, color: Colors.white,)),
+                          ],
                         ),
-                      ),
-                    ),
+                      )
                   ),
                 ],
               ),

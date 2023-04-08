@@ -4,14 +4,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:nft_call/core/base/view/base_view.dart';
-import 'package:nft_call/core/components/kt_icon.dart';
-import 'package:nft_call/core/components/kt_text_button.dart';
-import 'package:nft_call/core/constants/asset.dart';
 import 'package:nft_call/core/constants/extension.dart';
-import 'package:nft_call/view/notification/notification_view.dart';
-import 'package:nft_call/view/root/root_view.dart';
 import 'package:nft_call/view/search/search_view_model.dart';
-
 import '../../core/base/view/view_info.dart';
 import '../../core/components/line_item.dart';
 import '../../core/constants/dt_text.dart';
@@ -55,6 +49,7 @@ class SearchView extends BaseView<SearchView, SearchViewModel> {
                   padding:
                       const EdgeInsets.only(top: 15.0, left: 15, right: 15),
                   child: TextField(
+                    cursorColor: Colors.white,
                     controller: viewModel.nameController,
                     onChanged: (value) => viewModel.fillFilterList(),
                     decoration: InputDecoration(

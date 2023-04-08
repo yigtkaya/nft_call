@@ -16,13 +16,13 @@ class SplashView extends BaseView<SplashView, SplashViewModel> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: const Color(0xff16161f),
+          backgroundColor: const Color(0xff36395d),
           body: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ITIcon(iconName: AssetConstants.icons.splashFullWave),
+                  ITIcon(iconName: AssetConstants.icons.nft_call, color: const Color(0xff384fa2),),
                   // Icon(
                   //   Icons.build,
                   //   size: 50.0,

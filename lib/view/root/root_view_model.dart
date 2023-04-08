@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/auth/auth.dart';
@@ -10,14 +12,13 @@ class RootViewModel extends BaseViewModel<RootViewModel> {
   final _message = "Main Page".obs;
   late PageController pageController;
   final _currentPage = 0.obs;
-  final fcm  = NotificationController();
-
   final AuthController _auth = AuthController();
 
   @override
   void onInit() {
     pageController = PageController(keepPage: true);
     _currentPage.value = 0;
+    createUser();
     super.onInit();
   }
   int getInitialPage(int index){
@@ -29,12 +30,17 @@ class RootViewModel extends BaseViewModel<RootViewModel> {
       _currentPage.value = currentPage;
     }
   }
-  void singOut() {
-    _auth.signOut();
+
+  createUser() async {
+    final data = await FirebaseFirestore.instance.collection("users").doc(_auth.getCurrentUserId()).get();
+    String? token = await FirebaseMessaging.instance.getToken();
+
+    if(!data.exists){
+      FirebaseFirestore.instance.collection("users").doc(_auth.getCurrentUserId()).set(
+          {"alertedId": [], "token": token});
+    }
   }
-  void navigateToDrawer() {
-    navigation?.navigateToPage(MenuKey.drawer);
-  }
+
   void animatePage(int page) {
     pageController.animateToPage(
       page,

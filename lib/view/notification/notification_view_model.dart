@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:nft_call/core/components/alert_list_item.dart';
-import 'package:nft_call/core/components/card_info.dart';
+import 'package:nft_call/core/constants/dt_text.dart';
+import 'package:nft_call/core/constants/extension.dart';
 import 'package:nft_call/view/event_detail/event_detail.dart';
 import 'package:nft_call/view/search/search_view.dart';
 import '../../auth/auth.dart';
@@ -18,6 +21,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
   final _alertedList = <KTCardItem>[].obs;
   final _isAddButtonEnable = false.obs;
   final _isSelected = true.obs;
+  final _isVerified = false.obs;
   final _resultName = "".obs;
   final _resultId = "".obs;
   final AuthController _auth = AuthController();
@@ -32,6 +36,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     nameController.addListener(() {
       fillFilterList();
     });
+    checkVerifiedUser();
     getEventList();
     super.onInit();
   }
@@ -61,6 +66,10 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     return filterList;
   }
 
+  String? getCurrentUser() {
+    return _auth.getCurrentUserId();
+  }
+
   void getEventList() async {
     var snapshot = await FirebaseFirestore.instance.collection('events').get();
     if (snapshot.docs.isNotEmpty) {
@@ -72,22 +81,33 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
     }
   }
 
-  String? getCurrentUser() {
-    return _auth.getCurrentUserId();
-  }
-
   List<KTCardItem> filterById(DocumentSnapshot? snapshot) {
     List<KTCardItem> collectionList = [];
-    Map map = snapshot?.data() as Map;
-    List ids = map["alertedId"];
-    for (var id in ids) {
-      for (var element in _collectionList) {
-        if (element.eventId == id) {
-          collectionList.add(element);
+    try {
+      Map map = snapshot?.data() as Map;
+      List ids = map["alertedId"];
+
+      for (var id in ids) {
+        for (var element in _collectionList) {
+          if (element.eventId == id) {
+            if (element.mintDate!.isAfter(DateTime.now())) {
+              collectionList.add(element);
+            } else {
+              FirebaseFirestore.instance
+                  .collection("users")
+                  .doc(getCurrentUser())
+                  .set({
+                "alertedId": FieldValue.arrayRemove([element.eventId])
+              });
+              FirebaseMessaging.instance.unsubscribeFromTopic(element.eventId ?? "");
+            }
+          }
         }
       }
+      return collectionList;
+    } catch (e) {
+      return collectionList;
     }
-    return collectionList;
   }
 
   Widget getUsersAlerts() {
@@ -101,18 +121,15 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
             );
           } else if (snapshot.hasData) {
             List<KTCardItem> list = filterById(snapshot.data);
-            return ListView.builder(
+            return list.isEmpty ? DTText(label: "Add a collection to get notified", style: context.regular16, color: Colors.blueGrey,): ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (BuildContext context, index) {
                   return AlertListItem(
                     ktCardItem: list[index],
                     onDelete: () => deleteAlert(list[index].eventId ?? ""),
                     onPress: () => Get.to(() => EventDetailView(
-                      eventId: list[index].eventId ?? "",
+                          eventId: list[index].eventId ?? "",
                           item: list[index],
-                          isFavorite: list[index]
-                              .favUidList
-                              ?.contains(getCurrentUser()),
                         )),
                   );
                 });
@@ -127,7 +144,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
   void navigateToSearch() async {
     Map<String, dynamic>? map = await Get.to(() => SearchView());
     if (map != null) {
-      _resultName.value = map!["name"];
+      _resultName.value = map["name"];
       _resultId.value = map["id"];
 
       if (_resultName.value != "") {
@@ -139,6 +156,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
       _resultName.value = "";
       _isAddButtonEnable.value = false;
     }
+    checkVerifiedUser();
   }
 
   void createAlert() async {
@@ -146,14 +164,15 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
       final data = await users.doc(getCurrentUser()).get();
       Map<dynamic, dynamic> map = data.data() as Map;
       List list = map["alertedId"];
-      if (list.length <= 5) {
-        users.doc(getCurrentUser()).update({
+      if (list.length < 3) {
+        await users.doc(getCurrentUser()).update({
           "alertedId": FieldValue.arrayUnion([_resultId.value])
         });
+        await FirebaseMessaging.instance.subscribeToTopic(_resultId.value.trim());
         _resultName.value = "";
         _isAddButtonEnable.value = false;
       } else {
-        showToastMessage("You already have 5 alerts on!");
+        showToastMessage("You already have 3 alerts on!");
         _resultName.value = "";
         _isAddButtonEnable.value = false;
       }
@@ -169,9 +188,17 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
       users.doc(getCurrentUser()).update({
         "alertedId": FieldValue.arrayRemove([eventId])
       });
+      FirebaseMessaging.instance.unsubscribeFromTopic(_resultId.value);
     } catch (e) {
       showToastMessage(e.toString());
     }
+  }
+
+  void checkVerifiedUser() async {
+    _auth.currentUser()?.reload();
+    final user =  FirebaseAuth.instance.currentUser;
+    _isVerified.value = user!.emailVerified;
+    print(_isVerified.value);
   }
 
   void showToastMessage(String message) {
@@ -186,6 +213,7 @@ class NotificationViewModel extends BaseViewModel<NotificationViewModel> {
   }
 
   bool get isViewSelected => _isSelected.value;
+  bool get isVerified => _isVerified.value;
   bool get isAddButtonEnable => _isAddButtonEnable.value;
   String get resultName => _resultName.value;
   String get resultId => _resultId.value;

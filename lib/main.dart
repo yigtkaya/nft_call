@@ -11,23 +11,18 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nft_call/product/menu/menu_factory.dart';
 import 'package:nft_call/product/navigation/navigation_handler.dart';
-import 'package:nft_call/view/root/root_view.dart';
 import 'package:nft_call/view/splash/splash_view.dart';
 import 'core/base/binding/binding.dart';
 import 'core/constants/theme/app_theme.dart';
 import 'core/constants/theme/theme_manager.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
-  print('background message ${message.notification!.body}');
+  print('background message ${message.data["eventId"]}');
 }
 
-const AndroidNotificationChannel channel = AndroidNotificationChannel(
-  //for notificaiton initialization
-  'high_importance_channel', // id
-  'High Importance Notifications', // title
-  importance: Importance.high,
-  playSound: true,
-);
+const channel = AndroidNotificationChannel(
+    "high_importance_channel", "High_importance_channel",
+    playSound: true, importance: Importance.high);
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
@@ -56,18 +51,20 @@ Future<void> main() async {
             message.notification.hashCode,
             message.notification!.title,
             message.notification!.body,
-            NotificationDetails(
-                android: AndroidNotificationDetails(channel.id, channel.name,
+            const NotificationDetails(
+                android: AndroidNotificationDetails(
+                    "high_importance_channel", "High Importance Notifications",
                     color: Colors.blue,
+                    priority: Priority.high,
+                    importance: Importance.high,
                     playSound: true,
-                    channelDescription: channel.description,
                     icon: "@mipmap/ic_launcher")));
       }
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
       if (message.notification != null) {
-        Get.to(RootView());
+        Get.to(SplashView());
       }
     });
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
@@ -83,6 +80,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Neo Flutter Base',
       theme: AppThemeBuilder.createTheme(LightAppTheme()),
       themeMode:

@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:327903857793:android:d304214f70b7d801ea1180",
+        "mobilesdk_app_id": "1:327903857793:android:41db3785e90b22b8ea1180",
         "android_client_info": {
-          "package_name": "com.example.nft_call"
+          "package_name": "com.aladine.nft_call"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "327903857793-2oba575gu5lqm8t2beee1912dlm1v2nc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aladine.nft_call",
+            "certificate_hash": "dc8176201d05115b064585bf3afdd2a7d988c28a"
+          }
+        },
         {
           "client_id": "327903857793-2na00to1ceekds1n62vabmag4m52ahn2.apps.googleusercontent.com",
           "client_type": 3

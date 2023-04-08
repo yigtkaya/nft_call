@@ -2,9 +2,11 @@
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../auth/auth.dart';
 import '../../core/base/view/base_view_model.dart';
 
 class DrawerViewModel extends BaseViewModel<DrawerViewModel> {
+  final AuthController _auth = AuthController();
 
 
   @override
@@ -13,8 +15,7 @@ class DrawerViewModel extends BaseViewModel<DrawerViewModel> {
   }
 
   /// Navigate to Notification page
-  void navigateToRoot() {
-    Get.back();
+  void signOut() {
+    _auth.signOut();
   }
-
 }

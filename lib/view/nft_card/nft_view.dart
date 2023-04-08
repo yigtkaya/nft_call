@@ -10,7 +10,6 @@ import 'package:nft_call/product/model/nft_info_model.dart';
 import '../../core/components/kt_text_button.dart';
 import '../../core/constants/dt_text.dart';
 import '../../core/constants/horizontal_space.dart';
-import '../../core/components/card_info.dart';
 import '../../core/components/kt_icon.dart';
 import '../../core/constants/vertical_space.dart';
 import '../event_detail/event_detail.dart';
@@ -61,57 +60,62 @@ class NFTCardViewState extends State<NFTCardView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                children: [
-                  CachedNetworkImage(
-                    imageUrl: widget.ktCardItem.imageUrl ?? "",
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(
-                      color: Colors.white,
-                    )),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 15, top: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          decoration:
-                              BoxDecoration(color: Colors.black.withOpacity(0)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              ITIcon(
-                                iconName: widget.isFavorite
-                                    ? AssetConstants
-                                        .icons.favorite_menu_selected
-                                    : AssetConstants
-                                        .icons.favorite_menu_un_selected,
-                                width: 28,
-                                height: 28,
-                                onPress: () => {
-                                  widget.onFavChanged(),
-                                },
-                              ),
-                              const HorizontalSpace(),
-                              DTText(
-                                label: "${widget.favCount}",
-                                style: context.regular12,
-                                color: Colors.white,
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
               Expanded(
-                child: Padding(
+                child: Stack(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: widget.ktCardItem.imageUrl ?? "",
+                      fit: BoxFit.fill,
+                      width: double.infinity,
+                      height: 500,
+                      placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(
+                        color: Colors.white,
+                      )),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 5, right: 15, top: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                ITIcon(
+                                  iconName: widget.isFavorite
+                                      ? AssetConstants
+                                          .icons.favorite_menu_selected
+                                      : AssetConstants
+                                          .icons.favorite,
+                                  color: Colors.white,
+                                  width: 28,
+                                  height: 28,
+                                  onPress: () => {
+                                    widget.onFavChanged(),
+                                  },
+                                ),
+                                const HorizontalSpace(),
+                                DTText(
+                                  label: "${widget.favCount}",
+                                  style: context.regular10,
+                                  color: Colors.white,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
                   padding: const EdgeInsets.only(top: 15, left: 20, right: 5),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
@@ -120,8 +124,10 @@ class NFTCardViewState extends State<NFTCardView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         DTText(
-                          label: widget.ktCardItem.collectionName ?? "NFT Collection Name",
-                          style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          label: widget.ktCardItem.collectionName ??
+                              "NFT Collection Name",
+                          style: const TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
                           color: Colors.white,
                         ),
                         const VerticalSpace(
@@ -131,19 +137,10 @@ class NFTCardViewState extends State<NFTCardView> {
                           children: [
                             Center(
                                 child: DTText(
-                                  label: widget.ktCardItem.blockchain ?? "#Chain",
-                                  style: context.regular16,
-                                  color: Colors.grey,
-                                )),
-                            const HorizontalSpace(
-                              spaceAmount: 5,
-                            ),
-                            Center(
-                                child: DTText(
-                                  label: "#NFT Drop",
-                                  style: context.regular16,
-                                  color: Colors.grey,
-                                ))
+                              label: "#NFT Drop",
+                              style: context.regular16,
+                              color: Colors.grey,
+                            ))
                           ],
                         ),
                         const VerticalSpace(
@@ -152,42 +149,70 @@ class NFTCardViewState extends State<NFTCardView> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: DTText(
-                            label:
-                            widget.ktCardItem.description ?? "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder",
+                            label: widget.ktCardItem.description ??
+                                "Place Holder Place Holder Place Holder Place nolder Place Holder Place Holder",
                             maxLines: 2,
-                            style: const TextStyle(color: Colors.white, fontSize: 16),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 16),
                           ),
                         ),
                         const VerticalSpace(
                           spaceAmount: 20,
                         ),
-                        DTText(
-                          label: "Mint Date: ${widget.ktCardItem.mintDate}",
-                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                        Row(
+                          children: [
+                            DTText(
+                              label: "Mint Date: ",
+                              style: context.regular16,
+                              color: Colors.white,
+                            ),
+                            DTText(
+                              label: widget.ktCardItem.mintDate ==
+                                      DateTime(2025, 4, 4, 3)
+                                  ? "TBA"
+                                  : "${widget.ktCardItem.mintDate?.year}/${widget.ktCardItem.mintDate?.month}/${widget.ktCardItem.mintDate?.day}",
+                              style: context.regular16,
+                              color: Colors.blue,
+                            ),
+                          ],
                         ),
                         const VerticalSpace(
                           spaceAmount: 10,
                         ),
-                        DTText(
-                          label: "Mint Price: ${widget.ktCardItem.mintPrice}",
-                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                        Row(
+                          children: [
+                            DTText(
+                              label: "Mint Price: ",
+                              style: context.regular16,
+                              color: Colors.white,
+                            ),
+                            DTText(
+                              label: "${widget.ktCardItem.mintPrice}",
+                              style: context.regular16,
+                              color: Colors.blue,
+                            ),
+                          ],
                         ),
                         const VerticalSpace(
                           spaceAmount: 20,
                         ),
                         Padding(
-                          padding:
-                          const EdgeInsets.only(bottom: 10, right: 10, left: 10, top: 5),
+                          padding: const EdgeInsets.only(
+                              bottom: 15, right: 10, left: 10, top: 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               DTTextButton(
                                   child: const Text(
                                     "read more",
-                                    style: TextStyle(color: Colors.white, fontSize: 14),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 14),
                                   ),
                                   onPress: () {
-                                    Get.to(() => EventDetailView(item: widget.ktCardItem,eventId: widget.ktCardItem.eventId ?? "",isFavorite: widget.isFavorite,));
+                                    Get.to(() => EventDetailView(
+                                        item: widget.ktCardItem,
+                                        eventId:
+                                            widget.ktCardItem.eventId ?? ""));
                                   }),
                               const HorizontalSpace(
                                 spaceAmount: 15,
@@ -197,9 +222,7 @@ class NFTCardViewState extends State<NFTCardView> {
                         )
                       ],
                     ),
-                  )
-                ),
-              ),
+                  )),
             ],
           ),
         ),
