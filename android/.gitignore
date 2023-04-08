@@ -11,3 +11,7 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
+.dart_tool/
+build/
+pubspec.lock
+/app/google-services.json
